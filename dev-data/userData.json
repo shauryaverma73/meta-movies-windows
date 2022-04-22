@@ -1,0 +1,57 @@
+[
+    {
+        "name": "Admin",
+        "email": "admin@admin.com",
+        "role": "admin",
+        "password": "test1234",
+        "confirmPassword": "test1234",
+        "passwordChangedAt": "",
+        "passwordResetToken": "",
+        "active": "true",
+        "subscription": "premium"
+    },
+    {
+        "name": "Shauyra",
+        "email": "shaurya@gmail.com",
+        "role": "admin",
+        "password": "test1234",
+        "confirmPassword": "test1234",
+        "passwordChangedAt": "",
+        "passwordResetToken": "",
+        "active": "true",
+        "subscription": "basic"
+    },
+    {
+        "name": "Basic User",
+        "email": "basicuser@io.io",
+        "role": "user",
+        "password": "test1234",
+        "confirmPassword": "test1234",
+        "passwordChangedAt": "",
+        "passwordResetToken": "",
+        "active": "true",
+        "subscription": "basic"
+    },
+    {
+        "name": "Tatiana",
+        "email": "tatiana@io.io",
+        "role": "user",
+        "password": "test1234",
+        "confirmPassword": "test1234",
+        "passwordChangedAt": "",
+        "passwordResetToken": "",
+        "active": "true",
+        "subscription": "basic"
+    },
+    {
+        "name": "Abel",
+        "email": "abel@weeknd.io",
+        "role": "user",
+        "password": "test1234",
+        "confirmPassword": "test1234",
+        "passwordChangedAt": "",
+        "passwordResetToken": "",
+        "active": "true",
+        "subscription": "premium"
+    }
+]

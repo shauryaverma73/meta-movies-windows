@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Pushpa: The Rise - Part 1",
+        "slug": "pushpa-the-rise-part-1",
+        "runTime": "179",
+        "ratings": "8.0",
+        "description": "Pushpa Raj is a coolie who rises in the world of red sandalwood smuggling. Along the way, he doesn’t shy from making an enemy or two.",
+        "poster": "https://image.tmdb.org/t/p/w500/kKDnGklCDRK8hrFGH4pLr7ZDA33.jpg",
+        "year": "2021",
+        "movieLink": "video/movie-id",
+        "trailerLink": "https://www.youtube.com/embed/Gs9TQr1D9Ps",
+        "stars": [
+            "Allu Arjun",
+            "Rashmika Mandanna",
+            "Samantha"
+        ],
+        "genre": [
+            "Action",
+            "Drama",
+            "Thriller"
+        ],
+        "language": "Hindi",
+        "pgRating": "U",
+        "backdrop": "https://image.tmdb.org/t/p/w500/kKDnGklCDRK8hrFGH4pLr7ZDA33.jpg"
+    }
+]

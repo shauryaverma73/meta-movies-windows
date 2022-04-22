@@ -1,0 +1,826 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Font
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CUbuntu:300,400,500,700' rel='stylesheet')
+  // CSS
+  link(rel='stylesheet' href='css/bootstrap-reboot.min.css')
+  link(rel='stylesheet' href='css/bootstrap-grid.min.css')
+  link(rel='stylesheet' href='css/owl.carousel.min.css')
+  link(rel='stylesheet' href='css/jquery.mCustomScrollbar.min.css')
+  link(rel='stylesheet' href='css/nouislider.min.css')
+  link(rel='stylesheet' href='css/ionicons.min.css')
+  link(rel='stylesheet' href='css/plyr.css')
+  link(rel='stylesheet' href='css/photoswipe.css')
+  link(rel='stylesheet' href='css/default-skin.css')
+  link(rel='stylesheet' href='css/main.css')
+  // Favicons
+  link(rel='icon' type='image/png' href='icon/favicon-32x32.png' sizes='32x32')
+  link(rel='apple-touch-icon' href='icon/favicon-32x32.png')
+  link(rel='apple-touch-icon' sizes='72x72' href='icon/apple-touch-icon-72x72.png')
+  link(rel='apple-touch-icon' sizes='114x114' href='icon/apple-touch-icon-114x114.png')
+  link(rel='apple-touch-icon' sizes='144x144' href='icon/apple-touch-icon-144x144.png')
+  meta(name='description' content='')
+  meta(name='keywords' content='')
+  meta(name='author' content='Dmitry Volkov')
+  title FlixGo &ndash; Online Movies, TV Shows &amp; Cinema HTML Template
+// header
+header.header
+  .header__wrap
+    .container
+      .row
+        .col-12
+          .header__content
+            // header logo
+            a.header__logo(href='index.html')
+              img(src='img/logo.svg' alt='')
+            // end header logo
+            // header nav
+            ul.header__nav
+              // dropdown
+              li.header__nav-item
+                a#dropdownMenuHome.dropdown-toggle.header__nav-link(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Home
+                ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuHome')
+                  li
+                    a(href='index.html') Home slideshow bg
+                  li
+                    a(href='index2.html') Home static bg
+              // end dropdown
+              // dropdown
+              li.header__nav-item
+                a#dropdownMenuCatalog.dropdown-toggle.header__nav-link(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Catalog
+                ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuCatalog')
+                  li
+                    a(href='catalog1.html') Catalog Grid
+                  li
+                    a(href='catalog2.html') Catalog List
+                  li
+                    a(href='details1.html') Details Movie
+                  li
+                    a(href='details2.html') Details TV Series
+              // end dropdown
+              li.header__nav-item
+                a.header__nav-link(href='pricing.html') Pricing Plan
+              li.header__nav-item
+                a.header__nav-link(href='faq.html') Help
+              // dropdown
+              li.dropdown.header__nav-item
+                a#dropdownMenuMore.dropdown-toggle.header__nav-link.header__nav-link--more(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                  i.icon.ion-ios-more
+                ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuMore')
+                  li
+                    a(href='about.html') About
+                  li
+                    a(href='signin.html') Sign In
+                  li
+                    a(href='signup.html') Sign Up
+                  li
+                    a(href='404.html') 404 Page
+              // end dropdown
+            // end header nav
+            // header auth
+            .header__auth
+              button.header__search-btn(type='button')
+                i.icon.ion-ios-search
+              a.header__sign-in(href='signin.html')
+                i.icon.ion-ios-log-in
+                span sign in
+            // end header auth
+            // header menu btn
+            button.header__btn(type='button')
+              span
+              span
+              span
+            // end header menu btn
+  // header search
+  form.header__search(action='#')
+    .container
+      .row
+        .col-12
+          .header__search-content
+            input(type='text' placeholder='Search for a movie, TV Series that you are looking for')
+            button(type='button') search
+  // end header search
+// end header
+// details
+section.section.details
+  // details background
+  .details__bg(data-bg='img/home/home__bg.jpg')
+  // end details background
+  // details content
+  .container
+    .row
+      // title
+      .col-12
+        h1.details__title I Dream in Another Language
+      // end title
+      // content
+      .col-10
+        .card.card--details.card--series
+          .row
+            // card cover
+            .col-12.col-sm-4.col-md-4.col-lg-3.col-xl-3
+              .card__cover
+                img(src='img/covers/cover.jpg' alt='')
+            // end card cover
+            // card content
+            .col-12.col-sm-8.col-md-8.col-lg-9.col-xl-9
+              .card__content
+                .card__wrap
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+                  ul.card__list
+                    li HD
+                    li 16+
+                ul.card__meta
+                  li
+                    span Genre:
+                    a(href='#') Action
+                    a(href='#') Triler
+                  li
+                    span Release year:
+                    |  2017
+                  li
+                    span Running time:
+                    |  120 min
+                  li
+                    span Country:
+                    a(href='#') USA
+                .card__description.card__description--details
+                  | It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &apos;Content here, content here&apos;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &apos;lorem ipsum&apos; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            // end card content
+      // end content
+      // player
+      .col-12.col-xl-6
+        video#player(controls='' crossorigin='' playsinline='' poster='../../../cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg')
+          // Video files
+          source(src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4' type='video/mp4' size='576')
+          source(src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4' type='video/mp4' size='720')
+          source(src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4' type='video/mp4' size='1080')
+          source(src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1440p.mp4' type='video/mp4' size='1440')
+          // Caption files
+          track(kind='captions' label='English' srclang='en' src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt' default='')
+          track(kind='captions' label='Français' srclang='fr' src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt')
+          // Fallback for browsers that don't support the <video> element
+          a(href='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4' download='') Download
+      // end player
+      // accordion
+      .col-12.col-xl-6
+        #accordion.accordion
+          .accordion__card
+            #headingOne.card-header
+              button(type='button' data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne')
+                span Season: 1
+                span 22 Episodes from Nov, 2004 until May, 2005
+            #collapseOne.collapse.show(aria-labelledby='headingOne' data-parent='#accordion')
+              .card-body
+                table.accordion__list
+                  thead
+                    tr
+                      th #
+                      th Title
+                      th Air Date
+                  tbody
+                    tr
+                      th 1
+                      td Pilot
+                      td Tuesday, November 16th, 2004
+                    tr
+                      th 2
+                      td Paternity
+                      td Tuesday, November 23rd, 2004
+                    tr
+                      th 3
+                      td Occam&apos;s Razor
+                      td Tuesday, November 30th, 2004
+                    tr
+                      th 4
+                      td Maternity
+                      td Tuesday, December 7th, 2004
+                    tr
+                      th 5
+                      td Damned If You Do
+                      td Tuesday, December 14th, 2004
+                    tr
+                      th 6
+                      td The Socratic Method
+                      td Tuesday, December 21st, 2004
+          .accordion__card
+            #headingTwo.card-header
+              button.collapsed(type='button' data-toggle='collapse' data-target='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo')
+                span Season: 2
+                span 24 Episodes from Sep, 2005 until May, 2006
+            #collapseTwo.collapse(aria-labelledby='headingTwo' data-parent='#accordion')
+              .card-body
+                table.accordion__list
+                  thead
+                    tr
+                      th #
+                      th Title
+                      th Air Date
+                  tbody
+                    tr
+                      th 1
+                      td Pilot
+                      td Tuesday, November 16th, 2004
+                    tr
+                      th 2
+                      td Paternity
+                      td Tuesday, November 23rd, 2004
+                    tr
+                      th 3
+                      td Occam&apos;s Razor
+                      td Tuesday, November 30th, 2004
+                    tr
+                      th 4
+                      td Maternity
+                      td Tuesday, December 7th, 2004
+                    tr
+                      th 5
+                      td Damned If You Do
+                      td Tuesday, December 14th, 2004
+                    tr
+                      th 6
+                      td The Socratic Method
+                      td Tuesday, December 21st, 2004
+          .accordion__card
+            #headingThree.card-header
+              button.collapsed(type='button' data-toggle='collapse' data-target='#collapseThree' aria-expanded='false' aria-controls='collapseThree')
+                span Season: 3
+                span 24 Episodes from Sep, 2006 until May, 2007
+            #collapseThree.collapse(aria-labelledby='headingThree' data-parent='#accordion')
+              .card-body
+                table.accordion__list
+                  thead
+                    tr
+                      th #
+                      th Title
+                      th Air Date
+                  tbody
+                    tr
+                      th 1
+                      td Pilot
+                      td Tuesday, November 16th, 2004
+                    tr
+                      th 2
+                      td Paternity
+                      td Tuesday, November 23rd, 2004
+                    tr
+                      th 3
+                      td Occam&apos;s Razor
+                      td Tuesday, November 30th, 2004
+                    tr
+                      th 4
+                      td Maternity
+                      td Tuesday, December 7th, 2004
+                    tr
+                      th 5
+                      td Damned If You Do
+                      td Tuesday, December 14th, 2004
+                    tr
+                      th 6
+                      td The Socratic Method
+                      td Tuesday, December 21st, 2004
+          .accordion__card
+            #headingFour.card-header
+              button.collapsed(type='button' data-toggle='collapse' data-target='#collapseFour' aria-expanded='false' aria-controls='collapseFour')
+                span Season: 4
+                span 16 Episodes from Sep, 2007 until May, 2008
+            #collapseFour.collapse(aria-labelledby='headingFour' data-parent='#accordion')
+              .card-body
+                table.accordion__list
+                  thead
+                    tr
+                      th #
+                      th Title
+                      th Air Date
+                  tbody
+                    tr
+                      th 1
+                      td Pilot
+                      td Tuesday, November 16th, 2004
+                    tr
+                      th 2
+                      td Paternity
+                      td Tuesday, November 23rd, 2004
+                    tr
+                      th 3
+                      td Occam&apos;s Razor
+                      td Tuesday, November 30th, 2004
+                    tr
+                      th 4
+                      td Maternity
+                      td Tuesday, December 7th, 2004
+                    tr
+                      th 5
+                      td Damned If You Do
+                      td Tuesday, December 14th, 2004
+                    tr
+                      th 6
+                      td The Socratic Method
+                      td Tuesday, December 21st, 2004
+      // end accordion
+      .col-12
+        .details__wrap
+          // availables
+          .details__devices
+            span.details__devices-title Available on devices:
+            ul.details__devices-list
+              li
+                i.icon.ion-logo-apple
+                span IOS
+              li
+                i.icon.ion-logo-android
+                span Android
+              li
+                i.icon.ion-logo-windows
+                span Windows
+              li
+                i.icon.ion-md-tv
+                span Smart TV
+          // end availables
+          // share
+          .details__share
+            span.details__share-title Share with friends:
+            ul.details__share-list
+              li.facebook
+                a(href='#')
+                  i.icon.ion-logo-facebook
+              li.instagram
+                a(href='#')
+                  i.icon.ion-logo-instagram
+              li.twitter
+                a(href='#')
+                  i.icon.ion-logo-twitter
+              li.vk
+                a(href='#')
+                  i.icon.ion-logo-vk
+          // end share
+  // end details content
+// end details
+// content
+section.content
+  .content__head
+    .container
+      .row
+        .col-12
+          // content title
+          h2.content__title Discover
+          // end content title
+          // content tabs nav
+          ul#content__tabs.nav.nav-tabs.content__tabs(role='tablist')
+            li.nav-item
+              a.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') Comments
+            li.nav-item
+              a.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') Reviews
+            li.nav-item
+              a.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') Photos
+          // end content tabs nav
+          // content mobile tabs nav
+          #content__mobile-tabs.content__mobile-tabs
+            #mobile-tabs.content__mobile-tabs-btn.dropdown-toggle(role='navigation' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+              input(type='button' value='Comments')
+              span
+            .content__mobile-tabs-menu.dropdown-menu(aria-labelledby='mobile-tabs')
+              ul.nav.nav-tabs(role='tablist')
+                li.nav-item
+                  a#1-tab.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') Comments
+                li.nav-item
+                  a#2-tab.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') Reviews
+                li.nav-item
+                  a#3-tab.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') Photos
+          // end content mobile tabs nav
+  .container
+    .row
+      .col-12.col-lg-8.col-xl-8
+        // content tabs
+        #myTabContent.tab-content
+          #tab-1.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='1-tab')
+            .row
+              // comments
+              .col-12
+                .comments
+                  ul.comments__list
+                    li.comments__item
+                      .comments__autor
+                        img.comments__avatar(src='img/user.png' alt='')
+                        span.comments__name John Doe
+                        span.comments__time 30.08.2018, 17:53
+                      p.comments__text
+                        | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+                      .comments__actions
+                        .comments__rate
+                          button(type='button')
+                            i.icon.ion-md-thumbs-up
+                            | 12
+                          button(type='button')
+                            | 7
+                            i.icon.ion-md-thumbs-down
+                        button(type='button')
+                          i.icon.ion-ios-share-alt
+                          | Reply
+                        button(type='button')
+                          i.icon.ion-ios-quote
+                          | Quote
+                    li.comments__item.comments__item--answer
+                      .comments__autor
+                        img.comments__avatar(src='img/user.png' alt='')
+                        span.comments__name John Doe
+                        span.comments__time 24.08.2018, 16:41
+                      p.comments__text
+                        | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                      .comments__actions
+                        .comments__rate
+                          button(type='button')
+                            i.icon.ion-md-thumbs-up
+                            | 8
+                          button(type='button')
+                            | 3
+                            i.icon.ion-md-thumbs-down
+                        button(type='button')
+                          i.icon.ion-ios-share-alt
+                          | Reply
+                        button(type='button')
+                          i.icon.ion-ios-quote
+                          | Quote
+                    li.comments__item.comments__item--quote
+                      .comments__autor
+                        img.comments__avatar(src='img/user.png' alt='')
+                        span.comments__name John Doe
+                        span.comments__time 11.08.2018, 11:11
+                      p.comments__text
+                        span
+                          | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable.
+                        | It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                      .comments__actions
+                        .comments__rate
+                          button(type='button')
+                            i.icon.ion-md-thumbs-up
+                            | 11
+                          button(type='button')
+                            | 1
+                            i.icon.ion-md-thumbs-down
+                        button(type='button')
+                          i.icon.ion-ios-share-alt
+                          | Reply
+                        button(type='button')
+                          i.icon.ion-ios-quote
+                          | Quote
+                    li.comments__item
+                      .comments__autor
+                        img.comments__avatar(src='img/user.png' alt='')
+                        span.comments__name John Doe
+                        span.comments__time 07.08.2018, 14:33
+                      p.comments__text
+                        | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+                      .comments__actions
+                        .comments__rate
+                          button(type='button')
+                            i.icon.ion-md-thumbs-up
+                            | 99
+                          button(type='button')
+                            | 35
+                            i.icon.ion-md-thumbs-down
+                        button(type='button')
+                          i.icon.ion-ios-share-alt
+                          | Reply
+                        button(type='button')
+                          i.icon.ion-ios-quote
+                          | Quote
+                    li.comments__item
+                      .comments__autor
+                        img.comments__avatar(src='img/user.png' alt='')
+                        span.comments__name John Doe
+                        span.comments__time 02.08.2018, 15:24
+                      p.comments__text
+                        | Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &apos;lorem ipsum&apos; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                      .comments__actions
+                        .comments__rate
+                          button(type='button')
+                            i.icon.ion-md-thumbs-up
+                            | 74
+                          button(type='button')
+                            | 13
+                            i.icon.ion-md-thumbs-down
+                        button(type='button')
+                          i.icon.ion-ios-share-alt
+                          | Reply
+                        button(type='button')
+                          i.icon.ion-ios-quote
+                          | Quote
+                  form.form(action='#')
+                    textarea#text.form__textarea(name='text' placeholder='Add comment')
+                    button.form__btn(type='button') Send
+              // end comments
+          #tab-2.tab-pane.fade(role='tabpanel' aria-labelledby='2-tab')
+            .row
+              // reviews
+              .col-12
+                .reviews
+                  ul.reviews__list
+                    li.reviews__item
+                      .reviews__autor
+                        img.reviews__avatar(src='img/user.png' alt='')
+                        span.reviews__name Best Marvel movie in my opinion
+                        span.reviews__time 24.08.2018, 17:53 by John Doe
+                        span.reviews__rating
+                          i.icon.ion-ios-star
+                          | 8.4
+                      p.reviews__text
+                        | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+                    li.reviews__item
+                      .reviews__autor
+                        img.reviews__avatar(src='img/user.png' alt='')
+                        span.reviews__name Best Marvel movie in my opinion
+                        span.reviews__time 24.08.2018, 17:53 by John Doe
+                        span.reviews__rating
+                          i.icon.ion-ios-star
+                          | 9.0
+                      p.reviews__text
+                        | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+                    li.reviews__item
+                      .reviews__autor
+                        img.reviews__avatar(src='img/user.png' alt='')
+                        span.reviews__name Best Marvel movie in my opinion
+                        span.reviews__time 24.08.2018, 17:53 by John Doe
+                        span.reviews__rating
+                          i.icon.ion-ios-star
+                          | 7.5
+                      p.reviews__text
+                        | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+                  form.form(action='#')
+                    input.form__input(type='text' placeholder='Title')
+                    textarea.form__textarea(placeholder='Review')
+                    .form__slider
+                      #slider__rating.form__slider-rating
+                      #form__slider-value.form__slider-value
+                    button.form__btn(type='button') Send
+              // end reviews
+          #tab-3.tab-pane.fade(role='tabpanel' aria-labelledby='3-tab')
+            // project gallery
+            .gallery(itemscope='')
+              .row
+                // gallery item
+                figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+                  a(href='img/gallery/project-1.jpg' itemprop='contentUrl' data-size='1920x1280')
+                    img(src='img/gallery/project-1.jpg' itemprop='thumbnail' alt='Image description')
+                  figcaption(itemprop='caption description') Some image caption 1
+                // end gallery item
+                // gallery item
+                figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+                  a(href='img/gallery/project-2.jpg' itemprop='contentUrl' data-size='1920x1280')
+                    img(src='img/gallery/project-2.jpg' itemprop='thumbnail' alt='Image description')
+                  figcaption(itemprop='caption description') Some image caption 2
+                // end gallery item
+                // gallery item
+                figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+                  a(href='img/gallery/project-3.jpg' itemprop='contentUrl' data-size='1920x1280')
+                    img(src='img/gallery/project-3.jpg' itemprop='thumbnail' alt='Image description')
+                  figcaption(itemprop='caption description') Some image caption 3
+                // end gallery item
+                // gallery item
+                figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+                  a(href='img/gallery/project-4.jpg' itemprop='contentUrl' data-size='1920x1280')
+                    img(src='img/gallery/project-4.jpg' itemprop='thumbnail' alt='Image description')
+                  figcaption(itemprop='caption description') Some image caption 4
+                // end gallery item
+                // gallery item
+                figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+                  a(href='img/gallery/project-5.jpg' itemprop='contentUrl' data-size='1920x1280')
+                    img(src='img/gallery/project-5.jpg' itemprop='thumbnail' alt='Image description')
+                  figcaption(itemprop='caption description') Some image caption 5
+                // end gallery item
+                // gallery item
+                figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+                  a(href='img/gallery/project-6.jpg' itemprop='contentUrl' data-size='1920x1280')
+                    img(src='img/gallery/project-6.jpg' itemprop='thumbnail' alt='Image description')
+                  figcaption(itemprop='caption description') Some image caption 6
+                // end gallery item
+            // end project gallery
+        // end content tabs
+      // sidebar
+      .col-12.col-lg-4.col-xl-4
+        .row
+          // section title
+          .col-12
+            h2.section__title.section__title--sidebar You may also like...
+          // end section title
+          // card
+          .col-6.col-sm-4.col-lg-6
+            .card
+              .card__cover
+                img(src='img/covers/cover.jpg' alt='')
+                a.card__play(href='#')
+                  i.icon.ion-ios-play
+              .card__content
+                h3.card__title
+                  a(href='#') I Dream in Another Language
+                span.card__category
+                  a(href='#') Action
+                  a(href='#') Triler
+                span.card__rate
+                  i.icon.ion-ios-star
+                  | 8.4
+          // end card
+          // card
+          .col-6.col-sm-4.col-lg-6
+            .card
+              .card__cover
+                img(src='img/covers/cover2.jpg' alt='')
+                a.card__play(href='#')
+                  i.icon.ion-ios-play
+              .card__content
+                h3.card__title
+                  a(href='#') Benched
+                span.card__category
+                  a(href='#') Comedy
+                span.card__rate
+                  i.icon.ion-ios-star
+                  | 7.1
+          // end card
+          // card
+          .col-6.col-sm-4.col-lg-6
+            .card
+              .card__cover
+                img(src='img/covers/cover3.jpg' alt='')
+                a.card__play(href='#')
+                  i.icon.ion-ios-play
+              .card__content
+                h3.card__title
+                  a(href='#') Whitney
+                span.card__category
+                  a(href='#') Romance
+                  a(href='#') Drama
+                  a(href='#') Music
+                span.card__rate
+                  i.icon.ion-ios-star
+                  | 6.3
+          // end card
+          // card
+          .col-6.col-sm-4.col-lg-6
+            .card
+              .card__cover
+                img(src='img/covers/cover4.jpg' alt='')
+                a.card__play(href='#')
+                  i.icon.ion-ios-play
+              .card__content
+                h3.card__title
+                  a(href='#') Blindspotting
+                span.card__category
+                  a(href='#') Comedy
+                  a(href='#') Drama
+                span.card__rate
+                  i.icon.ion-ios-star
+                  | 7.9
+          // end card
+          // card
+          .col-6.col-sm-4.col-lg-6
+            .card
+              .card__cover
+                img(src='img/covers/cover5.jpg' alt='')
+                a.card__play(href='#')
+                  i.icon.ion-ios-play
+              .card__content
+                h3.card__title
+                  a(href='#') I Dream in Another Language
+                span.card__category
+                  a(href='#') Action
+                  a(href='#') Triler
+                span.card__rate
+                  i.icon.ion-ios-star
+                  | 8.4
+          // end card
+          // card
+          .col-6.col-sm-4.col-lg-6
+            .card
+              .card__cover
+                img(src='img/covers/cover6.jpg' alt='')
+                a.card__play(href='#')
+                  i.icon.ion-ios-play
+              .card__content
+                h3.card__title
+                  a(href='#') Benched
+                span.card__category
+                  a(href='#') Comedy
+                span.card__rate
+                  i.icon.ion-ios-star
+                  | 7.1
+          // end card
+      // end sidebar
+// end content
+// footer
+footer.footer
+  .container
+    .row
+      // footer list
+      .col-12.col-md-3
+        h6.footer__title Download Our App
+        ul.footer__app
+          li
+            a(href='#')
+              img(src='img/Download_on_the_App_Store_Badge.svg' alt='')
+          li
+            a(href='#')
+              img(src='img/google-play-badge.png' alt='')
+      // end footer list
+      // footer list
+      .col-6.col-sm-4.col-md-3
+        h6.footer__title Resources
+        ul.footer__list
+          li
+            a(href='#') About Us
+          li
+            a(href='#') Pricing Plan
+          li
+            a(href='#') Help
+      // end footer list
+      // footer list
+      .col-6.col-sm-4.col-md-3
+        h6.footer__title Legal
+        ul.footer__list
+          li
+            a(href='#') Terms of Use
+          li
+            a(href='#') Privacy Policy
+          li
+            a(href='#') Security
+      // end footer list
+      // footer list
+      .col-12.col-sm-4.col-md-3
+        h6.footer__title Contact
+        ul.footer__list
+          li
+            a(href='tel:+18002345678') +1 (800) 234-5678
+          li
+            a(href='mailto:support@moviego.com') support@flixgo.com
+        ul.footer__social
+          li.facebook
+            a(href='#')
+              i.icon.ion-logo-facebook
+          li.instagram
+            a(href='#')
+              i.icon.ion-logo-instagram
+          li.twitter
+            a(href='#')
+              i.icon.ion-logo-twitter
+          li.vk
+            a(href='#')
+              i.icon.ion-logo-vk
+      // end footer list
+      // footer copyright
+      .col-12
+        .footer__copyright
+          small
+            a(target='_blank' href='https://www.templateshub.net') Templates Hub
+          ul
+            li
+              a(href='#') Terms of Use
+            li
+              a(href='#') Privacy Policy
+      // end footer copyright
+// end footer
+// Root element of PhotoSwipe. Must have class pswp.
+.pswp(tabindex='-1' role='dialog' aria-hidden='true')
+  //
+    Background of PhotoSwipe.
+    It's a separate element, as animating opacity is faster than rgba().
+  .pswp__bg
+  // Slides wrapper with overflow:hidden.
+  .pswp__scroll-wrap
+    // Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory.
+    // don't modify these 3 pswp__item elements, data is added later on.
+    .pswp__container
+      .pswp__item
+      .pswp__item
+      .pswp__item
+    // Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.
+    .pswp__ui.pswp__ui--hidden
+      .pswp__top-bar
+        // Controls are self-explanatory. Order can be changed.
+        .pswp__counter
+        button.pswp__button.pswp__button--close(title='Close (Esc)')
+        button.pswp__button.pswp__button--fs(title='Toggle fullscreen')
+        // Preloader
+        .pswp__preloader
+          .pswp__preloader__icn
+            .pswp__preloader__cut
+              .pswp__preloader__donut
+      button.pswp__button.pswp__button--arrow--left(title='Previous (arrow left)')
+      button.pswp__button.pswp__button--arrow--right(title='Next (arrow right)')
+      .pswp__caption
+        .pswp__caption__center
+// JS
+script(src='js/jquery-3.3.1.min.js')
+script(src='js/bootstrap.bundle.min.js')
+script(src='js/owl.carousel.min.js')
+script(src='js/jquery.mousewheel.min.js')
+script(src='js/jquery.mCustomScrollbar.min.js')
+script(src='js/wNumb.js')
+script(src='js/nouislider.min.js')
+script(src='js/plyr.min.js')
+script(src='js/jquery.morelines.min.js')
+script(src='js/photoswipe.min.js')
+script(src='js/photoswipe-ui-default.min.js')
+script(src='js/main.js')

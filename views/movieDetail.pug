@@ -1,0 +1,202 @@
+extends base
+block content
+  // details
+  section.section.details
+    // details background
+    .details__bg(data-bg=`${movie.backdrop}`)
+    // end details background
+    // details content
+    .container
+      .row
+        // title
+        .col-12
+          h1.details__title= `${movie.name}`
+        // end title
+        // content
+        .col-12.col-xl-6
+          .card.card--details
+            .row
+              // card cover
+              .col-12.col-sm-4.col-md-4.col-lg-3.col-xl-5
+                .card__cover
+                  img(src=`${movie.poster}` alt=`${movie.name}`)
+              // end card cover
+              // card content
+              .col-12.col-sm-8.col-md-8.col-lg-9.col-xl-7
+                .card__content
+                  .card__wrap
+                    span.card__rate
+                      i.icon.ion-ios-star
+                      | #{(Math.round(movie.ratings * 100) / 100).toFixed(1)}
+                    ul.card__list
+                      li HD
+                      li= `${movie.pgRating}`
+                  ul.card__meta
+                    li
+                      span Genre:
+                      each gen in movie.genre
+                        a= `${gen}`
+                    li
+                      span= `Release year:\n${movie.year}`
+                    li
+                      span= `Running time:\n${movie.runTime} minutes`
+                  .card__description.card__description--details= `${movie.description}`
+              // end card content
+        // end content
+        // player
+        .col-12.col-xl-6
+          video#player(controls='' crossorigin='' playsinline='' poster='../../../cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg')
+            // Video files
+            source(src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4' type='video/mp4' size='576')
+            source(src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4' type='video/mp4' size='720')
+            source(src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4' type='video/mp4' size='1080')
+            source(src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1440p.mp4' type='video/mp4' size='1440')
+            // Caption files
+            track(kind='captions' label='English' srclang='en' src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt' default='')
+            track(kind='captions' label='Français' srclang='fr' src='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt')
+            // Fallback for browsers that don't support the <video> element
+            a(href='https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4' download='') Download
+        // end player
+    // end details content
+  // end details
+  // content
+  section.content
+    .content__head
+      .container
+        .row
+          .col-12
+            // content title
+            h2.content__title Discover
+            // end content title
+            // content tabs nav
+            ul#content__tabs.nav.nav-tabs.content__tabs(role='tablist')
+              li.nav-item
+                a.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') Trailer 
+              li.nav-item
+                a.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') Reviews
+            // end content tabs nav
+            // content mobile tabs nav
+            #content__mobile-tabs.content__mobile-tabs
+              #mobile-tabs.content__mobile-tabs-btn.dropdown-toggle(role='navigation' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                input(type='button' value='Comments')
+                span
+              .content__mobile-tabs-menu.dropdown-menu(aria-labelledby='mobile-tabs')
+                ul.nav.nav-tabs(role='tablist')
+                  li.nav-item
+                    a#1-tab.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') Trailer
+                  li.nav-item
+                    a#2-tab.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') Reviews
+            // end content mobile tabs nav
+    .container
+      .row
+        .col-12.col-lg-8.col-xl-8
+          // content tabs
+          #myTabContent.tab-content
+            #tab-1.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='1-tab')
+              .row 
+                .col-12
+                  .comments 
+                    iframe(width='660', height='371', src=`${movie.trailerLink}`)
+
+            #tab-2.tab-pane.fade(role='tabpanel' aria-labelledby='2-tab')
+              .row
+                // reviews
+                .col-12
+                  .reviews
+                    ul.reviews__list
+                      li.reviews__item
+                        .reviews__autor
+                          img.reviews__avatar(src='img/user.png' alt='')
+                          span.reviews__name Best Marvel movie in my opinion
+                          span.reviews__time 24.08.2018, 17:53 by John Doe
+                          span.reviews__rating
+                            i.icon.ion-ios-star
+                            | 8.4
+                        p.reviews__text
+                          | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+                      li.reviews__item
+                        .reviews__autor
+                          img.reviews__avatar(src='img/user.png' alt='')
+                          span.reviews__name Best Marvel movie in my opinion
+                          span.reviews__time 24.08.2018, 17:53 by John Doe
+                          span.reviews__rating
+                            i.icon.ion-ios-star
+                            | 9.0
+                        p.reviews__text
+                          | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+                      li.reviews__item
+                        .reviews__autor
+                          img.reviews__avatar(src='img/user.png' alt='')
+                          span.reviews__name Best Marvel movie in my opinion
+                          span.reviews__time 24.08.2018, 17:53 by John Doe
+                          span.reviews__rating
+                            i.icon.ion-ios-star
+                            | 7.5
+                        p.reviews__text
+                          | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+                    form.form(action='#')
+                      input.form__input(type='text' placeholder='Title')
+                      textarea.form__textarea(placeholder='Review')
+                      .form__slider
+                        #slider__rating.form__slider-rating
+                        #form__slider-value.form__slider-value
+                      button.form__btn(type='button') Send
+                // end reviews
+          // end content tabs
+        // sidebar
+        .col-12.col-lg-4.col-xl-4
+          .row
+            // section title
+            .col-12
+              h2.section__title.section__title--sidebar Highest IMDb Rated
+            // end section title
+            // card
+            each card in highIMDBRating
+              .col-6.col-sm-4.col-lg-6
+                .card
+                  .card__cover
+                    img(src=`${card.poster}` alt=`${card.name}`)
+                    a.card__play(href=`/movie/${card.slug}`)
+                      i.icon.ion-ios-play
+                  .card__content
+                    h3.card__title
+                      a(href='#')= `${card.name}`
+                    span.card__category
+                      each genre in card.genre
+                        a= `${genre}`
+                    span.card__rate
+                      i.icon.ion-ios-star
+                      | #{(Math.round(card.ratings * 100) / 100).toFixed(1)}
+            // end card
+        // end sidebar
+  // end content
+  // Root element of PhotoSwipe. Must have class pswp.
+  .pswp(tabindex='-1' role='dialog' aria-hidden='true')
+    //
+      Background of PhotoSwipe.
+      It's a separate element, as animating opacity is faster than rgba().
+    .pswp__bg
+    // Slides wrapper with overflow:hidden.
+    .pswp__scroll-wrap
+      // Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory.
+      // don't modify these 3 pswp__item elements, data is added later on.
+      .pswp__container
+        .pswp__item
+        .pswp__item
+        .pswp__item
+      // Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.
+      .pswp__ui.pswp__ui--hidden
+        .pswp__top-bar
+          // Controls are self-explanatory. Order can be changed.
+          .pswp__counter
+          button.pswp__button.pswp__button--close(title='Close (Esc)')
+          button.pswp__button.pswp__button--fs(title='Toggle fullscreen')
+          // Preloader
+          .pswp__preloader
+            .pswp__preloader__icn
+              .pswp__preloader__cut
+                .pswp__preloader__donut
+        button.pswp__button.pswp__button--arrow--left(title='Previous (arrow left)')
+        button.pswp__button.pswp__button--arrow--right(title='Next (arrow right)')
+        .pswp__caption
+          .pswp__caption__center

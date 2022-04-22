@@ -1,0 +1,977 @@
+extends base
+
+block content
+  // home
+  section.home
+    // home bg
+    .owl-carousel.home__bg
+      each movie in movies 
+        .item.home__cover(data-bg=`${movie.backdrop}`)
+    // end home bg
+    .container
+      .row
+        .col-12
+          h1.home__title
+            b NEW ITEMS
+            |  OF THIS SEASON
+          button.home__nav.home__nav--prev(type='button')
+            i.icon.ion-ios-arrow-round-back
+          button.home__nav.home__nav--next(type='button')
+            i.icon.ion-ios-arrow-round-forward
+        .col-12
+          .owl-carousel.home__carousel
+            each movie in movies 
+              .item
+                // card
+                .card.card--big
+                  .card__cover
+                    img(src=`${movie.poster}` alt=`${movie.name}`)
+                    a.card__play(href=`/movie/${movie.slug}`)
+                      i.icon.ion-ios-play
+                  .card__content
+                    h3.card__title
+                      a(href='#')= `${movie.name}`
+                    span.card__category
+                      each genre in movie.genre
+                        a(href='#')= `${genre}`
+                    span.card__rate
+                      i.icon.ion-ios-star
+                      | #{(Math.round(movie.ratings * 100) / 100).toFixed(1)}
+                // end card
+  // end home
+  // content
+  section.content
+    .content__head
+      .container
+        .row
+          .col-12
+            // content title
+            h2.content__title New items
+            // end content title
+            // content tabs nav
+            ul#content__tabs.nav.nav-tabs.content__tabs(role='tablist')
+              li.nav-item
+                a.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') NEW RELEASES
+              li.nav-item
+                a.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') MOVIES
+              li.nav-item
+                a.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') TV SERIES
+              li.nav-item
+                a.nav-link(data-toggle='tab' href='#tab-4' role='tab' aria-controls='tab-4' aria-selected='false') CARTOONS
+            // end content tabs nav
+            // content mobile tabs nav
+            #content__mobile-tabs.content__mobile-tabs
+              #mobile-tabs.content__mobile-tabs-btn.dropdown-toggle(role='navigation' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                input(type='button' value='New items')
+                span
+              .content__mobile-tabs-menu.dropdown-menu(aria-labelledby='mobile-tabs')
+                ul.nav.nav-tabs(role='tablist')
+                  li.nav-item
+                    a#1-tab.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') NEW RELEASES
+                  li.nav-item
+                    a#2-tab.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') MOVIES
+                  li.nav-item
+                    a#3-tab.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') TV SERIES
+                  li.nav-item
+                    a#4-tab.nav-link(data-toggle='tab' href='#tab-4' role='tab' aria-controls='tab-4' aria-selected='false') CARTOONS
+            // end content mobile tabs nav
+    .container
+      // content tabs
+      #myTabContent.tab-content
+        #tab-1.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='1-tab')
+          .row
+            // card
+            .col-6.col-sm-12.col-lg-6
+              .card.card--list
+                .row
+                  .col-12.col-sm-4
+                    .card__cover
+                      img(src='img/covers/cover.jpg' alt='')
+                      a.card__play(href='#')
+                        i.icon.ion-ios-play
+                  .col-12.col-sm-8
+                    .card__content
+                      h3.card__title
+                        a(href='#') I Dream in Another Language
+                      span.card__category
+                        a(href='#') Action
+                        a(href='#') Triler
+                      .card__wrap
+                        span.card__rate
+                          i.icon.ion-ios-star
+                          | 8.4
+                        ul.card__list
+                          li HD
+                          li 16+
+                      .card__description
+                        p
+                          | It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &apos;Content here, content here&apos;, making it look like readable English.
+            // end card
+            // card
+            .col-6.col-sm-12.col-lg-6
+              .card.card--list
+                .row
+                  .col-12.col-sm-4
+                    .card__cover
+                      img(src='img/covers/cover2.jpg' alt='')
+                      a.card__play(href='#')
+                        i.icon.ion-ios-play
+                  .col-12.col-sm-8
+                    .card__content
+                      h3.card__title
+                        a(href='#') Benched
+                      span.card__category
+                        a(href='#') Comedy
+                      .card__wrap
+                        span.card__rate
+                          i.icon.ion-ios-star
+                          | 7.1
+                        ul.card__list
+                          li HD
+                          li 16+
+                      .card__description
+                        p
+                          | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            // end card
+            // card
+            .col-6.col-sm-12.col-lg-6
+              .card.card--list
+                .row
+                  .col-12.col-sm-4
+                    .card__cover
+                      img(src='img/covers/cover3.jpg' alt='')
+                      a.card__play(href='#')
+                        i.icon.ion-ios-play
+                  .col-12.col-sm-8
+                    .card__content
+                      h3.card__title
+                        a(href='#') Whitney
+                      span.card__category
+                        a(href='#') Romance
+                        a(href='#') Drama
+                        a(href='#') Music
+                      .card__wrap
+                        span.card__rate
+                          i.icon.ion-ios-star
+                          | 6.3
+                        ul.card__list
+                          li HD
+                          li 16+
+                      .card__description
+                        p
+                          | It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            // end card
+            // card
+            .col-6.col-sm-12.col-lg-6
+              .card.card--list
+                .row
+                  .col-12.col-sm-4
+                    .card__cover
+                      img(src='img/covers/cover4.jpg' alt='')
+                      a.card__play(href='#')
+                        i.icon.ion-ios-play
+                  .col-12.col-sm-8
+                    .card__content
+                      h3.card__title
+                        a(href='#') Blindspotting
+                      span.card__category
+                        a(href='#') Comedy
+                        a(href='#') Drama
+                      .card__wrap
+                        span.card__rate
+                          i.icon.ion-ios-star
+                          | 7.9
+                        ul.card__list
+                          li HD
+                          li 16+
+                      .card__description
+                        p
+                          | Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &apos;lorem ipsum&apos; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            // end card
+            // card
+            .col-6.col-sm-12.col-lg-6
+              .card.card--list
+                .row
+                  .col-12.col-sm-4
+                    .card__cover
+                      img(src='img/covers/cover5.jpg' alt='')
+                      a.card__play(href='#')
+                        i.icon.ion-ios-play
+                  .col-12.col-sm-8
+                    .card__content
+                      h3.card__title
+                        a(href='#') I Dream in Another Language
+                      span.card__category
+                        a(href='#') Action
+                        a(href='#') Triler
+                      .card__wrap
+                        span.card__rate
+                          i.icon.ion-ios-star
+                          | 8.4
+                        ul.card__list
+                          li HD
+                          li 16+
+                      .card__description
+                        p
+                          | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+            // end card
+            // card
+            .col-6.col-sm-12.col-lg-6
+              .card.card--list
+                .row
+                  .col-12.col-sm-4
+                    .card__cover
+                      img(src='img/covers/cover6.jpg' alt='')
+                      a.card__play(href='#')
+                        i.icon.ion-ios-play
+                  .col-12.col-sm-8
+                    .card__content
+                      h3.card__title
+                        a(href='#') Benched
+                      span.card__category
+                        a(href='#') Comedy
+                      .card__wrap
+                        span.card__rate
+                          i.icon.ion-ios-star
+                          | 7.1
+                        ul.card__list
+                          li HD
+                          li 16+
+                      .card__description
+                        p
+                          | All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+            // end card
+        #tab-2.tab-pane.fade(role='tabpanel' aria-labelledby='2-tab')
+          .row
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') I Dream in Another Language
+                  span.card__category
+                    a(href='#') Action
+                    a(href='#') Triler
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover2.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Benched
+                  span.card__category
+                    a(href='#') Comedy
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.1
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover3.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Whitney
+                  span.card__category
+                    a(href='#') Romance
+                    a(href='#') Drama
+                    a(href='#') Music
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 6.3
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover4.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Blindspotting
+                  span.card__category
+                    a(href='#') Comedy
+                    a(href='#') Drama
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.9
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover5.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') I Dream in Another Language
+                  span.card__category
+                    a(href='#') Action
+                    a(href='#') Triler
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover6.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Benched
+                  span.card__category
+                    a(href='#') Comedy
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.1
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover6.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Whitney
+                  span.card__category
+                    a(href='#') Romance
+                    a(href='#') Drama
+                    a(href='#') Music
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 6.3
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover5.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Blindspotting
+                  span.card__category
+                    a(href='#') Comedy
+                    a(href='#') Drama
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.9
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover4.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') I Dream in Another Language
+                  span.card__category
+                    a(href='#') Action
+                    a(href='#') Triler
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover3.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Benched
+                  span.card__category
+                    a(href='#') Comedy
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.1
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover2.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Whitney
+                  span.card__category
+                    a(href='#') Romance
+                    a(href='#') Drama
+                    a(href='#') Music
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 6.3
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Blindspotting
+                  span.card__category
+                    a(href='#') Comedy
+                    a(href='#') Drama
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.9
+            // end card
+        #tab-3.tab-pane.fade(role='tabpanel' aria-labelledby='3-tab')
+          .row
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover2.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') I Dream in Another Language
+                  span.card__category
+                    a(href='#') Action
+                    a(href='#') Triler
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Benched
+                  span.card__category
+                    a(href='#') Comedy
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.1
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover4.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Whitney
+                  span.card__category
+                    a(href='#') Romance
+                    a(href='#') Drama
+                    a(href='#') Music
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 6.3
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover3.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Blindspotting
+                  span.card__category
+                    a(href='#') Comedy
+                    a(href='#') Drama
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.9
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover6.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') I Dream in Another Language
+                  span.card__category
+                    a(href='#') Action
+                    a(href='#') Triler
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover5.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Benched
+                  span.card__category
+                    a(href='#') Comedy
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.1
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover5.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Whitney
+                  span.card__category
+                    a(href='#') Romance
+                    a(href='#') Drama
+                    a(href='#') Music
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 6.3
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover6.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Blindspotting
+                  span.card__category
+                    a(href='#') Comedy
+                    a(href='#') Drama
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.9
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover3.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') I Dream in Another Language
+                  span.card__category
+                    a(href='#') Action
+                    a(href='#') Triler
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover4.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Benched
+                  span.card__category
+                    a(href='#') Comedy
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.1
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Whitney
+                  span.card__category
+                    a(href='#') Romance
+                    a(href='#') Drama
+                    a(href='#') Music
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 6.3
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover2.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Blindspotting
+                  span.card__category
+                    a(href='#') Comedy
+                    a(href='#') Drama
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.9
+            // end card
+        #tab-4.tab-pane.fade(role='tabpanel' aria-labelledby='4-tab')
+          .row
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') I Dream in Another Language
+                  span.card__category
+                    a(href='#') Action
+                    a(href='#') Triler
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover3.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Benched
+                  span.card__category
+                    a(href='#') Comedy
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.1
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover2.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Whitney
+                  span.card__category
+                    a(href='#') Romance
+                    a(href='#') Drama
+                    a(href='#') Music
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 6.3
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover6.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Blindspotting
+                  span.card__category
+                    a(href='#') Comedy
+                    a(href='#') Drama
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.9
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover4.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') I Dream in Another Language
+                  span.card__category
+                    a(href='#') Action
+                    a(href='#') Triler
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover5.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Benched
+                  span.card__category
+                    a(href='#') Comedy
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.1
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover6.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Whitney
+                  span.card__category
+                    a(href='#') Romance
+                    a(href='#') Drama
+                    a(href='#') Music
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 6.3
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover5.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Blindspotting
+                  span.card__category
+                    a(href='#') Comedy
+                    a(href='#') Drama
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.9
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover4.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') I Dream in Another Language
+                  span.card__category
+                    a(href='#') Action
+                    a(href='#') Triler
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 8.4
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover3.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Benched
+                  span.card__category
+                    a(href='#') Comedy
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.1
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover2.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Whitney
+                  span.card__category
+                    a(href='#') Romance
+                    a(href='#') Drama
+                    a(href='#') Music
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 6.3
+            // end card
+            // card
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src='img/covers/cover.jpg' alt='')
+                  a.card__play(href='#')
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href='#') Blindspotting
+                  span.card__category
+                    a(href='#') Comedy
+                    a(href='#') Drama
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | 7.9
+            // end card
+            // end content tabs
+  // end content
+    // expected premiere
+  section.section.section--bg(data-bg='img/section/section.jpg')
+    .container
+      .row
+        // section title
+        .col-12
+          h2.section__title Expected premiere
+        // end section title
+        // card
+        .col-6.col-sm-4.col-lg-3.col-xl-2
+          .card
+            .card__cover
+              img(src='img/covers/cover.jpg' alt='')
+              a.card__play(href='#')
+                i.icon.ion-ios-play
+            .card__content
+              h3.card__title
+                a(href='#') I Dream in Another Language
+              span.card__category
+                a(href='#') Action
+                a(href='#') Triler
+              span.card__rate
+                i.icon.ion-ios-star
+                | 8.4
+        // end card
+        // card
+        .col-6.col-sm-4.col-lg-3.col-xl-2
+          .card
+            .card__cover
+              img(src='img/covers/cover3.jpg' alt='')
+              a.card__play(href='#')
+                i.icon.ion-ios-play
+            .card__content
+              h3.card__title
+                a(href='#') Benched
+              span.card__category
+                a(href='#') Comedy
+              span.card__rate
+                i.icon.ion-ios-star
+                | 7.1
+        // end card
+        // card
+        .col-6.col-sm-4.col-lg-3.col-xl-2
+          .card
+            .card__cover
+              img(src='img/covers/cover2.jpg' alt='')
+              a.card__play(href='#')
+                i.icon.ion-ios-play
+            .card__content
+              h3.card__title
+                a(href='#') Whitney
+              span.card__category
+                a(href='#') Romance
+                a(href='#') Drama
+                a(href='#') Music
+              span.card__rate
+                i.icon.ion-ios-star
+                | 6.3
+        // end card
+        // card
+        .col-6.col-sm-4.col-lg-3.col-xl-2
+          .card
+            .card__cover
+              img(src='img/covers/cover6.jpg' alt='')
+              a.card__play(href='#')
+                i.icon.ion-ios-play
+            .card__content
+              h3.card__title
+                a(href='#') Blindspotting
+              span.card__category
+                a(href='#') Comedy
+                a(href='#') Drama
+              span.card__rate
+                i.icon.ion-ios-star
+                | 7.9
+        // end card
+        // card
+        .col-6.col-sm-4.col-lg-3.col-xl-2
+          .card
+            .card__cover
+              img(src='img/covers/cover4.jpg' alt='')
+              a.card__play(href='#')
+                i.icon.ion-ios-play
+            .card__content
+              h3.card__title
+                a(href='#') I Dream in Another Language
+              span.card__category
+                a(href='#') Action
+                a(href='#') Triler
+              span.card__rate
+                i.icon.ion-ios-star
+                | 8.4
+        // end card
+        // card
+        .col-6.col-sm-4.col-lg-3.col-xl-2
+          .card
+            .card__cover
+              img(src='img/covers/cover5.jpg' alt='')
+              a.card__play(href='#')
+                i.icon.ion-ios-play
+            .card__content
+              h3.card__title
+                a(href='#') Benched
+              span.card__category
+                a(href='#') Comedy
+              span.card__rate
+                i.icon.ion-ios-star
+                | 7.1
+        // end card
+        // section btn
+        .col-12
+          a.section__btn(href='#') Show more
+        // end section btn
+  // end expected premiere

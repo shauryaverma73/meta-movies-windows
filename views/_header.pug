@@ -1,0 +1,69 @@
+header.header
+  .header__wrap
+    .container
+      .row
+        .col-12
+          .header__content
+            // header logo
+            a.header__logo(href=`/`)
+              img(src='/img/logo.svg' alt='')
+            // end header logo
+            // header nav
+            ul.header__nav
+              // dropdown
+              li.header__nav-item
+                a.header__nav-link(href='/') Home
+                //- a#dropdownMenuHome.dropdown-toggle.header__nav-link(href='/' role='button' data-toggle='dropdown' aria-haspopup='false' aria-expanded='false') Home
+                //- ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuHome')
+                //-   li
+                //-     a(href='index.html') Home slideshow bg
+                //-   li
+                //-     a(href='index2.html') Home static bg
+              // end dropdown
+              // dropdown
+              //- li.header__nav-item
+              //-   a#dropdownMenuCatalog.dropdown-toggle.header__nav-link(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Catalog
+              //-   ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuCatalog')
+              //-     li
+              //-       a(href='catalog1.html') Catalog Grid
+              //-     li
+              //-       a(href='catalog2.html') Catalog List
+              //-     li
+              //-       a(href='details1.html') Details Movie
+              //-     li
+              //-       a(href='details2.html') Details TV Series
+              //- // end dropdown
+              li.header__nav-item
+                a.header__nav-link(href='/catalogue') Catalogue 
+              li.header__nav-item
+                a.header__nav-link(href='/buy-subscription') Pricing Plan
+              li.header__nav-item
+                a.header__nav-link(href='faq.html') Help
+              // dropdown
+              li.dropdown.header__nav-item
+                a#dropdownMenuMore.dropdown-toggle.header__nav-link.header__nav-link--more(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                  i.icon.ion-ios-more
+                ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuMore')
+                  li
+                    a(href='about.html') About
+                  li
+                    a(href='signin.html') Sign In
+                  li
+                    a(href='signup.html') Sign Up
+                  li
+                    a(href='404.html') 404 Page
+              // end dropdown
+            // end header nav
+            // header auth
+            .header__auth
+              a.header__sign-in(href='/signin')
+                i.icon.ion-ios-log-in
+                span sign in
+            // end header auth
+            // header menu btn
+            button.header__btn(type='button')
+              span
+              span
+              span
+            // end header menu btn
+// end header

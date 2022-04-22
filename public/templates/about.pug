@@ -1,0 +1,354 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Font
+  link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CUbuntu:300,400,500,700' rel='stylesheet')
+  // CSS
+  link(rel='stylesheet' href='css/bootstrap-reboot.min.css')
+  link(rel='stylesheet' href='css/bootstrap-grid.min.css')
+  link(rel='stylesheet' href='css/owl.carousel.min.css')
+  link(rel='stylesheet' href='css/jquery.mCustomScrollbar.min.css')
+  link(rel='stylesheet' href='css/nouislider.min.css')
+  link(rel='stylesheet' href='css/ionicons.min.css')
+  link(rel='stylesheet' href='css/plyr.css')
+  link(rel='stylesheet' href='css/photoswipe.css')
+  link(rel='stylesheet' href='css/default-skin.css')
+  link(rel='stylesheet' href='css/main.css')
+  // Favicons
+  link(rel='icon' type='image/png' href='icon/favicon-32x32.png' sizes='32x32')
+  link(rel='apple-touch-icon' href='icon/favicon-32x32.png')
+  link(rel='apple-touch-icon' sizes='72x72' href='icon/apple-touch-icon-72x72.png')
+  link(rel='apple-touch-icon' sizes='114x114' href='icon/apple-touch-icon-114x114.png')
+  link(rel='apple-touch-icon' sizes='144x144' href='icon/apple-touch-icon-144x144.png')
+  meta(name='description' content='')
+  meta(name='keywords' content='')
+  meta(name='author' content='Dmitry Volkov')
+  title FlixGo &ndash; Online Movies, TV Shows &amp; Cinema HTML Template
+// header
+header.header
+  .header__wrap
+    .container
+      .row
+        .col-12
+          .header__content
+            // header logo
+            a.header__logo(href='index.html')
+              img(src='img/logo.svg' alt='')
+            // end header logo
+            // header nav
+            ul.header__nav
+              // dropdown
+              li.header__nav-item
+                a#dropdownMenuHome.dropdown-toggle.header__nav-link(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Home
+                ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuHome')
+                  li
+                    a(href='index.html') Home slideshow bg
+                  li
+                    a(href='index2.html') Home static bg
+              // end dropdown
+              // dropdown
+              li.header__nav-item
+                a#dropdownMenuCatalog.dropdown-toggle.header__nav-link(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Catalog
+                ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuCatalog')
+                  li
+                    a(href='catalog1.html') Catalog Grid
+                  li
+                    a(href='catalog2.html') Catalog List
+                  li
+                    a(href='details1.html') Details Movie
+                  li
+                    a(href='details2.html') Details TV Series
+              // end dropdown
+              li.header__nav-item
+                a.header__nav-link(href='pricing.html') Pricing Plan
+              li.header__nav-item
+                a.header__nav-link(href='faq.html') Help
+              // dropdown
+              li.dropdown.header__nav-item
+                a#dropdownMenuMore.dropdown-toggle.header__nav-link.header__nav-link--more(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+                  i.icon.ion-ios-more
+                ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuMore')
+                  li
+                    a(href='about.html') About
+                  li
+                    a(href='signin.html') Sign In
+                  li
+                    a(href='signup.html') Sign Up
+                  li
+                    a(href='404.html') 404 Page
+              // end dropdown
+            // end header nav
+            // header auth
+            .header__auth
+              button.header__search-btn(type='button')
+                i.icon.ion-ios-search
+              a.header__sign-in(href='signin.html')
+                i.icon.ion-ios-log-in
+                span sign in
+            // end header auth
+            // header menu btn
+            button.header__btn(type='button')
+              span
+              span
+              span
+            // end header menu btn
+  // header search
+  form.header__search(action='#')
+    .container
+      .row
+        .col-12
+          .header__search-content
+            input(type='text' placeholder='Search for a movie, TV Series that you are looking for')
+            button(type='button') search
+  // end header search
+// end header
+// page title
+section.section.section--first.section--bg(data-bg='img/section/section.jpg')
+  .container
+    .row
+      .col-12
+        .section__wrap
+          // section title
+          h2.section__title About Us
+          // end section title
+          // breadcrumb
+          ul.breadcrumb
+            li.breadcrumb__item
+              a(href='#') Home
+            li.breadcrumb__item.breadcrumb__item--active About Us
+          // end breadcrumb
+// end page title
+// about
+section.section
+  .container
+    .row
+      // section title
+      .col-12
+        h2.section__title
+          b FLIXGO
+          |  &ndash; Best Place for Movies
+      // end section title
+      // section text
+      .col-12
+        p.section__text
+          | It is a long 
+          b established
+          |  fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.
+        p.section__text.section__text--last-with-margin
+          | &apos;Content here, content here&apos;, making it look like 
+          a(href='#') readable
+          |  English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &apos;lorem ipsum&apos; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+      // end section text
+      // feature
+      .col-12.col-md-6.col-lg-4
+        .feature
+          i.icon.ion-ios-tv.feature__icon
+          h3.feature__title Ultra HD
+          p.feature__text
+            | If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+      // end feature
+      // feature
+      .col-12.col-md-6.col-lg-4
+        .feature
+          i.icon.ion-ios-film.feature__icon
+          h3.feature__title Film
+          p.feature__text
+            | All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first.
+      // end feature
+      // feature
+      .col-12.col-md-6.col-lg-4
+        .feature
+          i.icon.ion-ios-trophy.feature__icon
+          h3.feature__title Awards
+          p.feature__text
+            | It to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining.
+      // end feature
+      // feature
+      .col-12.col-md-6.col-lg-4
+        .feature
+          i.icon.ion-ios-notifications.feature__icon
+          h3.feature__title Notifications
+          p.feature__text
+            | Various versions have evolved over the years, sometimes by accident, sometimes on purpose.
+      // end feature
+      // feature
+      .col-12.col-md-6.col-lg-4
+        .feature
+          i.icon.ion-ios-rocket.feature__icon
+          h3.feature__title Rocket
+          p.feature__text
+            | It to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.
+      // end feature
+      // feature
+      .col-12.col-md-6.col-lg-4
+        .feature
+          i.icon.ion-ios-globe.feature__icon
+          h3.feature__title Multi Language Subtitles 
+          p.feature__text
+            | Various versions have evolved over the years, sometimes by accident, sometimes on purpose.
+      // end feature
+// end about
+// how it works
+section.section.section--dark
+  .container
+    .row
+      // section title
+      .col-12
+        h2.section__title.section__title--no-margin How it works?
+      // end section title
+      // how box
+      .col-12.col-md-6.col-lg-4
+        .how
+          span.how__number 01
+          h3.how__title Create an account
+          p.how__text
+            | It has never been an issue to find an old movie or TV show on the internet. However, this is not the case with the new releases.
+      // ebd how box
+      // how box
+      .col-12.col-md-6.col-lg-4
+        .how
+          span.how__number 02
+          h3.how__title Choose your Plan
+          p.how__text
+            | It has never been an issue to find an old movie or TV show on the internet. However, this is not the case with the new releases.
+      // ebd how box
+      // how box
+      .col-12.col-md-6.col-lg-4
+        .how
+          span.how__number 03
+          h3.how__title Enjoy MovieGo
+          p.how__text
+            | It has never been an issue to find an old movie or TV show on the internet. However, this is not the case with the new releases.
+      // ebd how box
+// end how it works
+// partners
+section.section
+  .container
+    .row
+      // section title
+      .col-12
+        h2.section__title.section__title--no-margin Our Partners
+      // end section title
+      // section text
+      .col-12
+        p.section__text.section__text--last-with-margin
+          | It is a long 
+          b established
+          |  fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.
+      // end section text
+      // partner
+      .col-6.col-sm-4.col-md-3.col-lg-2
+        a.partner(href='#')
+          img.partner__img(src='img/partners/themeforest-light-background.png' alt='')
+      // end partner
+      // partner
+      .col-6.col-sm-4.col-md-3.col-lg-2
+        a.partner(href='#')
+          img.partner__img(src='img/partners/audiojungle-light-background.png' alt='')
+      // end partner
+      // partner
+      .col-6.col-sm-4.col-md-3.col-lg-2
+        a.partner(href='#')
+          img.partner__img(src='img/partners/codecanyon-light-background.png' alt='')
+      // end partner
+      // partner
+      .col-6.col-sm-4.col-md-3.col-lg-2
+        a.partner(href='#')
+          img.partner__img(src='img/partners/photodune-light-background.png' alt='')
+      // end partner
+      // partner
+      .col-6.col-sm-4.col-md-3.col-lg-2
+        a.partner(href='#')
+          img.partner__img(src='img/partners/activeden-light-background.png' alt='')
+      // end partner
+      // partner
+      .col-6.col-sm-4.col-md-3.col-lg-2
+        a.partner(href='#')
+          img.partner__img(src='img/partners/3docean-light-background.png' alt='')
+      // end partner
+// end partners
+// footer
+footer.footer
+  .container
+    .row
+      // footer list
+      .col-12.col-md-3
+        h6.footer__title Download Our App
+        ul.footer__app
+          li
+            a(href='#')
+              img(src='img/Download_on_the_App_Store_Badge.svg' alt='')
+          li
+            a(href='#')
+              img(src='img/google-play-badge.png' alt='')
+      // end footer list
+      // footer list
+      .col-6.col-sm-4.col-md-3
+        h6.footer__title Resources
+        ul.footer__list
+          li
+            a(href='#') About Us
+          li
+            a(href='#') Pricing Plan
+          li
+            a(href='#') Help
+      // end footer list
+      // footer list
+      .col-6.col-sm-4.col-md-3
+        h6.footer__title Legal
+        ul.footer__list
+          li
+            a(href='#') Terms of Use
+          li
+            a(href='#') Privacy Policy
+          li
+            a(href='#') Security
+      // end footer list
+      // footer list
+      .col-12.col-sm-4.col-md-3
+        h6.footer__title Contact
+        ul.footer__list
+          li
+            a(href='tel:+18002345678') +1 (800) 234-5678
+          li
+            a(href='mailto:support@moviego.com') support@flixgo.com
+        ul.footer__social
+          li.facebook
+            a(href='#')
+              i.icon.ion-logo-facebook
+          li.instagram
+            a(href='#')
+              i.icon.ion-logo-instagram
+          li.twitter
+            a(href='#')
+              i.icon.ion-logo-twitter
+          li.vk
+            a(href='#')
+              i.icon.ion-logo-vk
+      // end footer list
+      // footer copyright
+      .col-12
+        .footer__copyright
+          small
+            a(target='_blank' href='https://www.templateshub.net') Templates Hub
+          ul
+            li
+              a(href='#') Terms of Use
+            li
+              a(href='#') Privacy Policy
+      // end footer copyright
+// end footer
+// JS
+script(src='js/jquery-3.3.1.min.js')
+script(src='js/bootstrap.bundle.min.js')
+script(src='js/owl.carousel.min.js')
+script(src='js/jquery.mousewheel.min.js')
+script(src='js/jquery.mCustomScrollbar.min.js')
+script(src='js/wNumb.js')
+script(src='js/nouislider.min.js')
+script(src='js/plyr.min.js')
+script(src='js/jquery.morelines.min.js')
+script(src='js/photoswipe.min.js')
+script(src='js/photoswipe-ui-default.min.js')
+script(src='js/main.js')
