@@ -1,7 +1,5 @@
 const fs = require("fs");
 
-// add this endpoint and the url will be /api/video/videoID
-// app.get("/video",videoStram.sendStream);
 
 const sendStream = function (req, res) {
     // Ensure there is a range given for the video
