@@ -4,7 +4,17 @@ exports.getAllMovie = async (req, res, next) => {
     try {
         const queryObject = { ...req.query };
         
-        const movies = await Movie.find();
+        queryObject.genre = queryObject.genre.replace(/\b\w/g, c => c.toUpperCase());
+
+        let queryStr = JSON.stringify(queryObject);
+
+        queryStr = queryStr.replace(/\b(gte|lte|gt|lt|eq)\b/g, match => `$${match}`);
+
+        console.log(queryStr);
+
+        const query = Movie.find(JSON.parse(queryStr));
+
+        const movies = await query;
         if (movies) {
             res.status(201).json({
                 status: 'success',
