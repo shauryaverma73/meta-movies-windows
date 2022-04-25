@@ -40,8 +40,3 @@ exports.stream = async (req, res) => {
     videoStream.pipe(res);
 };
 
-// exports.findMovie = async (req, res, next) => {
-//     const movie = await Movie.findOne({ slug: req.params.slug });
-//     req.link = movie.movieLink;
-//     next();
-// };
