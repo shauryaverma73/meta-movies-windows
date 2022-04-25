@@ -111,7 +111,7 @@ block content
                 .col-12.col-sm-8
                   .card__content
                     h3.card__title
-                      a(href='#')= `${movie.name}`
+                      a(href=`/movie/${movie.slug}`)= `${movie.name}`
                     span.card__category
                       each genre in movie.genre
                         a(href='#')= `${genre}`

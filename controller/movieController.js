@@ -3,7 +3,7 @@ const Movie = require('./../model/movieModel');
 exports.getAllMovie = async (req, res, next) => {
     try {
         const queryObject = { ...req.query };
-        
+
         queryObject.genre = queryObject.genre.replace(/\b\w/g, c => c.toUpperCase());
 
         let queryStr = JSON.stringify(queryObject);
@@ -13,6 +13,14 @@ exports.getAllMovie = async (req, res, next) => {
         console.log(queryStr);
 
         const query = Movie.find(JSON.parse(queryStr));
+
+        // pagination
+        // const page = req.params.page * 1 | 1;
+        // const limit = req.params.limit * 1 | 100;
+        // const skip = (page - 1) * limit;
+
+        // query = query.skip(skip).limit(limit);
+
 
         const movies = await query;
         if (movies) {
