@@ -4,6 +4,7 @@ const userRouter = require('./routes/userRoute');
 const movieRouter = require('./routes/movieRoute');
 const reviewRouter = require('./routes/reviewRoute');
 const viewRouter = require('./routes/viewRoute');
+const streamRouter = require('./routes/streamRoute');
 const cookieParser = require('cookie-parser');
 const pug = require('pug');
 const path = require('path');
@@ -18,8 +19,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(cookieParser());
 
+
 // Router Mounting Points
 app.use('/', viewRouter);
+app.use('/api/v1/stream', streamRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/movie', movieRouter);
 app.use('/api/v1/review', reviewRouter);

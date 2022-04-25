@@ -1,16 +1,19 @@
-const fs = require("fs");
-const got = require("got");
+const fs = require('fs');
+const Movie = require('./../model/movieModel');
+const path = require('path');
 
-const sendStream = function (req, res) {
+exports.stream = async (req, res) => {
     // Ensure there is a range given for the video
     const range = req.headers.range;
     if (!range) {
         res.status(400).send("Requires Range header");
     }
 
+    // console.log(req.link);
+
     // get video stats (about 61MB)
-    const videoPath = "bigbuck.mp4";
-    const videoSize = fs.statSync("bigbuck.mp4").size;
+    const videoPath = path.join(__dirname, `../public/movies/${req.params.slug}`);
+    const videoSize = fs.statSync(path.join(__dirname, `../public/movies/${req.params.slug}`)).size;
 
     // Parse Range
     // Example: "bytes=32324-"
@@ -37,4 +40,8 @@ const sendStream = function (req, res) {
     videoStream.pipe(res);
 };
 
-module.exports = sendStream;
+// exports.findMovie = async (req, res, next) => {
+//     const movie = await Movie.findOne({ slug: req.params.slug });
+//     req.link = movie.movieLink;
+//     next();
+// };

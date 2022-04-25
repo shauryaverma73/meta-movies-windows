@@ -32,6 +32,7 @@ router.get('/movie/:slug', async (req, res) => {
 
     res.status(200).render('movieDetail', {
         title: movie.name,
+        link: movie.movieLink,
         movie,
         highIMDBRating
     });
