@@ -8,6 +8,7 @@ const streamRouter = require('./routes/streamRoute');
 const cookieParser = require('cookie-parser');
 const pug = require('pug');
 const path = require('path');
+const morgan = require('morgan');
 
 // setting view engine
 app.set('view engine', 'pug');
@@ -18,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // middlewares
 app.use(express.json());
 app.use(cookieParser());
-
+// app.use(morgan('dev'));
 
 // Router Mounting Points
 app.use('/', viewRouter);
@@ -27,3 +28,4 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/movie', movieRouter);
 app.use('/api/v1/review', reviewRouter);
 module.exports = app;
+

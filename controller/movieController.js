@@ -4,7 +4,9 @@ exports.getAllMovie = async (req, res, next) => {
     try {
         const queryObject = { ...req.query };
 
-        queryObject.genre = queryObject.genre.replace(/\b\w/g, c => c.toUpperCase());
+        if (queryObject.genre) {
+            queryObject.genre = queryObject.genre.replace(/\b\w/g, c => c.toUpperCase());
+        }
 
         let queryStr = JSON.stringify(queryObject);
 
@@ -124,6 +126,41 @@ exports.deleteMovie = async (req, res) => {
         console.log(err);
     }
 };
+
+exports.getAllGenre = async (req, res, next) => {
+    try {
+        const movies = await Movie.find();
+        let genreSet = new Set();
+        movies.forEach((el) => {
+            el.genre.forEach((gen) => {
+                genreSet.add(gen);
+            });
+        });
+
+        const genArr = Array.from(genreSet);
+
+        console.log(genArr);
+
+        if (genArr) {
+            res.status(201).json({
+                status: 'success',
+                data: {
+                    genArr
+                }
+            });
+        } else {
+            res.status(400).json({
+                status: 'error',
+                message: 'Error with create method'
+            });
+        }
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+
+
 
 exports.latestMovies = (req, res) => {
 

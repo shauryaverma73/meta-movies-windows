@@ -41,7 +41,7 @@ exports.createReview = async (req, res) => {
 
 exports.getReview = async (req, res) => {
     try {
-        const review = await Review.findOne(req.params.id);
+        const review = await Review.findOne({ id: req.params.id });
         res.status(200).json({
             status: 'success',
             data: {

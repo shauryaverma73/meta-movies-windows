@@ -3,6 +3,10 @@ const movieController = require('./../controller/movieController');
 const router = express.Router();
 
 router
+    .route('/genre')
+    .get(movieController.getAllGenre);
+
+router
     .route('/')
     .get(movieController.getAllMovie)
     .post(movieController.addMovie);

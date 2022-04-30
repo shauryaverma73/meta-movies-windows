@@ -27,46 +27,47 @@ block content
               #filter__genre.filter__item
                 span.filter__item-label GENRE:
                 #filter-genre.filter__item-btn.dropdown-toggle(role='navigation' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                  input(type='button' value='Action/Adventure')
+                  input(type='button' value='Action/Adventure' id='genreName')
                   span
                 ul.filter__item-menu.dropdown-menu.scrollbar-dropdown(aria-labelledby='filter-genre')
+                  //- div(id='listOfGenre')
                   li select
                   li Action/Adventure
                   li Animals
                   li Animation
-                  li Biography
-                  li Comedy
-                  li Cooking
-                  li Dance
-                  li Documentary
-                  li Drama
-                  li Education
-                  li Entertainment
-                  li Family
-                  li Fantasy
-                  li History
-                  li Horror
-                  li Independent
-                  li International
-                  li Kids
-                  li Kids &amp; Family
-                  li Medical
-                  li Military/War
-                  li Music
-                  li Musical
-                  li Mystery/Crime
-                  li Nature
-                  li Paranormal
-                  li Politics
-                  li Racing
-                  li Romance
-                  li Sci-Fi/Horror
-                  li Science
-                  li Science Fiction
-                  li Science/Nature
-                  li Spanish
-                  li Travel
-                  li Western
+                  //- li Biography
+                  //- li Comedy
+                  //- li Cooking
+                  //- li Dance
+                  //- li Documentary
+                  //- li Drama
+                  //- li Education
+                  //- li Entertainment
+                  //- li Family
+                  //- li Fantasy
+                  //- li History
+                  //- li Horror
+                  //- li Independent
+                  //- li International
+                  //- li Kids
+                  //- li Kids &amp; Family
+                  //- li Medical
+                  //- li Military/War
+                  //- li Music
+                  //- li Musical
+                  //- li Mystery/Crime
+                  //- li Nature
+                  //- li Paranormal
+                  //- li Politics
+                  //- li Racing
+                  //- li Romance
+                  //- li Sci-Fi/Horror
+                  //- li Science
+                  //- li Science Fiction
+                  //- li Science/Nature
+                  //- li Spanish
+                  //- li Travel
+                  //- li Western
               // end filter item
               // filter item
               #filter__rate.filter__item
@@ -91,7 +92,7 @@ block content
                   #filter__years
               // end filter item
             // filter btn
-            button.filter__btn(type='button') apply filter
+            button.filter__btn(type='button' id='apply') apply filter
             // end filter btn
   // end filter
   // catalog
@@ -145,3 +146,15 @@ block content
                 i.icon.ion-ios-arrow-forward
         // end paginator
   // end catalog
+  script.
+    document.getElementById("apply").addEventListener('click', async () => {
+      // get all fields
+      const genre = document.getElementById('genreName').value;
+      const ratingLow = document.getElementById('filter__years-start').value;
+      const ratingHigh = document.getElementById('filter__years-end').value;
+      const year = document.getElementById('');
+      //- create a link with data to make api request api
+      const apiLink = `/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[eq]=${year}&genre=${genre}`;
+    });
+
+
