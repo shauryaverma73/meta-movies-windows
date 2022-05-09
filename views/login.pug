@@ -32,12 +32,12 @@ head
         .sign__content
           // authorization form
           form.sign__form(action='#')
-            a.sign__logo(href='index.html')
+            a.sign__logo(href='/')
               img(src='img/logo.svg' alt='')
             .sign__group
-              input.sign__input(type='text' placeholder='Email')
+              input.sign__input(type='text' placeholder='Email' id='email')
             .sign__group
-              input.sign__input(type='password' placeholder='Password')
+              input.sign__input(type='password' placeholder='Password' id='password')
             button.sign__btn(type='button') Sign in
             span.sign__text
               | Don&apos;t have an account? 
