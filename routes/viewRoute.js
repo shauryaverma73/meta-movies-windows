@@ -104,8 +104,8 @@ router.get('/catalogue', async (req, res) => {
     });
 });
 
-router.get('/test', async (req, res) => {
-    res.status(200).render('test', {
+router.get('/me', async (req, res) => {
+    res.status(200).render('account', {
     
     });
 });

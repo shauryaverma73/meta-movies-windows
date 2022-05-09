@@ -1,0 +1,164 @@
+extends base
+block content 
+	section.section(style='margin-bottom:-29px;')
+	// end details
+	// content
+	section.content
+		.content__head
+			.container
+				.row
+					.col-12
+						// content title
+						h2.content__title Username here
+						// end content title
+						// content tabs nav
+						ul#content__tabs.nav.nav-tabs.content__tabs(role='tablist')
+							li.nav-item
+								a.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') Settings
+							li.nav-item
+								a.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') My Reviews
+							li.nav-item
+								a.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') Manage Watch Later
+							li.nav-item
+								a.nav-link(data-toggle='tab' href='#tab-4' role='tab' aria-controls='tab-4' aria-selected='false') Manage Subscription
+							li.nav-item
+								a.nav-link(data-toggle='tab' href='#tab-5' role='tab' aria-controls='tab-5' aria-selected='false') Update Password
+						// end content tabs nav
+						// content mobile tabs nav
+						#content__mobile-tabs.content__mobile-tabs
+							#mobile-tabs.content__mobile-tabs-btn.dropdown-toggle(role='navigation' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+								input(type='button' value='Comments')
+								span
+							.content__mobile-tabs-menu.dropdown-menu(aria-labelledby='mobile-tabs')
+								ul.nav.nav-tabs(role='tablist')
+									li.nav-item
+										a#1-tab.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') Settings
+									li.nav-item
+										a#2-tab.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') Comments
+									li.nav-item
+										a#3-tab.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') WatchList
+									li.nav-item
+										a#4-tab.nav-link(data-toggle='tab' href='#tab-4' role='tab' aria-controls='tab-4' aria-selected='false') Manage Subscription
+									li.nav-item
+										a#5-tab.nav-link(data-toggle='tab' href='#tab-5' role='tab' aria-controls='tab-5' aria-selected='false') Update Password
+						// end content mobile tabs nav
+		.container
+			.row
+				.col-12.col-lg-8.col-xl-8
+					// content tabs
+					#myTabContent.tab-content
+						// tab1
+						#tab-1.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='1-tab')
+							.row
+								// update email name photo
+								.col-12
+									.reviews
+										label.form__Heading Account Details
+										form.form(action='#')
+											input.form__input(type='text' placeholder='Name')
+											input.form__input(type='text' placeholder='Email')
+											button.form__btn(type='button') Update
+									// file upload for user photo
+									label.form__Heading Profile Picture
+									form.form(action='#')
+										// add multipart form
+										img.nav__user-form(src='img/gallery/project-1.jpg')
+										input(type='file' accept='image/*')
+										button.form__btn(type='button') Update
+								// end email name photo
+						// tab2
+						#tab-2.tab-pane.fade(role='tabpanel' aria-labelledby='2-tab')
+							.row
+								// reviews
+								.col-12
+									.reviews
+										ul.reviews__list
+											li.reviews__item
+												.reviews__autor
+													img.reviews__avatar(src='img/user.png' alt='')
+													span.reviews__name Best Marvel movie in my opinion
+													span.reviews__time 24.08.2018, 17:53 by John Doe
+													span.reviews__rating
+														i.icon.ion-ios-star
+														| 7.5
+												p.reviews__text
+													| There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+												.comments__actions
+													button(type='button')
+														i.icon.ion-ios-document
+														| Edit
+													button(type='button')
+														i.icon.ion-ios-trash
+														| Delete
+								// end reviews
+						// tab3
+						#tab-3.tab-pane.fade(role='tabpanel' aria-labelledby='3-tab')
+							// project gallery
+							.gallery(itemscope='')
+								.row
+									// gallery item
+									figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+										a(href='img/gallery/project-1.jpg' itemprop='contentUrl' data-size='1920x1280')
+											img(src='img/gallery/project-1.jpg' itemprop='thumbnail' alt='Image description')
+										figcaption(itemprop='caption description') Some image caption 1
+									// end gallery item
+									// gallery item
+									figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+										a(href='img/gallery/project-2.jpg' itemprop='contentUrl' data-size='1920x1280')
+											img(src='img/gallery/project-2.jpg' itemprop='thumbnail' alt='Image description')
+										figcaption(itemprop='caption description') Some image caption 2
+									// end gallery item
+									// gallery item
+									figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+										a(href='img/gallery/project-3.jpg' itemprop='contentUrl' data-size='1920x1280')
+											img(src='img/gallery/project-3.jpg' itemprop='thumbnail' alt='Image description')
+										figcaption(itemprop='caption description') Some image caption 3
+									// end gallery item
+									// gallery item
+									figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+										a(href='img/gallery/project-4.jpg' itemprop='contentUrl' data-size='1920x1280')
+											img(src='img/gallery/project-4.jpg' itemprop='thumbnail' alt='Image description')
+										figcaption(itemprop='caption description') Some image caption 4
+									// end gallery item
+									// gallery item
+									figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+										a(href='img/gallery/project-5.jpg' itemprop='contentUrl' data-size='1920x1280')
+											img(src='img/gallery/project-5.jpg' itemprop='thumbnail' alt='Image description')
+										figcaption(itemprop='caption description') Some image caption 5
+									// end gallery item
+									// gallery item
+									figure.col-12.col-sm-6.col-xl-4(itemprop='associatedMedia' itemscope='')
+										a(href='img/gallery/project-6.jpg' itemprop='contentUrl' data-size='1920x1280')
+											img(src='img/gallery/project-6.jpg' itemprop='thumbnail' alt='Image description')
+										figcaption(itemprop='caption description') Some image caption 6
+									// end gallery item
+							// end project gallery
+						// tab4
+						#tab-4.tab-pane.fade(role='tabpanel' aria-labelledby='4-tab')
+							.row
+								// reviews
+								.col-12
+									.reviews
+										form.form(action='#')
+											input.form__input(type='text' placeholder='Title')
+											textarea.form__textarea(placeholder='Review')
+											.form__slider
+												#slider__rating.form__slider-rating
+												#form__slider-value.form__slider-value
+											button.form__btn(type='button') Send
+								// end reviews
+						// tab5
+						#tab-5.tab-pane.fade(role='tabpanel' aria-labelledby='5-tab')
+							.row
+								// update password
+								.col-12
+									.reviews
+										label.form__Heading Update Password
+										form.form(action='#')
+											input.form__input(type='text' placeholder='Old Password')
+											input.form__input(type='text' placeholder='Re-Enter Old Password')
+											input.form__input(type='text' placeholder='New Password')
+											button.form__btn(type='button') Update
+								// end update password
+					// end content tabs
+	// end content

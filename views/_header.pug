@@ -19,12 +19,23 @@ header.header
                 a.header__nav-link(href='/catalogue') Catalogue
               li.header__nav-item
                 a.header__nav-link(href='/buy-subscription') Pricing Plan
+              - if (user)
+                  li.header__nav-item
+                    a.header__nav-link(href='/') WatchList
             // end header nav
             // header auth
             .header__auth
-              a.header__sign-in(href='/signin')
-                i.icon.ion-ios-log-in
-                span sign in
+              if (user)
+                a(href='/me')
+                  img.nav__user-img(src='img/user.png' alt='photo of user')
+                span.nav__user-name firstname
+                a.header__sign-in(href='signin.html')
+                  i.icon.ion-ios-log-in
+                  span Logout
+              else 
+                a.header__sign-in(href='/signin')
+                  i.icon.ion-ios-log-in
+                  span sign in
             // end header auth
             // header menu btn
             button.header__btn(type='button')
