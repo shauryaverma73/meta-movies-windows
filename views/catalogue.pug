@@ -146,15 +146,3 @@ block content
                 i.icon.ion-ios-arrow-forward
         // end paginator
   // end catalog
-  script.
-    document.getElementById("apply").addEventListener('click', async () => {
-      // get all fields
-      const genre = document.getElementById('genreName').value;
-      const ratingLow = document.getElementById('filter__years-start').value;
-      const ratingHigh = document.getElementById('filter__years-end').value;
-      const year = document.getElementById('');
-      //- create a link with data to make api request api
-      const apiLink = `/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[eq]=${year}&genre=${genre}`;
-    });
-
-
