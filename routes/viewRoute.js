@@ -104,6 +104,13 @@ router.get('/catalogue', async (req, res) => {
     });
 });
 
+router.get('/test', async (req, res) => {
+    res.status(200).render('test', {
+    
+    });
+});
+
+
 
 
 module.exports = router;
