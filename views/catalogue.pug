@@ -27,47 +27,11 @@ block content
               #filter__genre.filter__item
                 span.filter__item-label GENRE:
                 #filter-genre.filter__item-btn.dropdown-toggle(role='navigation' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
-                  input(type='button' value='Action/Adventure' id='genreName')
+                  input(type='button' value='Action' id='genreName')
                   span
                 ul.filter__item-menu.dropdown-menu.scrollbar-dropdown(aria-labelledby='filter-genre')
-                  //- div(id='listOfGenre')
-                  li select
-                  li Action/Adventure
-                  li Animals
-                  li Animation
-                  //- li Biography
-                  //- li Comedy
-                  //- li Cooking
-                  //- li Dance
-                  //- li Documentary
-                  //- li Drama
-                  //- li Education
-                  //- li Entertainment
-                  //- li Family
-                  //- li Fantasy
-                  //- li History
-                  //- li Horror
-                  //- li Independent
-                  //- li International
-                  //- li Kids
-                  //- li Kids &amp; Family
-                  //- li Medical
-                  //- li Military/War
-                  //- li Music
-                  //- li Musical
-                  //- li Mystery/Crime
-                  //- li Nature
-                  //- li Paranormal
-                  //- li Politics
-                  //- li Racing
-                  //- li Romance
-                  //- li Sci-Fi/Horror
-                  //- li Science
-                  //- li Science Fiction
-                  //- li Science/Nature
-                  //- li Spanish
-                  //- li Travel
-                  //- li Western
+                  - for(i = 0 ; i<genres.data.data.genArr.length ; i++ )  
+                    li #{genres.data.data.genArr[i]}
               // end filter item
               // filter item
               #filter__rate.filter__item
@@ -98,7 +62,7 @@ block content
   // catalog
   .catalog
     .container
-      .row
+      .row(class="movie-card-container")
         each movie in movies
           // card
           .col-6.col-sm-12.col-lg-6

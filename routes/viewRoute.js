@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Movie = require('./../model/movieModel');
+const axios = require('axios');
 
 router.get('/', async (req, res) => {
     try {
@@ -98,15 +99,18 @@ router.get('/about', (req, res) => {
 
 router.get('/catalogue', async (req, res) => {
     const movies = await Movie.find();
+    const genres = await axios.get('http://127.0.0.1:3000/api/v1/movie/genre');
+    // console.log(genres.data.data.genArr);
     res.status(200).render('catalogue', {
         title: 'Catalogue',
-        movies
+        movies,
+        genres
     });
 });
 
 router.get('/me', async (req, res) => {
     res.status(200).render('account', {
-    
+
     });
 });
 

@@ -482,15 +482,69 @@ $(document).ready(function () {
 	$(window).on('load', initializeThirdSlider());
 });
 
-// ***************************
-document.getElementById('apply').addEventListener('click', () => {
+// *************************************************************************
+// ***************************CATALOGUE*************************************
+// *************************************************************************
+
+document.getElementById('apply').addEventListener('click', async () => {
 	const genre = document.getElementById('genreName').value;
 	const ratingLow = document.getElementById('filter__imbd-start').innerHTML;
 	const ratingHigh = document.getElementById('filter__imbd-end').innerHTML;
 	const year = document.getElementById('filter__years-end').innerHTML;
 	//- create a link with data to make api request api
-	alert(genre + ' ' + ratingLow + ' ' + ratingHigh + ' ' + year);
-	const apiLink = `/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[eq]=${year}&genre=${genre}`;
-	alert(apiLink);
+	// alert(genre + ' ' + ratingLow + ' ' + ratingHigh + ' ' + year);
+	const apiLink = `http://127.0.0.1:3000/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[eq]=${year}&genre=${genre}`;
+	const movieData = await axios.get(apiLink);
+	document.querySelector('.movie-card-container').innerHTML = '';
+	let cardHTML = '';
+	if (movieData.data.data.movies.length > 0) {
+		for (i = 0; i < movieData.data.data.movies.length; i++) {
+			const movie = movieData.data.data.movies[i];
+			let genres = '';
+			for (j = 0; j < movie.genre.length; j++) {
+				genres += `<a href="#">${movie.genre[j]}</a>`;
+			}
+			const card = `<div class="col-6 col-sm-12 col-lg-6">
+				<div class="card card--list">
+					<div class="row">
+						<div class="col-12 col-sm-4">
+							<div class="card__cover">
+								<img src="${movie.poster}" alt="${movie.name}" />
+								<a class="card__play" href="/movie/${movie.slug}">
+									<i class="icon ion-ios-play"></i>
+								</a>
+							</div>
+						</div>
+						<div class="col-12 col-sm-8">
+							<div class="card__content">
+								<h3 class="card__title">
+									<a href="/movie/${movie.slug}">${movie.name}</a>
+								</h3><span class="card__category">
+									${genres}
+								</span>
+								<div class="card__wrap">
+									<span class="card__rate">
+										<i class="icon ion-ios-star">
+										</i>${(Math.round(movie.ratings * 100) / 100).toFixed(1)}</span>
+									<ul class="card__list">
+										<li>HD</li>
+										<li>${movie.pgRating}</li>
+									</ul>
+								</div>
+								<div class="card__description">
+									<p>${movie.description}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>`;
+			cardHTML += card;
+		}
+		document.querySelector('.movie-card-container').innerHTML = cardHTML;
+	} else {
+		document.querySelector('.movie-card-container').innerHTML = `<h2 style="color:#fff">No Results Found !!!</h2>`;
+	}
+	console.log(movieData);
 });
 // ***************************
