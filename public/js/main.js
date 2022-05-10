@@ -547,4 +547,4 @@ document.getElementById('apply').addEventListener('click', async () => {
 	}
 	console.log(movieData);
 });
-// ***************************
+// *************************************************************************
