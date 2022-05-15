@@ -3,11 +3,12 @@ const User = require('./../model/userModel');
 
 
 exports.getMe = (req, res) => {
-
+    res.status(200).json({
+        name: req.user.name,
+        status: 'ok'
+    });
 };
-exports.updateMyPassword = (req, res) => {
 
-};
 exports.updateMe = (req, res) => {
 
 };

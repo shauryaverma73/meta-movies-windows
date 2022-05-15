@@ -35,8 +35,12 @@ const userSchema = new mongoose.Schema({
             message: 'Password not same'
         }
     },
-    passwordChangedAt: {
-        type: String
+    profilePicture: {
+        type: String,
+        default: 'default.jpg'
+    },
+    passwordResetExpires: {
+        type: Date
     },
     passwordResetToken: {
         type: String
@@ -54,25 +58,42 @@ const userSchema = new mongoose.Schema({
         type: Date
     },
     watchList: {
-        type: [String]
+        type: [mongoose.Schema.ObjectId],
+        ref: 'Movie'
+    },
+    reviews: {
+        type: [mongoose.Schema.ObjectId],
+        ref: 'Review'
     }
 });
 
 // encrypt user password before save
 userSchema.pre('save', async function (next) {
+
+    // if the password has been modified or new password is being created then
+    // hashing password
     this.password = await bcrypt.hash(this.password, 12);
+    // console.log(this.password + 'hashed');
+    // no use of confirmpassword
+    this.confirmPassword = undefined;
+    const date = new Date();
+    date.setDate(date.getDate() + 7);
+    this.subscriptionDuration = date;
     next();
 });
 
-// checkPassword middleware
-userSchema.methods.checkPassword = async (userPassword, dbPassword) => {
+
+
+// checkPassword instance method
+userSchema.methods.checkPassword = async function (userPassword, dbPassword) {
     return await bcrypt.compare(userPassword, dbPassword);
 };
 
 // create reset token
-userSchema.methods.createResetToken = () => {
+userSchema.methods.createPasswordResetToken = function () {
     const token = crypto.randomBytes(32).toString('hex');
     this.passwordResetToken = crypto.createHash('sha256').update(token).digest('hex');
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
     return token;
 };
 

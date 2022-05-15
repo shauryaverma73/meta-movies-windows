@@ -22,10 +22,19 @@ app.use(cookieParser());
 // app.use(morgan('dev'));
 
 // Router Mounting Points
+app.use(morgan('dev'));
 app.use('/', viewRouter);
 app.use('/api/v1/stream', streamRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/movie', movieRouter);
 app.use('/api/v1/review', reviewRouter);
+
+app.all('*', (req, res, next) => {
+    res.status(200).render('404', {
+        title: 'Error Page Not Found'
+    });
+});
+
+
 module.exports = app;
 

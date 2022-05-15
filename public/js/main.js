@@ -486,25 +486,29 @@ $(document).ready(function () {
 // ***************************CATALOGUE*************************************
 // *************************************************************************
 
-document.getElementById('apply').addEventListener('click', async () => {
-	const genre = document.getElementById('genreName').value;
-	const ratingLow = document.getElementById('filter__imbd-start').innerHTML;
-	const ratingHigh = document.getElementById('filter__imbd-end').innerHTML;
-	const year = document.getElementById('filter__years-end').innerHTML;
-	//- create a link with data to make api request api
-	// alert(genre + ' ' + ratingLow + ' ' + ratingHigh + ' ' + year);
-	const apiLink = `http://127.0.0.1:3000/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[eq]=${year}&genre=${genre}`;
-	const movieData = await axios.get(apiLink);
-	document.querySelector('.movie-card-container').innerHTML = '';
-	let cardHTML = '';
-	if (movieData.data.data.movies.length > 0) {
-		for (i = 0; i < movieData.data.data.movies.length; i++) {
-			const movie = movieData.data.data.movies[i];
-			let genres = '';
-			for (j = 0; j < movie.genre.length; j++) {
-				genres += `<a href="#">${movie.genre[j]}</a>`;
-			}
-			const card = `<div class="col-6 col-sm-12 col-lg-6">
+const catalogueApplyButton = document.getElementById('apply');
+if (catalogueApplyButton) {
+
+
+	document.getElementById('apply').addEventListener('click', async () => {
+		const genre = document.getElementById('genreName').value;
+		const ratingLow = document.getElementById('filter__imbd-start').innerHTML;
+		const ratingHigh = document.getElementById('filter__imbd-end').innerHTML;
+		const year = document.getElementById('filter__years-end').innerHTML;
+		//- create a link with data to make api request api
+		// alert(genre + ' ' + ratingLow + ' ' + ratingHigh + ' ' + year);
+		const apiLink = `http://127.0.0.1:3000/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[eq]=${year}&genre=${genre}`;
+		const movieData = await axios.get(apiLink);
+		document.querySelector('.movie-card-container').innerHTML = '';
+		let cardHTML = '';
+		if (movieData.data.data.movies.length > 0) {
+			for (i = 0; i < movieData.data.data.movies.length; i++) {
+				const movie = movieData.data.data.movies[i];
+				let genres = '';
+				for (j = 0; j < movie.genre.length; j++) {
+					genres += `<a href="#">${movie.genre[j]}</a>`;
+				}
+				const card = `<div class="col-6 col-sm-12 col-lg-6">
 				<div class="card card--list">
 					<div class="row">
 						<div class="col-12 col-sm-4">
@@ -539,12 +543,13 @@ document.getElementById('apply').addEventListener('click', async () => {
 					</div>
 				</div>
 			</div>`;
-			cardHTML += card;
+				cardHTML += card;
+			}
+			document.querySelector('.movie-card-container').innerHTML = cardHTML;
+		} else {
+			document.querySelector('.movie-card-container').innerHTML = `<h2 style="color:#fff">No Results Found !!!</h2>`;
 		}
-		document.querySelector('.movie-card-container').innerHTML = cardHTML;
-	} else {
-		document.querySelector('.movie-card-container').innerHTML = `<h2 style="color:#fff">No Results Found !!!</h2>`;
-	}
-	console.log(movieData);
-});
+		console.log(movieData);
+	});
+}
 // *************************************************************************

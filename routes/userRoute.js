@@ -5,25 +5,43 @@ const router = express.Router();
 
 
 // For All Users
-
 router
     .route('/signup')
-    .post(authController.signUp); //authcontroller
-router.post('/login', authController.login);//authcontroller
-router.get('/logout', authController.logout);//authcontroller
+    .post(authController.signUp);
 
-// router.post('forgotPassword',); //authcontroller 
-// router.patch('resetPassword/:token',); //authcontroller 
+router
+    .route('/login')
+    .post(authController.login);
+
+router
+    .route('/forgotPassword')
+    .post(authController.forgotPassword);
+
+router
+    .route('/resetPassword/:token')
+    .patch(authController.resetPassword);
+
+
+
+
+// Protected Routes
+router.use(authController.protect);
+
+
+router.patch('/updateMyPassword', authController.updatePassword);
+
 
 // User Logged in
 // protected routes must be logged in (protect middleware)
+router.get('/logout', authController.logout);//authcontroller
+
 router
     .route('/me')
     .get(userController.getMe);
 
 router
     .route('/updateMyPassword')
-    .patch(userController.updateMyPassword);
+    .patch(authController.updatePassword);
 
 router
     .route('/updateMe')
@@ -36,6 +54,8 @@ router
 
 // ADMIN ONLY
 // restriction middleware
+// router.use(authController.restrictTo('admin'));
+
 router
     .route('/')
     .get(userController.getAllUsers)
