@@ -553,3 +553,40 @@ if (catalogueApplyButton) {
 	});
 }
 // *************************************************************************
+
+
+
+
+
+
+
+// modal form
+const open = document.getElementById('open');
+const modal_container = document.getElementById('modal-container');
+const close = document.getElementById('close');
+
+open.addEventListener('click', () => {
+	modal_container.classList.add('show');
+});
+
+close.addEventListener('click', () => {
+	modal_container.classList.remove('show');
+});
+
+
+const openEdit = document.getElementById('openEdit');
+const closeEdit = document.getElementById('closeEdit');
+const editModal = document.getElementById('modal-container-edit');
+
+
+openEdit.addEventListener('click', () => {
+	editModal.classList.add('show');
+	console.log('click');
+});
+
+closeEdit.addEventListener('click', () => {
+	editModal.classList.remove('show');
+});
+
+
+

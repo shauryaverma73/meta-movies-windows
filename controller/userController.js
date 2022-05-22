@@ -9,24 +9,57 @@ exports.getMe = (req, res) => {
     });
 };
 
-exports.updateMe = (req, res) => {
+exports.updateMe = async (req, res, next) => {
+    if (req.body.password || req.body.confirmPassword) {
+        res.status(400).json({
+            status: 'error',
+            message: 'Plz Use /updateMyPassword endpoint'
+        });
+    }
+    try {
+        let obBody = {};
+        if (req.body.name) {
+            obBody.name = req.body.name;
+        }
+        if (req.body.email) {
+            obBody.email = req.body.email;
+        }
+        console.log(obBody);
+        const user = await User.findByIdAndUpdate(req.user.id, obBody, { new: true, runValidators: true });
+        if (!user) {
+            res.status(401).json({
+                status: 'error',
+                message: 'Can\'t update data'
+            });
+        }
+        res.status(200).json({
+            status: 'success',
+            message: 'Data update successful'
+        });
+
+    } catch (err) {
+        res.status(200).json({
+            status: 'error',
+            message: 'Some internal error'
+        });
+    }
 
 };
-
-// exports.deleteMe = (req, res) => {
-
-// };
 
 
 exports.deleteMe = async (req, res, next) => {
     try {
-        await User.findByIdAndUpdate(req.user.id, { active: false });
-        res.status(204).json({
-            status: 'success',
+        if (await User.findByIdAndUpdate(req.user.id, { active: false })) {
+            res.status(204).json({
+                status: 'success',
+                user: null
+            });
+        }
+    } catch (err) {
+        res.status(400).json({
+            status: 'error',
             user: null
         });
-    } catch (err) {
-        console.log(err);
     }
 };
 
@@ -34,7 +67,7 @@ exports.getAllUsers = async (req, res) => {
     try {
         const allUsers = await User.find();
         if (allUsers) {
-            res.status(200).json({
+            return res.status(200).json({
                 status: "success",
                 data: {
                     length: allUsers.length,

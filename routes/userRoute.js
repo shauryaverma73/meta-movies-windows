@@ -28,12 +28,12 @@ router
 router.use(authController.protect);
 
 
-router.patch('/updateMyPassword', authController.updatePassword);
-
-
 // User Logged in
 // protected routes must be logged in (protect middleware)
-router.get('/logout', authController.logout);//authcontroller
+
+router.patch('/updateMyPassword', authController.updatePassword);
+
+router.get('/logout', authController.logout);
 
 router
     .route('/me')
@@ -49,12 +49,12 @@ router
 
 router
     .route('/deleteMe')
-    .patch(userController.deleteMe);
+    .delete(userController.deleteMe);
 
 
 // ADMIN ONLY
 // restriction middleware
-// router.use(authController.restrictTo('admin'));
+router.use(authController.restrictTo('admin'));
 
 router
     .route('/')

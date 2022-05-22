@@ -12,8 +12,9 @@ block content
             // breadcrumb
             ul.breadcrumb
               li.breadcrumb__item
-                a(href='#') Home
-              li.breadcrumb__item.breadcrumb__item--active Catalog list
+                a(href='/') Home
+              li.breadcrumb__item.breadcrumb__item--active 
+                a(href='') Catalog
             // end breadcrumb
   // end page title
   // filter
@@ -91,22 +92,4 @@ block content
                       p
                         | #{movie.description}
           // end card
-        // paginator
-        .col-12
-          ul.paginator.paginator--list
-            li.paginator__item.paginator__item--prev
-              a(href='#')
-                i.icon.ion-ios-arrow-back
-            li.paginator__item
-              a(href='#') 1
-            li.paginator__item.paginator__item--active
-              a(href='#') 2
-            li.paginator__item
-              a(href='#') 3
-            li.paginator__item
-              a(href='#') 4
-            li.paginator__item.paginator__item--next
-              a(href='#')
-                i.icon.ion-ios-arrow-forward
-        // end paginator
   // end catalog
