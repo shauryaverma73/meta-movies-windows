@@ -9,6 +9,12 @@ const cookieParser = require('cookie-parser');
 const pug = require('pug');
 const path = require('path');
 const morgan = require('morgan');
+const monitor = require('express-status-monitor');
+const authController = require('./controller/authController');
+
+// server status
+// app.use(authController.protect,monitor());
+app.use(require('express-status-monitor')());
 
 // setting view engine
 app.set('view engine', 'pug');

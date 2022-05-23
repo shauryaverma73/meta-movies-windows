@@ -4,8 +4,8 @@
   "description": "online movies web app  with backend in express and mongo db, frontend in reactJS.",
   "main": "app.js",
   "scripts": {
-    "start:dev": "set NODE_ENV=development&nodemon server.js",
-    "start:prod": "set NODE_ENV=production&nodemon server.js"
+    "start:dev": "NODE_ENV='development' nodemon server.js",
+    "start:prod": "NODE_ENV='production' nodemon server.js"
   },
   "author": "shauryaverma_73",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "crypto": "^1.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "express-status-monitor": "^1.3.4",
     "got": "^12.0.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.1",
