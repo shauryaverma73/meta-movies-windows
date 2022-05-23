@@ -14,6 +14,8 @@ exports.getAllMovie = async (req, res, next) => {
 
         console.log(queryStr);
 
+        // queryStr = queryStr.limit(req.query.limit);
+
         const query = Movie.find(JSON.parse(queryStr));
 
         // pagination
@@ -139,7 +141,7 @@ exports.getAllGenre = async (req, res, next) => {
 
         const genArr = Array.from(genreSet);
 
-        console.log(genArr);
+        // console.log(genArr);
 
         if (genArr) {
             res.status(201).json({

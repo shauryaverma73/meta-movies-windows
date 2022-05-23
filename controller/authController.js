@@ -142,7 +142,7 @@ exports.protect = async (req, res, next) => {
         }
 
         if (!token) {
-            res.status(401).json({
+            return res.status(401).json({
                 status: 'error',
                 message: 'You are not logged in Please Login to get access'
             })
@@ -176,7 +176,7 @@ exports.protect = async (req, res, next) => {
     }
 };
 
-// check if user is logged in withour error[dont throw any error]
+// check if user is logged in withour error[dont throw any error] setting user on response
 exports.isLoggedIn = async (req, res, next) => {
 
     if (req.cookies.jwt) {
@@ -185,22 +185,19 @@ exports.isLoggedIn = async (req, res, next) => {
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
 
             // 2.check if user still exists
-            const freshUser = await User.findById(decoded.id);
-            if (!freshUser) {
+            const currentUser = await User.findById(decoded.id);
+            if (!currentUser) {
                 return next();
             }
 
-            // 3.check if user updated password after token was issued
-            if (freshUser.changedPasswordAfter(decoded.iat)) {
-                return next();
-            }
-
-            res.locals.user = freshUser;
+            res.locals.user = currentUser;
             return next();
         } catch (err) {
+            console.log(err);
             return next();
         }
     }
+    next();
 };
 
 exports.restrictTo = (...roles) => {
@@ -240,7 +237,7 @@ exports.forgotPassword = async (req, res, next) => {
                 message
             });
 
-            res.status(200).json({
+            return res.status(200).json({
                 status: 'success',
                 message: 'Token sent to email'
             });
@@ -254,7 +251,7 @@ exports.forgotPassword = async (req, res, next) => {
             user.passwordResetToken = undefined;
             user.passwordResetExpires = undefined;
             await user.save({ validateBeforeSave: false });
-            res.status(500).json({
+            return res.status(500).json({
                 status: 'error',
                 message: 'Error sending Email'
             });

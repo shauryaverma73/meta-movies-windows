@@ -6,7 +6,7 @@ header.header
           .header__content
             // header logo
             a.header__logo(href=`/`)
-              img(src='/img/logo.svg' alt='')
+              img(src='/img/logo.png' alt='')
             // end header logo
             // header nav
             ul.header__nav
@@ -18,7 +18,7 @@ header.header
               li.header__nav-item
                 a.header__nav-link(href='/catalogue') Catalogue
               li.header__nav-item
-                a.header__nav-link(href='/buy-subscription') Pricing Plan
+                a.header__nav-link(href='/buy-subscription') Subscriptions
               - if (user)
                   li.header__nav-item
                     a.header__nav-link(href='/') WatchList
@@ -27,9 +27,9 @@ header.header
             .header__auth
               if (user)
                 a(href='/me')
-                  img.nav__user-img(src='img/user.png' alt='photo of user')
-                span.nav__user-name firstname
-                a.header__sign-in(href='signin.html')
+                  img.nav__user-img(src=`/img/users/${user.profilePicture}` alt='photo of user')
+                  span.nav__user-name #{user.name.split(' ')[0]}
+                a.header__sign-in(href='/logout' id='logoutBtn')
                   i.icon.ion-ios-log-in
                   span Logout
               else 
