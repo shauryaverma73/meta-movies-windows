@@ -153,7 +153,7 @@ exports.protect = async (req, res, next) => {
         // console.log(decoded);
 
         // 3.check if user still exists
-        const freshUser = await User.findById(decoded.id);
+        const freshUser = await User.findById(decoded.id).populate('watchList').populate('reviews');
         if (!freshUser) {
             res.status(401).json({
                 status: 'error',

@@ -770,7 +770,14 @@ async function openReviewEditModal(btn) {
 	const editRevContent = document.getElementById('editRevContent');
 	const editRevRating = document.getElementById('editRevRating');
 
-	const reviewQuery = `http://`;
+	const reviewQuery = `http://127.0.0.1:3000/api/v1/review/${btn.value}`;
+	const reviewData = await axios.get(reviewQuery);
+	console.log(reviewData);
+
+	editRevTitle.value = reviewData.data.data.data.reviewTitle;
+	editRevContent.value = reviewData.data.data.data.reviewContent;
+	editRevRating.value = reviewData.data.data.data.reviewRating;
+
 }
 
 if (closeEditReview) {

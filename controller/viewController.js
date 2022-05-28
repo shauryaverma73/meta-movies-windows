@@ -110,7 +110,7 @@ exports.getMe = async (req, res) => {
     if (req.user.role == 'admin') {
         const movies = await Movie.find().populate('reviews');
         const users = await User.find();
-        const reviews = await Review.find();//.populate('movieID');
+        const reviews = await Review.find().populate('movie').populate('user');
 
         res.status(200).render('account', {
             title: 'My Account',
