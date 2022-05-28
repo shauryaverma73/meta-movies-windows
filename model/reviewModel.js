@@ -36,10 +36,10 @@ const reviewSchema = new mongoose.Schema({
     }
 );
 
-// reviewSchema.pre(/^find/, function (next) {
-//     this.populate('movie', 'name').populate('user', 'name profilePicture');
-//     next();
-// });
+reviewSchema.pre(/^find/, function (next) {
+    this.populate('movie', 'name').populate('user', 'name profilePicture');
+    next();
+});
 
 
 const Review = mongoose.model('Review', reviewSchema);
