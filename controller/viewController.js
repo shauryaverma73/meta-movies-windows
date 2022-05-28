@@ -27,7 +27,7 @@ exports.getOverview = async (req, res) => {
         // console.log(drama);
 
         // find movies
-        const movies = await Movie.find();
+        const movies = await Movie.find().populate('reviews');
         // send to template
         res.status(200).render('overview', {
             title: 'Home of Entertainment',
@@ -45,7 +45,7 @@ exports.getOverview = async (req, res) => {
 
 exports.getMovie = async (req, res) => {
     // find movie
-    const movie = await Movie.findOne({ slug: req.params.slug });
+    const movie = await Movie.findOne({ slug: req.params.slug }).populate('reviews');
     // Highest IMDB Rated
     const highIMDBRating = await Movie.aggregate([
         {

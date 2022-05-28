@@ -65,7 +65,7 @@ exports.deleteMe = async (req, res, next) => {
 
 exports.getAllUsers = async (req, res) => {
     try {
-        const allUsers = await User.find();
+        const allUsers = await User.find().populate('watchList').populate('reviews');
         console.log(allUsers);
         if (allUsers) {
             res.status(200).json({
