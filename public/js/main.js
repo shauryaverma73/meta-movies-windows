@@ -561,32 +561,273 @@ if (catalogueApplyButton) {
 
 
 // modal form
+// const open = document.getElementById('open');
+// const modal_container = document.getElementById('modal-container');
+// const close = document.getElementById('close');
+
+// open.addEventListener('click', () => {
+// 	modal_container.classList.add('show');
+// });
+
+// close.addEventListener('click', () => {
+// 	modal_container.classList.remove('show');
+// });
+
+
+// const openEdit = document.getElementById('openEdit');
+// const closeEdit = document.getElementById('closeEdit');
+// const editModal = document.getElementById('modal-container-edit');
+
+
+// openEdit.addEventListener('click', () => {
+// 	editModal.classList.add('show');
+// 	console.log('click');
+// });
+
+// closeEdit.addEventListener('click', () => {
+// 	editModal.classList.remove('show');
+// });
+
+
+const movSearch = document.getElementById('movSearch');// movie search form 
+
+if (movSearch) {
+	const movieSearchField = document.querySelector('.movieSearchField').value; //input field
+	const movieSearchBtn = document.querySelector('.movieSearch'); // search btn
+	movieSearchBtn.addEventListener('click', async (e) => {
+		e.preventDefault();
+		const query = `https://api.themoviedb.org/3/search/movie?api_key=bc9dabeae5a66fbe7bf887b0cb184612&query=${movieSearchField}`;
+
+		// const res = await axios.get(query);
+		console.log(movieSearchField);
+	});
+}
+
+
+/********************************************************************** */
+
+
+// modal form (Movie Search)
 const open = document.getElementById('open');
 const modal_container = document.getElementById('modal-container');
 const close = document.getElementById('close');
 
-open.addEventListener('click', () => {
-	modal_container.classList.add('show');
-});
+// search movie in admin then panel the put value
+if (open) {
+	open.addEventListener('click', async () => {
+		const searchValue = document.getElementById('searchMovieName').value;
+		const searchYear = document.getElementById('searchMovieYear').value;
+		const searchQuery = `https://api.themoviedb.org/3/search/movie?api_key=bc9dabeae5a66fbe7bf887b0cb184612&query=${searchValue}&year=${searchYear}`;
+		const search = await axios.get(searchQuery);
+		// console.log(search);
+		document.querySelector('#found-cards').innerHTML = '';
+		let putHTML = ``;
+		if (search.data.results.length >= 0) {
+			for (let i = 0; i < search.data.results.length; i++) {
+				putHTML += `
+					<div class="col-6 col-sm-12 col-lg-6">
+					<div class="card">
+						<div class="row">
+							<div class="col-12 col-sm-4">
+								<div class="card__cover">
+									<img src="https://image.tmdb.org/t/p/w500${search.data.results[i].poster_path}" alt="">
+									<a href="#" class="card__play">
+										<i class="icon ion-ios-play"></i>
+									</a>
+								</div>
+							</div>
 
-close.addEventListener('click', () => {
+							<div class="col-12 col-sm-8">
+								<div class="card__content">
+									<h3 class="card__title"><a href="#">${search.data.results[i].title}</a></h3>
+									
+
+									<div class="card__wrap">
+										<ul class="card__list">
+											<li>${search.data.results[i].release_date}</li>
+										</ul>
+									</div>
+									<div class="comments__actions">
+										<button type="button" onclick="setMovieDetailsInForm(this)" value="${search.data.results[i].id}"><i class="icon ion-ios-document"></i>Select</button>
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>`;
+				// console.log(search.data.results[i]);
+			}
+		} else {
+			putHTML += `
+			<div class="col-6 col-sm-12 col-lg-6">
+				<div class="card">
+					<div class="row">
+						<div class="col-12 col-sm-4">
+							<h1>Movie Not found</h1>
+						</div>
+					</div>
+				</div>
+			</div>`;
+		}
+		document.querySelector('#found-cards').innerHTML = putHTML;
+		modal_container.classList.add('show');
+	});
+}
+
+async function setMovieDetailsInForm(btn) {
+	const id = btn.value;
+	const searchQuery = `https://api.themoviedb.org/3/movie/${id}?api_key=bc9dabeae5a66fbe7bf887b0cb184612`;
+	const movieData = await axios.get(searchQuery);
+	const addMovName = document.getElementById('addMovName');
+	const addMovLength = document.getElementById('addMovLength');
+	const addMovDesc = document.getElementById('addMovDesc');
+	const addMovPosterLink = document.getElementById('addMovPosterLink');
+	const addMovReleaseYear = document.getElementById('addMovReleaseYear');
+	const addMovGenre = document.getElementById('addMovGenre');
+	const addMovBackdrop = document.getElementById('addMovBackdrop');
+
+	addMovName.value = movieData.data.title;
+	addMovLength.value = movieData.data.runtime;
+	addMovDesc.value = movieData.data.overview;
+	const poster = `https://image.tmdb.org/t/p/w500${movieData.data.poster_path}`;
+	addMovPosterLink.value = poster;
+	const year = movieData.data.release_date.split('-')[0];
+	addMovReleaseYear.value = year;
+	let genre = [];
+	for (let i = 0; i < movieData.data.genres.length; i++) {
+		genre.push(movieData.data.genres[i].name);
+	}
+	addMovGenre.value = genre;
+	const backdrop = `https://image.tmdb.org/t/p/w500${movieData.data.backdrop_path}`;
+	addMovBackdrop.value = backdrop;
+	const searchValue = document.getElementById('searchMovieName');
+	const searchYear = document.getElementById('searchMovieYear');
+	searchValue.value = '';
+	searchYear.value = '';
 	modal_container.classList.remove('show');
-});
+}
+
+if (close) {
+	close.addEventListener('click', () => {
+		modal_container.classList.remove('show');
+	});
+}
 
 
+// Edit movie
 const openEdit = document.getElementById('openEdit');
 const closeEdit = document.getElementById('closeEdit');
 const editModal = document.getElementById('modal-container-edit');
 
-
-openEdit.addEventListener('click', () => {
+async function openMovieEditModalWithData(btn) {
 	editModal.classList.add('show');
-	console.log('click');
-});
+	let id = btn.value;
+	const editMovName = document.getElementById('editMovName');
+	const editMovLength = document.getElementById('editMovLength');
+	const editMovDesc = document.getElementById('editMovDesc');
+	const editMovPoster = document.getElementById('editMovPoster');
+	const editMovYear = document.getElementById('editMovYear');
+	const editMovTrailer = document.getElementById('editMovTrailer');
+	const editMovGenre = document.getElementById('editMovGenre');
+	const editMovPgRating = document.getElementById('editMovPgRating');
+	const editMovBackdrop = document.getElementById('editMovBackdrop');
+	const editMovRating = document.getElementById('editMovRating');
 
-closeEdit.addEventListener('click', () => {
-	editModal.classList.remove('show');
-});
+	const movieQuery = `http://127.0.0.1:3000/api/v1/movie/${id}`;
+	const movieData = await axios.get(movieQuery);
+	// console.log(movieData.data.data.movie.name);
+
+	editMovName.value = movieData.data.data.movie.name;
+	editMovLength.value = movieData.data.data.movie.runTime;
+	editMovDesc.value = movieData.data.data.movie.description;
+	editMovPoster.value = movieData.data.data.movie.poster;
+	editMovYear.value = movieData.data.data.movie.year;
+	editMovTrailer.value = movieData.data.data.movie.trailerLink;
+	let genres = [];
+	for (let i = 0; i < movieData.data.data.movie.genre.length; i++) {
+		genres.push(movieData.data.data.movie.genre[i]);
+	}
+	editMovGenre.value = genres;
+	editMovPgRating.value = movieData.data.data.movie.pgRating;
+	editMovBackdrop.value = movieData.data.data.movie.backdrop;
+	editMovRating.value = movieData.data.data.movie.ratings;
+
+}
+if (closeEdit) {
+	closeEdit.addEventListener('click', () => {
+		editModal.classList.remove('show');
+	});
+}
 
 
+// Update review
+const reviewUpdateModal = document.getElementById('modal-container-updateReview');
+const closeEditReview = document.getElementById('closeEditReview');
+
+async function openReviewEditModal(btn) {
+	reviewUpdateModal.classList.add('show');
+	const editRevTitle = document.getElementById('editRevTitle');
+	const editRevContent = document.getElementById('editRevContent');
+	const editRevRating = document.getElementById('editRevRating');
+
+	const reviewQuery = `http://`;
+}
+
+if (closeEditReview) {
+	closeEditReview.addEventListener('click', () => {
+		reviewUpdateModal.classList.remove('show');
+	});
+}
+
+
+
+
+// edit user
+async function openUpdateUserModal(btn) {
+	const modalUpdateUser = document.getElementById('modal-container-editUser');
+	modalUpdateUser.classList.add('show');
+
+	const userQuery = `http://127.0.0.1:3000/api/v1/user/${btn.value}`;
+	const userData = await axios.get(userQuery);
+
+	const editUserName = document.getElementById('editUserName');
+	const editUserEmail = document.getElementById('editUserEmail');
+	const editUserRole = document.getElementById('editUserRole');
+	const editUserActive = document.getElementById('editUserActive');
+	const editUserSubscription = document.getElementById('editUserSubscription');
+	const editUserSubscriptionEnd = document.getElementById('editUserSubscriptionEnd');
+
+	// To be used when pre selecting an option
+	// document.getElementById("serviceType");
+	// use if else to select the option (which is from database)
+	const roleIndex = userData.data.data.user.role == 'admin' ? 0 : 1;
+	editUserRole.selectedIndex = roleIndex;
+
+	let activeIndex = 0;
+	if (userData.data.data.user.active) {
+		activeIndex = 0;
+	} else {
+		activeIndex = 1;
+	}
+	editUserActive.selectedIndex = activeIndex;
+
+	const subscriptionIndex = userData.data.data.user.subscription == 'basic' ? 0 : userData.data.data.user.subscription == 'premium' ? 1 : userData.data.data.user.subscription == 'cinematic' ? 2 : 0;
+	editUserSubscription.selectedIndex = subscriptionIndex;
+
+	//To be used when updating the  data
+	// const role = editUserRole.options[editUserRole.selectedIndex].value;
+	editUserName.value = userData.data.data.user.name;
+	editUserEmail.value = userData.data.data.user.email;
+	editUserSubscriptionEnd.value = userData.data.data.user.subscriptionDuration;
+	console.log(userData.data.data.user.subscriptionDuration);
+
+};
+
+const closeUserModal = document.getElementById('closeUserModal');
+const userUpdateModal = document.getElementById('modal-container-editUser');
+if (closeUserModal) {
+	closeUserModal.addEventListener('click', () => {
+		userUpdateModal.classList.remove('show');
+	});
+}
 

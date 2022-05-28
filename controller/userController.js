@@ -66,8 +66,9 @@ exports.deleteMe = async (req, res, next) => {
 exports.getAllUsers = async (req, res) => {
     try {
         const allUsers = await User.find();
+        console.log(allUsers);
         if (allUsers) {
-            return res.status(200).json({
+            res.status(200).json({
                 status: "success",
                 data: {
                     length: allUsers.length,
@@ -92,13 +93,18 @@ exports.createUser = (req, res) => {
 exports.getUserUsingId = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
-        console.log(req.user);
+        console.log(user);
         if (user) {
             res.status(200).json({
                 status: "success",
                 data: {
                     user
                 }
+            });
+        } else {
+            res.status(200).json({
+                status: "error",
+                message: 'User not found!!!'
             });
         }
     } catch (err) {

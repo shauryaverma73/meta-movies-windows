@@ -12,7 +12,9 @@ exports.setTourUserIds = (req, res, next) => {    // used for review creation
 
 exports.getAllReviews = async (req, res) => {
     try {
+        console.log('reached');
         const reviews = await Review.find();
+        console.log(reviews);
         res.status(200).json({
             status: 'success',
             result: reviews.length,
@@ -28,7 +30,7 @@ exports.getAllReviews = async (req, res) => {
 exports.createReview = async (req, res) => {
     try {
         const review = await Review.create(req.body);
-        res.status(200).json({
+        res.status(201).json({
             status: 'success',
             data: {
                 data: review
