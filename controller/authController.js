@@ -184,7 +184,7 @@ exports.isLoggedIn = async (req, res, next) => {
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
 
             // 2.check if user still exists
-            const currentUser = await User.findById(decoded.id);
+            const currentUser = await User.findById(decoded.id).populate('watchList');
             if (!currentUser) {
                 return next();
             }
