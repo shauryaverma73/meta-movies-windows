@@ -51,6 +51,10 @@ router
     .route('/deleteMe')
     .delete(userController.deleteMe);
 
+router
+    .route('/addToWatchlist/:movieId')
+    .put(userController.addToWatchList);
+
 
 // ADMIN ONLY
 // restriction middleware

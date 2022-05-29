@@ -114,6 +114,7 @@ exports.getUserUsingId = async (req, res) => {
 
 exports.updateUser = (req, res) => {
 
+
 };
 
 exports.deleteUser = (req, res) => {
@@ -132,5 +133,32 @@ exports.buySubscription = async (req, res) => {
     }
     catch (err) {
         console.log(err);
+    }
+};
+
+exports.addToWatchList = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        // get movie id from parameters
+        const check = user.watchList.includes(req.params.movieId);
+        if (check) {
+            res.status(200).json({
+                status: 'success',
+                message: 'Movie already in watchlist.'
+            });
+        } else {
+            user.watchList.push(req.params.movieId);
+            const addedUser = await user.save({ validateBeforeSave: false, new: true });
+            res.status(200).json({
+                status: 'success',
+                message: 'Movie added to watchlist.'
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(201).json({
+            status: 'error',
+            message: 'Can\'t add movie to watchlist'
+        });
     }
 };

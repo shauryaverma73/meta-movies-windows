@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 	"use strict"; // start of use strict
 
@@ -482,6 +483,7 @@ $(document).ready(function () {
 	$(window).on('load', initializeThirdSlider());
 });
 
+
 // *************************************************************************
 // ***************************CATALOGUE*************************************
 // *************************************************************************
@@ -838,3 +840,18 @@ if (closeUserModal) {
 	});
 }
 
+
+
+async function addMovieToWatchlist(btn) {
+	const addQuery = `http://127.0.0.1:3000/api/v1/user/addToWatchlist/${btn.value}`;
+	try {
+		const added = await axios.put(addQuery);
+		if (added.status == 200) {
+			showAlert('success', added.data.message);
+		} else {
+			showAlert('error', added.data.message);
+		}
+	} catch (err) {
+		showAlert('success', 'Error adding to watchlist');
+	}
+}
