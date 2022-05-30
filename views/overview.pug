@@ -38,6 +38,34 @@ block content
                       i.icon.ion-ios-star
                       | #{(Math.round(movie.ratings * 100) / 100).toFixed(1)}
                 // end card
+  //  watchList
+  - if(user)
+    section.section.section--bg(data-bg='img/section/section.jpg' id='watchlistSection')
+      .container
+        .row
+          // section title
+          .col-12
+            h2.section__title My Watchlist
+          // end section title
+          // card
+          each card in user.watchList
+            .col-6.col-sm-4.col-lg-3.col-xl-2
+              .card
+                .card__cover
+                  img(src=`${card.poster}` alt=`${card.name}`)
+                  a.card__play(href=`/movie/${card.slug}`)
+                    i.icon.ion-ios-play
+                .card__content
+                  h3.card__title
+                    a(href=`/movie/${card.slug}`)= `${card.name}`
+                  span.card__category
+                    each genre in card.genre
+                      a= `${genre}`
+                  span.card__rate
+                    i.icon.ion-ios-star
+                    | #{(Math.round(card.ratings * 100) / 100).toFixed(1)}
+          // end card
+    // end watchList
   // end home
   // content
   section.content

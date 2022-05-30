@@ -5,11 +5,13 @@ const authController = require('./../controller/authController');
 
 router.get('/forgotPassword', viewController.forgotPassword);
 
+router.get('/me', authController.protect, viewController.getMe);
+
 router.use(authController.isLoggedIn);
 
 router.get('/', viewController.getOverview);
 
-router.get('/movie/:slug', authController.protect, viewController.getMovie);
+router.get('/movie/:slug', authController.protect, authController.checkSubscription, viewController.getMovie);
 
 
 // router.get('/movie/:movieSlug', async (req, res) => {
@@ -52,7 +54,6 @@ router.get('/about', viewController.about);
 router.get('/catalogue', viewController.catalogue);
 
 
-router.get('/me', viewController.getMe);
 
 router.get('/test', viewController.test);
 

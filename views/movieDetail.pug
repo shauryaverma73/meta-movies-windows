@@ -61,7 +61,7 @@ block content
           .details__wrap
             .details__devices
               ul.details__devices-list
-                button.form__btn(type='button') Add To WatchLater
+                button.form__btn(type='button' value=`${movie.id}` onclick='addMovieToWatchlist(this)') Add To WatchLater
     // end details content
   // end details
   // content
@@ -109,36 +109,17 @@ block content
                 .col-12
                   .reviews
                     ul.reviews__list
-                      li.reviews__item
-                        .reviews__autor
-                          img.reviews__avatar(src='img/user.png' alt='')
-                          span.reviews__name Best Marvel movie in my opinion
-                          span.reviews__time 24.08.2018, 17:53 by John Doe
-                          span.reviews__rating
-                            i.icon.ion-ios-star
-                            | 8.4
-                        p.reviews__text
-                          | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
-                      li.reviews__item
-                        .reviews__autor
-                          img.reviews__avatar(src='img/user.png' alt='')
-                          span.reviews__name Best Marvel movie in my opinion
-                          span.reviews__time 24.08.2018, 17:53 by John Doe
-                          span.reviews__rating
-                            i.icon.ion-ios-star
-                            | 9.0
-                        p.reviews__text
-                          | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
-                      li.reviews__item
-                        .reviews__autor
-                          img.reviews__avatar(src='img/user.png' alt='')
-                          span.reviews__name Best Marvel movie in my opinion
-                          span.reviews__time 24.08.2018, 17:53 by John Doe
-                          span.reviews__rating
-                            i.icon.ion-ios-star
-                            | 7.5
-                        p.reviews__text
-                          | There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&apos;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden in the middle of text.
+                      each review in movie.reviews
+                        li.reviews__item
+                          .reviews__autor
+                            img.reviews__avatar(src=`/img/users/${review.user.profilePicture}` alt=`${review.user.name}`)
+                            span.reviews__name #{review.reviewTitle}
+                            span.reviews__time #{review.createdAt.toDateString()} by #{review.user.name}
+                            span.reviews__rating
+                              i.icon.ion-ios-star
+                              | #{review.reviewRating}
+                          p.reviews__text
+                            | #{review.reviewContent}
                     form.form(action='#')
                       input.form__input(type='text' placeholder='Title')
                       textarea.form__textarea(placeholder='Review')

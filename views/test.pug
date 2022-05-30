@@ -1,119 +1,26 @@
-doctype html
-head
-  meta(charset='utf-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-  // Font
-  link(href='https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CUbuntu:300,400,500,700' rel='stylesheet')
-  // CSS
-  link(rel='stylesheet' href='css/bootstrap-reboot.min.css')
-  link(rel='stylesheet' href='css/bootstrap-grid.min.css')
-  link(rel='stylesheet' href='css/owl.carousel.min.css')
-  link(rel='stylesheet' href='css/jquery.mCustomScrollbar.min.css')
-  link(rel='stylesheet' href='css/nouislider.min.css')
-  link(rel='stylesheet' href='css/ionicons.min.css')
-  link(rel='stylesheet' href='css/plyr.css')
-  link(rel='stylesheet' href='css/photoswipe.css')
-  link(rel='stylesheet' href='css/default-skin.css')
-  link(rel='stylesheet' href='css/main.css')
-  // Favicons
-  link(rel='icon' type='image/png' href='icon/favicon-32x32.png' sizes='32x32')
-  link(rel='apple-touch-icon' href='icon/favicon-32x32.png')
-  link(rel='apple-touch-icon' sizes='72x72' href='icon/apple-touch-icon-72x72.png')
-  link(rel='apple-touch-icon' sizes='114x114' href='icon/apple-touch-icon-114x114.png')
-  link(rel='apple-touch-icon' sizes='144x144' href='icon/apple-touch-icon-144x144.png')
-  meta(name='description' content='')
-  meta(name='keywords' content='')
-  meta(name='author' content='Dmitry Volkov')
-  title FlixGo &ndash; Online Movies, TV Shows &amp; Cinema HTML Template
-// header
-header.header
-  .header__wrap
-    .container
-      .row
-        .col-12
-          .header__content
-            // header logo
-            a.header__logo(href='index.html')
-              img(src='img/logo.svg' alt='')
-            // end header logo
-            // header nav
-            ul.header__nav
-              // dropdown
-              li.header__nav-item
-                a#dropdownMenuHome.dropdown-toggle.header__nav-link(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Home
-                ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuHome')
-                  li
-                    a(href='index.html') Home slideshow bg
-                  li
-                    a(href='index2.html') Home static bg
-              // end dropdown
-              // dropdown
-              li.header__nav-item
-                a#dropdownMenuCatalog.dropdown-toggle.header__nav-link(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Catalog
-                ul.dropdown-menu.header__dropdown-menu(aria-labelledby='dropdownMenuCatalog')
-                  li
-                    a(href='catalog1.html') Catalog Grid
-                  li
-                    a(href='catalog2.html') Catalog List
-                  li
-                    a(href='details1.html') Details Movie
-                  li
-                    a(href='details2.html') Details TV Series
-              // end dropdown
-              li.header__nav-item
-                a.header__nav-link(href='pricing.html') Manage
-            // end header nav
-            // header auth
-            .header__auth
-              a(href='#')
-                img.nav__user-img(src='img/user.png' alt='photo of user')
-              span.nav__user-name firstname
-              a.header__sign-in(href='signin.html')
-                i.icon.ion-ios-log-in
-                span Logout
-            // end header auth
-            // header menu btn
-            button.header__btn(type='button')
-              span
-              span
-              span
-            // end header menu btn
-  // header search
-  form.header__search(action='#')
-    .container
-      .row
-        .col-12
-          .header__search-content
-            input(type='text' placeholder='Search for a movie, TV Series that you are looking for')
-            button(type='button') search
-  // end header search
-// end header
+
 // details
 section.section(style='margin-bottom:-29px;')
-// end details
-// content
 section.content
   .content__head
     .container
       .row
         .col-12
           // content title
-          h2.content__title Username here
+          h2.content__title Username here, watchlater btn dalna h movies me
           // end content title
           // content tabs nav
           ul#content__tabs.nav.nav-tabs.content__tabs(role='tablist')
             li.nav-item
               a.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') Settings
             li.nav-item
-              a.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') Add Movies
+              a.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') My Reviews
             li.nav-item
-              a.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') Manage Movies
+              a.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') Manage Watch Later
             li.nav-item
-              a.nav-link(data-toggle='tab' href='#tab-4' role='tab' aria-controls='tab-4' aria-selected='false') Manage Reviews
+              a.nav-link(data-toggle='tab' href='#tab-4' role='tab' aria-controls='tab-4' aria-selected='false') Manage Subscription
             li.nav-item
-              a.nav-link(data-toggle='tab' href='#tab-5' role='tab' aria-controls='tab-5' aria-selected='false') Manage Users
-            li.nav-item
-              a.nav-link(data-toggle='tab' href='#tab-6' role='tab' aria-controls='tab-6' aria-selected='false') Update Password
+              a.nav-link(data-toggle='tab' href='#tab-5' role='tab' aria-controls='tab-5' aria-selected='false') Update Password
           // end content tabs nav
           // content mobile tabs nav
           #content__mobile-tabs.content__mobile-tabs
@@ -125,15 +32,15 @@ section.content
                 li.nav-item
                   a#1-tab.nav-link.active(data-toggle='tab' href='#tab-1' role='tab' aria-controls='tab-1' aria-selected='true') Settings
                 li.nav-item
-                  a#2-tab.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') Add Movies
+                  a#2-tab.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') Comments
                 li.nav-item
-                  a#3-tab.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') Manage Movies
+                  a#3-tab.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') WatchList
                 li.nav-item
-                  a#4-tab.nav-link(data-toggle='tab' href='#tab-4' role='tab' aria-controls='tab-4' aria-selected='false') Manage Reviews
+                  a#4-tab.nav-link(data-toggle='tab' href='#tab-4' role='tab' aria-controls='tab-4' aria-selected='false')
+                    | Manage
+                    | Subscription
                 li.nav-item
-                  a#5-tab.nav-link(data-toggle='tab' href='#tab-5' role='tab' aria-controls='tab-5' aria-selected='false') Manage Users
-                li.nav-item
-                  a#6-tab.nav-link(data-toggle='tab' href='#tab-6' role='tab' aria-controls='tab-6' aria-selected='false') Update Password
+                  a#5-tab.nav-link(data-toggle='tab' href='#tab-5' role='tab' aria-controls='tab-5' aria-selected='false') Update Password
           // end content mobile tabs nav
   .container
     .row
@@ -158,7 +65,6 @@ section.content
                   img.nav__user-form(src='img/gallery/project-1.jpg')
                   input(type='file' accept='image/*')
                   button.form__btn(type='button') Update
-                .reviews
               // end email name photo
           // tab2
           #tab-2.tab-pane.fade(role='tabpanel' aria-labelledby='2-tab')
@@ -166,164 +72,42 @@ section.content
               // reviews
               .col-12
                 .reviews
-                  label.form__Heading Search Movie from TMDb
-                  form.form(action='#')
-                    input.form__input(type='text' placeholder='Enter Movie Name')
-                    button#open.form__btn(type='button') Search
-                #modal-container.modal-container-search
-                  .form-search.search-top-padding
-                    .catalog
-                      .container
-                        .col
-                          // card
-                          .col-6.col-sm-12.col-lg-6
-                            .card
-                              .row
-                                .col-12.col-sm-4
-                                  .card__cover
-                                    img(src='img/covers/cover.jpg' alt='')
-                                    a.card__play(href='#')
-                                      i.icon.ion-ios-play
-                                .col-12.col-sm-8
-                                  .card__content
-                                    h3.card__title
-                                      a(href='#')
-                                        | I Dream in
-                                        | Another
-                                        | Language
-                                    span.card__category
-                                      a(href='#') Action
-                                      a(href='#') Triler
-                                    .card__wrap
-                                      span.card__rate
-                                        i.icon.ion-ios-star
-                                        | 8.4
-                                      ul.card__list
-                                        li HD
-                                        li 16+
-                                    .comments__actions
-                                      button(type='button')
-                                        i.icon.ion-ios-document
-                                        | Select
-                                    // buttons here
-                          // end card
-                          // card
-                          .col-6.col-sm-12.col-lg-6
-                            .card
-                              .row
-                                .col-12.col-sm-4
-                                  .card__cover
-                                    img(src='img/covers/cover2.jpg' alt='')
-                                    a.card__play(href='#')
-                                      i.icon.ion-ios-play
-                                .col-12.col-sm-8
-                                  .card__content
-                                    h3.card__title
-                                      a(href='#') Benched
-                                    span.card__category
-                                      a(href='#') Comedy
-                                    .card__wrap
-                                      span.card__rate
-                                        i.icon.ion-ios-star
-                                        | 7.1
-                                      ul.card__list
-                                        li HD
-                                        li 16+
-                                    .comments__actions
-                                      button(type='button')
-                                        i.icon.ion-ios-trash
-                                        | Delete
-                          // end card
-                          // card
-                          .col-6.col-sm-12.col-lg-6
-                            .card
-                              .row
-                                .col-12.col-sm-4
-                                  .card__cover
-                                    img(src='img/covers/cover2.jpg' alt='')
-                                    a.card__play(href='#')
-                                      i.icon.ion-ios-play
-                                .col-12.col-sm-8
-                                  .card__content
-                                    h3.card__title
-                                      a(href='#') Benched
-                                    span.card__category
-                                      a(href='#') Comedy
-                                    .card__wrap
-                                      span.card__rate
-                                        i.icon.ion-ios-star
-                                        | 7.1
-                                      ul.card__list
-                                        li HD
-                                        li 16+
-                                    .comments__actions
-                                      button(type='button')
-                                        i.icon.ion-ios-trash
-                                        | Delete
-                          // end card
-                          // card
-                          .col-6.col-sm-12.col-lg-6
-                            .card
-                              .row
-                                .col-12.col-sm-4
-                                  .card__cover
-                                    img(src='img/covers/cover2.jpg' alt='')
-                                    a.card__play(href='#')
-                                      i.icon.ion-ios-play
-                                .col-12.col-sm-8
-                                  .card__content
-                                    h3.card__title
-                                      a(href='#') Benched
-                                    span.card__category
-                                      a(href='#') Comedy
-                                    .card__wrap
-                                      span.card__rate
-                                        i.icon.ion-ios-star
-                                        | 7.1
-                                      ul.card__list
-                                        li HD
-                                        li 16+
-                                    .comments__actions
-                                      button(type='button')
-                                        i.icon.ion-ios-trash
-                                        | Delete
-                          // end card
-                      button#close.form__btn(type='button') close
-                // Manually add movie data
-                label.form__Heading Manually add Movie Data
-                form.form(action='#')
-                  // add multipart form
-                  label.form__Heading Movie Name
-                  input.form__input(type='text' placeholder='Movie Name')
-                  label.form__Heading Movie Length (in minutes)
-                  input.form__input(type='number' placeholder='Movie Length (in minutes)')
-                  label.form__Heading Movie Description
-                  textarea.form__textarea(placeholder='Movie Description')
-                  label.form__Heading Poster
-                  input.form__input(type='text' placeholder='Poster Link')
-                  label.form__Heading Year
-                  input.form__input(type='number' placeholder='Movie Release Year')
-                  label.form__Heading Movie File
-                  input(type='file' accept='video/*')
-                  br
-                  br
-                  label.form__Heading Trailer Link
-                  input.form__input(type='text' placeholder="Movie's Youtube Trailer Link")
-                  label.form__Heading Genre
-                  input.form__input(type='text' placeholder='Genre (comma separated)')
-                  label.form__Heading Parental Guidance Rating
-                  input.form__input(type='text' placeholder='PG Rating')
-                  label.form__Heading Background Image
-                  input.form__input(type='text' placeholder='Backdrop Image Link')
-                  label.form__Heading IMDb Rating
-                  .form__slider
-                    #slider__rating.form__slider-rating
-                    #form__slider-value.form__slider-value
-                  button.form__btn(type='button') Add Movie
+                  ul.reviews__list
+                    li.reviews__item
+                      .reviews__autor
+                        img.reviews__avatar(src='img/user.png' alt='')
+                        span.reviews__name Best Marvel movie in my opinion
+                        span.reviews__time 24.08.2018, 17:53
+                        span.reviews__rating
+                          i.icon.ion-ios-star
+                          | 7.5
+                      p.reviews__text
+                        | There are many variations of passages of Lorem
+                        | Ipsum available, but the majority have suffered alteration in some
+                        | form, by injected humour, or randomised words which don&apos;t look even
+                        | slightly believable. If you are going to use a passage of Lorem
+                        | Ipsum, you need to be sure there isn&apos;t anything embarrassing hidden
+                        | in the middle of text.
+                      .comments__actions
+                        button(type='button' value='reviewID' onclick='openReviewEditModal(this)')
+                          i.icon.ion-ios-document
+                          | Edit
+                        button(type='button')
+                          i.icon.ion-ios-trash
+                          | Delete
+                      // Review Modal Form
+                      #modal-container-updateReview.modal-container-search
+                        .form-edit
+                          form.form(action='#')
+                            input#editRevTitle.form__input(type='text' placeholder='Title')
+                            textarea#editRevContent.form__textarea(placeholder='Review')
+                            input#editRevRating.form__input(type='text' placeholder='Rating')
+                            button.form__btn(type='button') Update
+                            button#closeEditReview.form__btn(type='button') close
               // end reviews
           // tab3
           #tab-3.tab-pane.fade(role='tabpanel' aria-labelledby='3-tab')
-            // catalog
+            // project gallery
             .catalog
               .container
                 .row
@@ -353,12 +137,10 @@ section.content
                                 li HD
                                 li 16+
                             .comments__actions
-                              button#openEdit(type='button')
-                                i.icon.ion-ios-document
-                                | Edit
                               button(type='button')
                                 i.icon.ion-ios-trash
-                                | Delete
+                                | Remove from
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WatchLater
                             // buttons here
                   // end card
                   // card
@@ -385,80 +167,24 @@ section.content
                                 li 16+
                             .comments__actions
                               button(type='button')
-                                i.icon.ion-ios-document
-                                | Edit
-                              button(type='button')
                                 i.icon.ion-ios-trash
-                                | Delete
+                                | Remove from
+                                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;WatchLater
                   // end card
-                  // Update Modal Form
-                  #modal-container-edit.modal-container-search
-                    .container
-                      .row
-                        // reviews
-                        .col-12
-                          // Manually add movie data
-                          label.form__Heading Update Movie Data
-                          form.form(action='#')
-                            // add multipart form
-                            label.form__Heading Movie Name
-                            input.form__input(type='text' placeholder='Movie Name')
-                            label.form__Heading Movie Length (in minutes)
-                            input.form__input(type='number' placeholder='Movie Length (in minutes)')
-                            label.form__Heading Movie Description
-                            textarea.form__textarea(placeholder='Movie Description')
-                            label.form__Heading Poster
-                            input.form__input(type='text' placeholder='Poster Link')
-                            label.form__Heading Year
-                            input.form__input(type='number' placeholder='Movie Release Year')
-                            label.form__Heading Movie File
-                            input(type='file' accept='video/*')
-                            br
-                            br
-                            label.form__Heading Trailer Link
-                            input.form__input(type='text' placeholder="Movie's Youtube Trailer Link")
-                            label.form__Heading Genre
-                            input.form__input(type='text' placeholder='Genre (comma separated)')
-                            label.form__Heading Parental Guidance Rating
-                            input.form__input(type='text' placeholder='PG Rating')
-                            label.form__Heading Background Image
-                            input.form__input(type='text' placeholder='Backdrop Image Link')
-                            label.form__Heading IMDb Rating
-                            input.form__input(type='text' placeholder='IMDb Rating')
-                            button.form__btn(type='button') Update Movie
-                            button#closeEdit.form__btn(type='button') Cancel
-                  // UPDATE Modal END
             // end catalog
+            // end project gallery
           // tab4
           #tab-4.tab-pane.fade(role='tabpanel' aria-labelledby='4-tab')
             .row
               // reviews
               .col-12
                 .reviews
-                  ul.reviews__list
-                    li.reviews__item
-                      .reviews__autor
-                        img.reviews__avatar(src='img/user.png' alt='')
-                        span.reviews__name Best Marvel movie in my opinion
-                        span.reviews__time
-                          | MOVIE NAME HERE****24.08.2018, 17:53 by
-                          | John Doe
-                        span.reviews__rating
-                          i.icon.ion-ios-star
-                          | 7.5
-                      p.reviews__text
-                        | There are many variations of passages of Lorem
-                        | Ipsum available, but the
-                        | majority have suffered alteration in some form, by injected humour,
-                        | or randomised words which
-                        | don&apos;t look even slightly believable. If you are going to use a
-                        | passage of Lorem Ipsum, you
-                        | need to be sure there isn&apos;t anything embarrassing hidden in the
-                        | middle of text.
-                      .comments__actions
-                        button(type='button')
-                          i.icon.ion-ios-trash
-                          | Delete
+                  .form
+                    h3.form__Heading Current Subscription: Subscription Name
+                    h3.form__Heading Valid Till: date + days left
+                    h3.form__Heading buy subs button if subscription not premium
+                    | &gt;
+                    button.form__btn(type='button') Buy Subscription
               // end reviews
           // tab5
           #tab-5.tab-pane.fade(role='tabpanel' aria-labelledby='5-tab')
@@ -472,103 +198,3 @@ section.content
                     input.form__input(type='text' placeholder='Re-Enter Old Password')
                     input.form__input(type='text' placeholder='New Password')
                     button.form__btn(type='button') Update
-              // end update password
-          // tab6
-          #tab-6.tab-pane.fade(role='tabpanel' aria-labelledby='6-tab')
-            .row
-              // update password
-              .col-12
-                .reviews
-                  label.form__Heading Update Password
-                  form.form(action='#')
-                    input.form__input(type='text' placeholder='Old Password')
-                    input.form__input(type='text' placeholder='Re-Enter Old Password')
-                    input.form__input(type='text' placeholder='New Password')
-                    button.form__btn(type='button') Update
-              // end update password
-        // end content tabs
-// end content
-// footer
-footer.footer
-  .container
-    .row
-      // footer list
-      .col-12.col-md-3
-        h6.footer__title Download Our App
-        ul.footer__app
-          li
-            a(href='#')
-              img(src='img/Download_on_the_App_Store_Badge.svg' alt='')
-          li
-            a(href='#')
-              img(src='img/google-play-badge.png' alt='')
-      // end footer list
-      // footer list
-      .col-6.col-sm-4.col-md-3
-        h6.footer__title Resources
-        ul.footer__list
-          li
-            a(href='#') About Us
-          li
-            a(href='#') Pricing Plan
-          li
-            a(href='#') Help
-      // end footer list
-      // footer list
-      .col-6.col-sm-4.col-md-3
-        h6.footer__title Legal
-        ul.footer__list
-          li
-            a(href='#') Terms of Use
-          li
-            a(href='#') Privacy Policy
-          li
-            a(href='#') Security
-      // end footer list
-      // footer list
-      .col-12.col-sm-4.col-md-3
-        h6.footer__title Contact
-        ul.footer__list
-          li
-            a(href='tel:+18002345678') +1 (800) 234-5678
-          li
-            a(href='mailto:support@moviego.com') support@flixgo.com
-        ul.footer__social
-          li.facebook
-            a(href='#')
-              i.icon.ion-logo-facebook
-          li.instagram
-            a(href='#')
-              i.icon.ion-logo-instagram
-          li.twitter
-            a(href='#')
-              i.icon.ion-logo-twitter
-          li.vk
-            a(href='#')
-              i.icon.ion-logo-vk
-      // end footer list
-      // footer copyright
-      .col-12
-        .footer__copyright
-          small
-            a(target='_blank' href='https://www.templateshub.net') Templates Hub
-          ul
-            li
-              a(href='#') Terms of Use
-            li
-              a(href='#') Privacy Policy
-      // end footer copyright
-// end footer
-// JS
-script(src='js/jquery-3.3.1.min.js')
-script(src='js/bootstrap.bundle.min.js')
-script(src='js/owl.carousel.min.js')
-script(src='js/jquery.mousewheel.min.js')
-script(src='js/jquery.mCustomScrollbar.min.js')
-script(src='js/wNumb.js')
-script(src='js/nouislider.min.js')
-script(src='js/plyr.min.js')
-script(src='js/jquery.morelines.min.js')
-script(src='js/photoswipe.min.js')
-script(src='js/photoswipe-ui-default.min.js')
-script(src='js/main.js')

@@ -59,17 +59,27 @@ const userSchema = new mongoose.Schema({
     },
     watchList: [
         {
-            type: [mongoose.Schema.ObjectId],
+            type: mongoose.Schema.ObjectId,
             ref: 'Movie'
         }
     ],
     reviews: [
         {
-            type: [mongoose.Schema.ObjectId],
+            type: mongoose.Schema.ObjectId,
             ref: 'Review'
         }
     ]
-});
+},
+    {
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
+    }
+);
+
+// userSchema.pre(/^find/, function (next) {
+//     this.populate('reviews');
+//     next();
+// });
 
 // encrypt user password before save
 userSchema.pre('save', async function (next) {
@@ -101,5 +111,5 @@ userSchema.methods.createPasswordResetToken = function () {
     return token;
 };
 
-const Users = mongoose.model('Users', userSchema);
-module.exports = Users;
+const User = mongoose.model('User', userSchema);
+module.exports = User;

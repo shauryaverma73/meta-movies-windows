@@ -1,4 +1,7 @@
 const Movie = require('./../model/movieModel');
+const User = require('./../model/userModel');
+const Review = require('./../model/reviewModel');
+
 const axios = require('axios');
 
 exports.getOverview = async (req, res) => {
@@ -24,7 +27,7 @@ exports.getOverview = async (req, res) => {
         // console.log(drama);
 
         // find movies
-        const movies = await Movie.find();
+        const movies = await Movie.find().populate('reviews');
         // send to template
         res.status(200).render('overview', {
             title: 'Home of Entertainment',
@@ -42,7 +45,7 @@ exports.getOverview = async (req, res) => {
 
 exports.getMovie = async (req, res) => {
     // find movie
-    const movie = await Movie.findOne({ slug: req.params.slug });
+    const movie = await Movie.findOne({ slug: req.params.slug }).populate('reviews');
     // Highest IMDB Rated
     const highIMDBRating = await Movie.aggregate([
         {
@@ -104,9 +107,22 @@ exports.catalogue = async (req, res) => {
 };
 
 exports.getMe = async (req, res) => {
-    res.status(200).render('account', {
-        title: res.locals.user.name
-    });
+    if (req.user.role == 'admin') {
+        const movies = await Movie.find().populate('reviews');
+        const users = await User.find();
+        const reviews = await Review.find().populate('movie').populate('user');
+
+        res.status(200).render('account', {
+            title: 'My Account',
+            movies,
+            users,
+            reviews
+        });
+    } else {
+        res.status(200).render('account', {
+            title: 'My Account'
+        });
+    }
 };
 
 exports.forgotPassword = (req, res) => {
@@ -115,9 +131,8 @@ exports.forgotPassword = (req, res) => {
     });
 };
 
-exports.test = (req,res) => {
+exports.test = (req, res) => {
     res.status(200).render('test', {
 
     });
-
 };

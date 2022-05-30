@@ -54,11 +54,13 @@ const movieSchema = new mongoose.Schema({
     },
     backdrop: {
         type: String
-    }
-    // ,reviews: [{
-    //     type: mongoose.isValidObjectId.SchemaId,
-    //     ref: 'Comments'
-    // }]
+    },
+    reviews: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Review'
+        }
+    ]
 },
     {
         toJSON: { virtuals: true },
@@ -66,14 +68,20 @@ const movieSchema = new mongoose.Schema({
     }
 );
 
+// movieSchema.pre(/^find/, function (next) {
+//     this.populate('reviews');
+//     next();
+// });
+
+
 // setting slug and path of tmdb pics
 movieSchema.pre('save', function (next) {
     this.slug = slugify(this.name, { lower: true });
-    this.poster = process.env.TMDB_PICTURE_PATH + this.poster;
-    this.backdrop = process.env.TMDB_PICTURE_PATH + this.backdrop;
+    // this.poster = process.env.TMDB_PICTURE_PATH + this.poster;
+    // this.backdrop = process.env.TMDB_PICTURE_PATH + this.backdrop;
     next();
 });
 
 
-const Movie = mongoose.model('movie', movieSchema);
+const Movie = mongoose.model('Movie', movieSchema);
 module.exports = Movie;

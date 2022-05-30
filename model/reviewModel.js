@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
+const Movie = require('./movieModel');
 
 const reviewSchema = new mongoose.Schema({
-    userID: {
+    user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
         required: [true, 'review belongs to a user']
     },
-    movieID: {
+    movie: {
         type: mongoose.Schema.ObjectId,
         ref: 'Movie',
         required: [true, 'review belongs to a movie']
@@ -28,7 +29,18 @@ const reviewSchema = new mongoose.Schema({
         min: 1,
         max: 10
     }
+},
+    {
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
+    }
+);
+
+reviewSchema.pre(/^find/, function (next) {
+    this.populate('movie', 'name').populate('user', 'name profilePicture');
+    next();
 });
 
-const Review = mongoose.model('Reviews', reviewSchema);
+
+const Review = mongoose.model('Review', reviewSchema);
 module.exports = Review;

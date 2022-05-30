@@ -17,10 +17,6 @@ router
     .patch(movieController.updateMovie)
     .delete(movieController.deleteMovie);
 
-// router.get('/api/v1/movie/movieGenres/:genre', movieController.movieGenre);
 
-// router.get('/api/v1/movie/latestMovies', movieController.latestMovies);
-
-// router.get('/api/v1/movie/trendingMovies', movieController.trendingMovies);
 
 module.exports = router;

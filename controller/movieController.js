@@ -16,7 +16,7 @@ exports.getAllMovie = async (req, res, next) => {
 
         // queryStr = queryStr.limit(req.query.limit);
 
-        const query = Movie.find(JSON.parse(queryStr));
+        const query = Movie.find(JSON.parse(queryStr)).populate('reviews');
 
         // pagination
         // const page = req.params.page * 1 | 1;
@@ -48,7 +48,7 @@ exports.getAllMovie = async (req, res, next) => {
 
 exports.getMovieUsingId = async (req, res) => {
     try {
-        const movie = await Movie.findById(req.params.id);
+        const movie = await Movie.findById(req.params.id).populate('reviews');
         if (movie) {
             res.status(200).json({
                 status: 'success',

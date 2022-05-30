@@ -65,9 +65,10 @@ exports.deleteMe = async (req, res, next) => {
 
 exports.getAllUsers = async (req, res) => {
     try {
-        const allUsers = await User.find();
+        const allUsers = await User.find().populate('watchList').populate('reviews');
+        console.log(allUsers);
         if (allUsers) {
-            return res.status(200).json({
+            res.status(200).json({
                 status: "success",
                 data: {
                     length: allUsers.length,
@@ -92,13 +93,18 @@ exports.createUser = (req, res) => {
 exports.getUserUsingId = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
-        console.log(req.user);
+        console.log(user);
         if (user) {
             res.status(200).json({
                 status: "success",
                 data: {
                     user
                 }
+            });
+        } else {
+            res.status(200).json({
+                status: "error",
+                message: 'User not found!!!'
             });
         }
     } catch (err) {
@@ -107,6 +113,7 @@ exports.getUserUsingId = async (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
+
 
 };
 
@@ -126,5 +133,32 @@ exports.buySubscription = async (req, res) => {
     }
     catch (err) {
         console.log(err);
+    }
+};
+
+exports.addToWatchList = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        // get movie id from parameters
+        const check = user.watchList.includes(req.params.movieId);
+        if (check) {
+            res.status(200).json({
+                status: 'success',
+                message: 'Movie already in watchlist.'
+            });
+        } else {
+            user.watchList.push(req.params.movieId);
+            const addedUser = await user.save({ validateBeforeSave: false, new: true });
+            res.status(200).json({
+                status: 'success',
+                message: 'Movie added to watchlist.'
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(201).json({
+            status: 'error',
+            message: 'Can\'t add movie to watchlist'
+        });
     }
 };

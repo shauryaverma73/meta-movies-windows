@@ -123,13 +123,14 @@ exports.logout = (req, res) => {
 // Middlewares
 /***************************************/
 exports.checkSubscription = async (req, res, next) => {
-    if (req.user.subscription == 'basic' || req.user.subscription == 'premium' || req.user.subscription == 'cinematic' && req.user.subscriptionDuration > new Date().toISOString()) {
+    if (req.user.subscription == 'basic' || req.user.subscription == 'premium' || req.user.subscription == 'cinematic' && req.user.subscriptionDuration > new Date()) {
         next();
     }
     else {
-        res.status(401).json({
-            status: 'success',
-            message: 'Please buy Subscription'
+        res.status(401).render('error', {
+            status: 'error',
+            message: 'You dont have a valid subscription, Please Buy Subscription First',
+            heading: 'Ohho...'
         });
     }
 };
@@ -147,10 +148,10 @@ exports.protect = async (req, res, next) => {
         }
 
         if (!token) {
-            return res.status(401).json({
+            return res.status(401).render('error', {
                 status: 'error',
                 message: 'You are not logged in Please Login to get access'
-            })
+            });
         }
 
         // 2.verification token
@@ -158,9 +159,9 @@ exports.protect = async (req, res, next) => {
         // console.log(decoded);
 
         // 3.check if user still exists
-        const freshUser = await User.findById(decoded.id);
+        const freshUser = await User.findById(decoded.id).populate('watchList').populate('reviews');
         if (!freshUser) {
-            res.status(401).json({
+            res.status(401).render('error', {
                 status: 'error',
                 message: 'The user belonging to token doesnt exist'
             })
@@ -190,7 +191,7 @@ exports.isLoggedIn = async (req, res, next) => {
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
 
             // 2.check if user still exists
-            const currentUser = await User.findById(decoded.id);
+            const currentUser = await User.findById(decoded.id).populate('watchList');
             if (!currentUser) {
                 return next();
             }
@@ -208,7 +209,7 @@ exports.isLoggedIn = async (req, res, next) => {
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
         if (!roles.includes(req.user.role)) {
-            res.status(403).json({
+            res.status(403).render('error', {
                 status: 'error',
                 message: 'You do not have access to perform this action'
             });

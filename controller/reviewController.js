@@ -28,7 +28,7 @@ exports.getAllReviews = async (req, res) => {
 exports.createReview = async (req, res) => {
     try {
         const review = await Review.create(req.body);
-        res.status(200).json({
+        res.status(201).json({
             status: 'success',
             data: {
                 data: review
