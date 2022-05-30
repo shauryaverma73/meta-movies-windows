@@ -55,10 +55,10 @@ const movieSchema = new mongoose.Schema({
     backdrop: {
         type: String
     }
-    // comments: {
+    // ,reviews: [{
     //     type: mongoose.isValidObjectId.SchemaId,
     //     ref: 'Comments'
-    // }
+    // }]
 },
     {
         toJSON: { virtuals: true },

@@ -57,14 +57,18 @@ const userSchema = new mongoose.Schema({
     subscriptionDuration: {
         type: Date
     },
-    watchList: {
-        type: [mongoose.Schema.ObjectId],
-        ref: 'Movie'
-    },
-    reviews: {
-        type: [mongoose.Schema.ObjectId],
-        ref: 'Review'
-    }
+    watchList: [
+        {
+            type: [mongoose.Schema.ObjectId],
+            ref: 'Movie'
+        }
+    ],
+    reviews: [
+        {
+            type: [mongoose.Schema.ObjectId],
+            ref: 'Review'
+        }
+    ]
 });
 
 // encrypt user password before save

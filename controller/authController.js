@@ -64,37 +64,42 @@ exports.signUp = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-
-    //1. check if email and password entered/exist
-    if (!req.body.email || !req.body.password) {
-        return res.status(201).json({
-            status: 'error',
-            message: 'Email or Password can\'t be empty'
-        });
-    }
-
-    // 2.Check if user exists and password is correct
-    const user = await User.findOne({ email: req.body.email });
-    const passwordCheck = await user.checkPassword(req.body.password, user.password);
-
-    if (!user || !passwordCheck) {
-        return res.status(401).json({
-            status: 'error',
-            message: 'Email ID or password incorrect'
-        });
-    }
-
-    // 3. If everything is ok then send token
-    const token = signJWT(user.id);
-
-    setCookie(res, token);
-
-    res.status(200).json({
-        status: 'success',
-        data: {
-            token
+    try {
+        //1. check if email and password entered/exist
+        if (!req.body.email || !req.body.password) {
+            return res.status(201).json({
+                status: 'error',
+                message: 'Email or Password can\'t be empty'
+            });
         }
-    });
+
+        // 2.Check if user exists and password is correct
+        const user = await User.findOne({ email: req.body.email });
+        const passwordCheck = await user.checkPassword(req.body.password, user.password);
+
+        if (!user || !passwordCheck) {
+            return res.status(401).json({
+                status: 'error',
+                message: 'Email ID or password incorrect'
+            });
+        }
+
+        // 3. If everything is ok then send token
+        const token = signJWT(user.id);
+
+        setCookie(res, token);
+
+        res.status(200).json({
+            status: 'success',
+            data: {
+                token
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
+
+
 };
 
 exports.logout = (req, res) => {
@@ -170,7 +175,7 @@ exports.protect = async (req, res, next) => {
         // console.log(err);
         res.status(400).json({
             status: 'error',
-            message:'something went very wrong',
+            message: 'something went very wrong',
             err
         })
     }
