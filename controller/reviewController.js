@@ -1,5 +1,5 @@
 const Review = require('./../model/reviewModel');
-
+const Movie = require('./../model/movieModel');
 exports.setTourUserIds = (req, res, next) => {    // used for review creation
     if (!req.body.tour) {   // if tour is not found in the body then param is used
         req.body.tour = req.params.tourId;
@@ -28,6 +28,9 @@ exports.getAllReviews = async (req, res) => {
 exports.createReview = async (req, res) => {
     try {
         const review = await Review.create(req.body);
+        const movie = await Movie.findById(req.body.movie);
+        movie.reviews.push(review.id);
+        await movie.save();
         res.status(201).json({
             status: 'success',
             data: {
