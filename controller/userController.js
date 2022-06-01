@@ -10,12 +10,12 @@ exports.getMe = (req, res) => {
 };
 
 exports.updateMe = async (req, res, next) => {
-    if (req.body.password || req.body.confirmPassword) {
-        res.status(400).json({
-            status: 'error',
-            message: 'Plz Use /updateMyPassword endpoint'
-        });
-    }
+    // if (req.body.password || req.body.confirmPassword) {
+    //     return res.status(400).json({
+    //         status: 'error',
+    //         message: 'Plz Use /updateMyPassword endpoint'
+    //     });
+    // }
     try {
         let obBody = {};
         if (req.body.name) {
@@ -27,18 +27,18 @@ exports.updateMe = async (req, res, next) => {
         console.log(obBody);
         const user = await User.findByIdAndUpdate(req.user.id, obBody, { new: true, runValidators: true });
         if (!user) {
-            res.status(401).json({
+            return res.status(401).json({
                 status: 'error',
                 message: 'Can\'t update data'
             });
         }
-        res.status(200).json({
+        return res.status(200).json({
             status: 'success',
             message: 'Data update successful'
         });
 
     } catch (err) {
-        res.status(200).json({
+        return res.status(200).json({
             status: 'error',
             message: 'Some internal error'
         });

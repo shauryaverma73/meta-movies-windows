@@ -59,9 +59,9 @@ block content
 										.reviews
 											label.form__Heading Account Details
 											form.form(action='#')
-												input.form__input(type='text' placeholder='Name' value=`${user.name}`)
-												input.form__input(type='text' placeholder='Email' value=`${user.email}`)
-												button.form__btn(type='button') Update
+												input.form__input(type='text' placeholder='Name' value=`${user.name}` id='userName')
+												input.form__input(type='text' placeholder='Email' value=`${user.email}` id='userEmail')
+												button.form__btn(type='button' onclick='updateCurrentUser()') Update
 										// file upload for user photo
 										label.form__Heading Profile Picture
 										form.form(action='#')
@@ -216,15 +216,15 @@ block content
 											label.form__Heading Year
 											input#addMovReleaseYear.form__input(type='number' placeholder='Movie Release Year')
 											label.form__Heading Movie File
-											input(type='file' accept='video/*')
+											input(type='file' accept='video/*' id='movieFileName')
 											br
 											br
 											label.form__Heading Trailer Link
-											input.form__input(type='text' placeholder="Movie's Youtube Trailer Link")
+											input.form__input(type='text' placeholder="Movie's Youtube Trailer Link" id='trailerLink')
 											label.form__Heading Genre
 											input#addMovGenre.form__input(type='text' placeholder='Genre (comma separated)')
 											label.form__Heading Parental Guidance Rating
-											input.form__input(type='text' placeholder='PG Rating')
+											input.form__input(type='text' placeholder='PG Rating' id='pgRating')
 											label.form__Heading Background Image
 											input#addMovBackdrop.form__input(type='text' placeholder='Backdrop Image Link')
 											label.form__Heading IMDb Rating

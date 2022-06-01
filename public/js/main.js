@@ -856,6 +856,8 @@ async function addMovieToWatchlist(btn) {
 	}
 }
 
+// REVIEWS
+
 async function addMovieReview(btn) {
 	const title = document.getElementById('reviewTitle').value;
 	const body = document.getElementById('reviewBody').value;
@@ -882,6 +884,78 @@ async function addMovieReview(btn) {
 			}, 1000);
 		}
 	} catch (err) {
-        showAlert('error', err.response.data.message);
+		showAlert('error', err.response.data.message);
+	}
+}
+
+
+// Update User
+async function updateCurrentUser() {
+	try {
+		const name = document.getElementById('userName').value;
+		const email = document.getElementById('userEmail').value;
+		console.log(name + '--' + email);
+		const res = await axios({
+			method: 'PATCH',
+			url: 'http://127.0.0.1:3000/api/v1/user/updateMe',
+			data: {
+				email: email,
+				name: name
+			}
+		});
+		if (res.data.status === 'success') {
+			showAlert('success', 'User updated successfully');
+			window.setTimeout(() => {
+				location.reload();
+			}, 1000);
+		}
+	} catch (err) {
+		showAlert('error', err.response.data.message);
+	}
+}
+
+
+
+// Add Movie
+async function addMovie() {
+	const addMovName = document.getElementById('addMovName').value;
+	const addMovLength = document.getElementById('addMovLength').value;
+	const addMovDesc = document.getElementById('addMovDesc').value;
+	const addMovPosterLink = document.getElementById('addMovPosterLink').value;
+	const addMovReleaseYear = document.getElementById('addMovReleaseYear').value;
+	// const movieFile = document.getElementById('movieFileName').value;
+	let trailer = document.getElementById('trailerLink').value;
+	trailer.replace('/watch?v=', '/embed/');
+	const addMovGenre = document.getElementById('addMovGenre').value;
+	const genreArray = addMovGenre.split(',');
+	const pgRating = document.getElementById('pgRating').value;
+	const addMovBackdrop = document.getElementById('addMovBackdrop').value;
+	const imdbRating = document.getElementById('form__slider-value').value;
+	try {
+		const movie = await axios({
+			method: 'POST',
+			url: 'http://127.0.0.1:3000/api/v1/movie',
+			data: {
+				name: addMovName,
+				runTime: addMovLength,
+				ratings: imdbRating,
+				description: addMovDesc,
+				poster: addMovPosterLink,
+				year: addMovReleaseYear,
+				// movieLink
+				trailerLink: trailer,
+				genre: genreArray,
+				pgRating: pgRating,
+				backdrop: addMovBackdrop
+			}
+		});
+		if (movie.data.status === 'success') {
+			showAlert('success', 'Movie added successfully');
+			window.setTimeout(() => {
+				location.reload();
+			}, 1000);
+		}
+	} catch (err) {
+		showAlert('error', err.response.data.message);
 	}
 }
