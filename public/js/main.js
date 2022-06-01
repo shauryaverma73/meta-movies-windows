@@ -855,3 +855,33 @@ async function addMovieToWatchlist(btn) {
 		showAlert('success', 'Error adding to watchlist');
 	}
 }
+
+async function addMovieReview(btn) {
+	const title = document.getElementById('reviewTitle').value;
+	const body = document.getElementById('reviewBody').value;
+	const rating = document.getElementById('form__slider-value').innerHTML;
+	const data = btn.value.split('|');
+	const movieId = data[0];
+	const userId = data[1];
+	try {
+		const res = await axios({
+			method: 'POST',
+			url: `http://127.0.0.1:3000/api/v1/review`,
+			data: {
+				user: userId,
+				movie: movieId,
+				reviewTitle: title,
+				reviewContent: body,
+				reviewRating: rating
+			}
+		});
+		if (res.data.status === 'success') {
+			showAlert('success', 'Review added successfully');
+			window.setTimeout(() => {
+				location.reload();
+			}, 1000);
+		}
+	} catch (err) {
+
+	}
+}

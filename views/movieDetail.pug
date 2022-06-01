@@ -120,13 +120,13 @@ block content
                               | #{review.reviewRating}
                           p.reviews__text
                             | #{review.reviewContent}
-                    form.form(action='#')
-                      input.form__input(type='text' placeholder='Title')
-                      textarea.form__textarea(placeholder='Review')
+                    form.form(action='#' id='addReviewOnMovie')
+                      input.form__input(type='text' placeholder='Title' id='reviewTitle')
+                      textarea.form__textarea(placeholder='Review' id='reviewBody')
                       .form__slider
                         #slider__rating.form__slider-rating
                         #form__slider-value.form__slider-value
-                      button.form__btn(type='button') Send
+                      button.form__btn(type='button' value=`${movie.id}|${user.id}` onclick='addMovieReview(this)') Add Review
                 // end reviews
           // end content tabs
         // sidebar
