@@ -231,7 +231,7 @@ block content
 											.form__slider
 												#slider__rating.form__slider-rating
 												#form__slider-value.form__slider-value
-											button.form__btn(type='button') Add Movie
+											button.form__btn(type='button' onclick='addMovie()') Add Movie
 									// end reviews
 							// tab3
 							#tab-3.tab-pane.fade(role='tabpanel' aria-labelledby='3-tab')
@@ -246,12 +246,12 @@ block content
 															.col-12.col-sm-4
 																.card__cover
 																	img(src=`${movie.poster}` alt=`${movie.name}`)
-																	a.card__play(href='#')
+																	a.card__play(href=`/movie/${movie.slug}`)
 																		i.icon.ion-ios-play
 															.col-12.col-sm-8
 																.card__content
 																	h3.card__title
-																		a(href='#')= `${movie.name}`
+																		a(href=`/movie/${movie.slug}`)= `${movie.name}`
 																	span.card__category
 																		each genre in movie.genre
 																			a(href='#')= `${genre}`
@@ -266,7 +266,7 @@ block content
 																		button(type='button' onclick='openMovieEditModalWithData(this)' value= `${movie.id}`)
 																			i.icon.ion-md-create
 																			| Edit
-																		button(type='button')
+																		button(type='button' value= `${movie.id}` onclick='deleteMovie(this)')
 																			i.icon.ion-ios-trash
 																			| Delete
 																	// buttons here
@@ -307,7 +307,7 @@ block content
 																	input#editMovBackdrop.form__input(type='text' placeholder='Backdrop Image Link')
 																	label.form__Heading IMDb Rating
 																	input#editMovRating.form__input(type='text' placeholder='IMDb Rating')
-																	button.form__btn(type='button' value='') Update Movie
+																	button.form__btn(type='button' id='updateBtnId' onclick='updateMovie(this)') Update Movie
 																	button#closeEdit.form__btn(type='button') Cancel
 												// UPDATE Modal END
 								
@@ -333,7 +333,7 @@ block content
 														p.reviews__text
 															| #{review.reviewContent}
 														.comments__actions
-															button(type='button')
+															button(type='button' id=`${review.id}` onclick='deleteReviewAdmin(this)')
 																i.icon.ion-ios-trash
 																| Delete
 										// end reviews

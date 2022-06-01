@@ -55,6 +55,10 @@ router
     .route('/addToWatchlist/:movieId')
     .put(userController.addToWatchList);
 
+// for updting the subscription details
+// router.route('/subscription/premium').get();
+// router.route('/subscription/cinematic').get();
+
 
 // ADMIN ONLY
 // restriction middleware

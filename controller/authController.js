@@ -11,7 +11,7 @@ const signJWT = (id) => {
 
 const setCookie = (res, token) => {
     const cookieOptions = {
-        expires: new Date(Date.now() + process.env.JWT_EXPIRES_IN * 24 * 60 * 60 * 1000),
+        expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
         httpOnly: true
     };
 
@@ -324,3 +324,23 @@ exports.updatePassword = async (req, res, next) => {
         token: newToken
     });
 };
+// for updating the user after payment
+// exports.setPremiumSubscription = async (req, res) => {
+//     try {
+//         const subscriptionName = 'premium';
+//         const endingDateTime = new Date() + '';
+//         const user = await User.findByIdAndUpdate(req.user.id, { subscription: subscriptionName, subscriptionDuration: endingDateTime }, { runValidators: false, new: true });
+//     } catch (err) {
+
+//     }
+// };
+
+// exports.setCinematicSubscription = (req, res) => {
+//     try {
+//         const subscriptionName = 'premium';
+//         const endingDateTime = new Date() + '';
+//         const user = await User.findByIdAndUpdate(req.user.id, { subscription: subscriptionName, subscriptionDuration: endingDateTime }, { runValidators: false, new: true });
+//     } catch (err) {
+
+//     }
+// };

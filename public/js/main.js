@@ -734,11 +734,12 @@ async function openMovieEditModalWithData(btn) {
 	const editMovPgRating = document.getElementById('editMovPgRating');
 	const editMovBackdrop = document.getElementById('editMovBackdrop');
 	const editMovRating = document.getElementById('editMovRating');
+	const updateBtnId = document.getElementById('updateBtnId');
 
 	const movieQuery = `http://127.0.0.1:3000/api/v1/movie/${id}`;
 	const movieData = await axios.get(movieQuery);
 	// console.log(movieData.data.data.movie.name);
-
+	updateBtnId.value = id;
 	editMovName.value = movieData.data.data.movie.name;
 	editMovLength.value = movieData.data.data.movie.runTime;
 	editMovDesc.value = movieData.data.data.movie.description;
@@ -924,13 +925,14 @@ async function addMovie() {
 	const addMovPosterLink = document.getElementById('addMovPosterLink').value;
 	const addMovReleaseYear = document.getElementById('addMovReleaseYear').value;
 	// const movieFile = document.getElementById('movieFileName').value;
-	let trailer = document.getElementById('trailerLink').value;
-	trailer.replace('/watch?v=', '/embed/');
+	let trailerArr = document.getElementById('trailerLink').value;
+	const trailerId = trailerArr.split('=');
+	const trailer = `https://www.youtube.com/embed/${trailerId[1]}`;
 	const addMovGenre = document.getElementById('addMovGenre').value;
 	const genreArray = addMovGenre.split(',');
 	const pgRating = document.getElementById('pgRating').value;
 	const addMovBackdrop = document.getElementById('addMovBackdrop').value;
-	const imdbRating = document.getElementById('form__slider-value').value;
+	const imdbRating = document.getElementById('form__slider-value').innerHTML;
 	try {
 		const movie = await axios({
 			method: 'POST',
@@ -942,7 +944,7 @@ async function addMovie() {
 				description: addMovDesc,
 				poster: addMovPosterLink,
 				year: addMovReleaseYear,
-				// movieLink
+				movieLink: 'bigbuck.mp4', //faking name here
 				trailerLink: trailer,
 				genre: genreArray,
 				pgRating: pgRating,
@@ -958,4 +960,60 @@ async function addMovie() {
 	} catch (err) {
 		showAlert('error', err.response.data.message);
 	}
+}
+
+// Update Movie 
+// Delete Movie
+async function deleteMovie(btn) {
+	try {
+		const id = btn.value;
+		await axios.delete(`http://127.0.0.1:3000/api/v1/movie/${id}`);
+		showAlert('success', 'Movie deleted successfully');
+		window.setTimeout(() => {
+			location.reload();
+		}, 1000);
+	} catch (err) {
+		console.log(err);
+		showAlert('error', err.response.data.message);
+	}
+}
+
+
+// DeleteReviewAdmin
+async function deleteReviewAdmin(btn) {
+	try {
+		const id = btn.value;
+		await axios.delete(`http://127.0.0.1:3000/api/v1/review/${id}`);
+		showAlert('success', 'Review deleted successfully');
+		window.setTimeout(() => {
+			location.reload();
+		}, 1000);
+	} catch (err) {
+		console.log(err);
+		showAlert('error', err.response.data.message);
+	}
+}
+
+
+
+
+// Stripe payment
+const stripe = Stripe('pk_test_51L5oipSICxPwE1EuSdZJewHG3Eea8Jy4gLhdYwxXBh5F0QTSHd9y9n7bKMikITSmK7v0jaH2uEBbgfV6ZddXHsFM00j2TFnsJB');
+
+async function buyPremiumSubscription() {
+	// get checkout session
+	const session = await axios.get(`http://127.0.0.1:3000/api/v1/subscription/premium/checkout-session`);
+	console.log(session);
+	await stripe.redirectToCheckout({
+		sessionId: session.data.session.id
+	});
+}
+
+async function buyCinematicSubscription() {
+	// get checkout session
+	const session = await axios.get(`http://127.0.0.1:3000/api/v1/subscription/cinematic/checkout-session`);
+	console.log(session);
+	await stripe.redirectToCheckout({
+		sessionId: session.data.session.id
+	});
 }
