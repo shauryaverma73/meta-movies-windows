@@ -885,3 +885,20 @@ async function addMovieReview(btn) {
 
 	}
 }
+
+const stripe = Stripe('pk_test_51L5oipSICxPwE1EuSdZJewHG3Eea8Jy4gLhdYwxXBh5F0QTSHd9y9n7bKMikITSmK7v0jaH2uEBbgfV6ZddXHsFM00j2TFnsJB');
+
+async function buyPremiumSubscription() {
+	// get checkout session
+	const session = await axios.get(`http://127.0.0.1:3000/api/v1/subscription/premium/checkout-session`);
+	console.log(session);
+	await stripe.redirectToCheckout({
+		sessionId:session.data.session.id
+	});
+}
+
+async function buyCinematicSubscription() {
+	// get checkout session
+	const session = await axios.get(`http://127.0.0.1:3000/api/v1/subscription/cinematic/checkout-session`);
+	console.log(session);
+}

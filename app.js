@@ -6,6 +6,9 @@ const reviewRouter = require('./routes/reviewRoute');
 const viewRouter = require('./routes/viewRoute');
 const streamRouter = require('./routes/streamRoute');
 const cookieParser = require('cookie-parser');
+const subscriptionRouter = require('./routes/subscriptionRoute');
+
+subscriptionRouter
 const pug = require('pug');
 const path = require('path');
 const morgan = require('morgan');
@@ -30,6 +33,7 @@ app.use(cookieParser());
 // Router Mounting Points
 app.use(morgan('dev'));
 app.use('/', viewRouter);
+app.use('/api/v1/subscription', subscriptionRouter);
 app.use('/api/v1/stream', streamRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/movie', movieRouter);
