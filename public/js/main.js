@@ -962,7 +962,56 @@ async function addMovie() {
 	}
 }
 
-// Update Movie 
+// Update Movie
+async function updateMovie(btn) {
+	try {
+		const id = btn.value;
+		const editMovName = document.getElementById('editMovName').value;
+		const editMovLength = document.getElementById('editMovLength').value;
+		const editMovDesc = document.getElementById('editMovDesc').value;
+		const editMovPoster = document.getElementById('editMovPoster').value;
+		const editMovYear = document.getElementById('editMovYear').value;
+		const editMovieFile = 'bigbuck.mp4';    // when file upload
+		const editMovTrailer = document.getElementById('editMovTrailer').value;
+		const editMovGenre = document.getElementById('editMovGenre').value;
+		const genre = editMovGenre.split(',');
+		const editMovPgRating = document.getElementById('editMovPgRating').value;
+		const editMovBackdrop = document.getElementById('editMovBackdrop').value;
+		const editMovRating = document.getElementById('editMovRating').value;
+
+		const updateEndpoint = `http://127.0.0.1:3000/api/v1/movie/${id}`;
+
+		const movie = await axios({
+			method: 'PATCH',
+			url: `http://127.0.0.1:3000/api/v1/movie/${id}`,
+			data: {
+				name: editMovName,
+				runTime: editMovLength,
+				ratings: editMovRating,
+				description: editMovDesc,
+				poster: editMovPoster,
+				year: editMovYear,
+				movieLink: 'bigbuck.mp4', //faking name here
+				trailerLink: editMovTrailer,
+				genre: genre,
+				pgRating: editMovPgRating,
+				backdrop: editMovBackdrop
+			}
+		});
+		console.log(movie);
+
+		if (movie.data.status == 'success') {
+			editModal.classList.remove('show');
+			showAlert('success', 'Movie updated successfully');
+			window.setTimeout(() => {
+				location.reload();
+			}, 1500);
+		}
+	} catch (err) {
+		showAlert('error', err.response.data.message);
+	}
+}
+
 // Delete Movie
 async function deleteMovie(btn) {
 	try {
