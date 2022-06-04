@@ -1123,7 +1123,32 @@ async function updatePassword() {
 	}
 }
 
-
+// resetPassword
+async function resetPassword(btn) {
+	try {
+		const newPassword = document.getElementById('resetNewPassword').value;
+		const confirmPassword = document.getElementById('resetConfirmPassword').value;
+		const token = btn.value;
+		const password = await axios({
+			method: 'PATCH',
+			url: `http://127.0.0.1:3000/api/v1/user/resetPassword/${token}`,
+			data: {
+				password: newPassword,
+				confirmPassword: confirmPassword
+			}
+		});
+		if (password.data.status == 'success') {
+			document.getElementById('resetNewPassword').value = '';
+			document.getElementById('resetConfirmPassword').value = '';
+			showAlert('success', 'Passsword Reset Successfully');
+			window.setTimeout(() => {
+				location.assign('/signin');
+			}, 1000);
+		}
+	} catch (err) {
+		showAlert('error', err.response.data.message)
+	}
+}
 
 // Stripe payment
 const stripe = Stripe('pk_test_51L5oipSICxPwE1EuSdZJewHG3Eea8Jy4gLhdYwxXBh5F0QTSHd9y9n7bKMikITSmK7v0jaH2uEBbgfV6ZddXHsFM00j2TFnsJB');

@@ -81,10 +81,6 @@ exports.checkoutCinematicSubscription = async (req, res) => {
     }
 };
 
-// 127.0.0.1:3000/api/v1/subscription/premium/checkout-session
-// 127.0.0.1:3000/api/v1/subscription/cinematic/checkout-session
-
-
 exports.verifyAndUpdateStatusPremium = async (req, res) => {
     try {
         const user = await User.findById(req.params.userId);

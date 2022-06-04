@@ -58,6 +58,8 @@ router.get('/premium/paymentSuccess/:userId', subscriptionController.verifyAndUp
 
 router.get('/cinematic/paymentSuccess/:userId', subscriptionController.verifyAndUpdateStatusCinematic);
 
+router.get('/resetPassword/:token', viewController.resetPasswordSet);
+
 router.get('/test', viewController.test);
 
 module.exports = router;

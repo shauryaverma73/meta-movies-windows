@@ -136,3 +136,10 @@ exports.test = (req, res) => {
 
     });
 };
+
+
+exports.resetPasswordSet = async (req, res) => {
+    res.status(200).render('resetPassword', {
+        token: req.params.token
+    });
+};
