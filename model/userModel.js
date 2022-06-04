@@ -81,21 +81,24 @@ const userSchema = new mongoose.Schema({
 //     next();
 // });
 
-// encrypt user password before save
-userSchema.pre('save', async function (next) {
+// // encrypt user password before save
+// userSchema.pre('save', async function (next) {
 
-    // if the password has been modified or new password is being created then
-    // hashing password
-    this.password = await bcrypt.hash(this.password, 12);
-    // console.log(this.password + 'hashed');
-    // no use of confirmpassword
+//     // if the password has been modified or new password is being created then
+//     // hashing password
+//     this.password = await bcrypt.hash(this.password, 12);
+//     // console.log(this.password + 'hashed');
+//     // no use of confirmpassword
+//     this.confirmPassword = undefined;
+//     const date = new Date();
+//     next();
+// });
+
+// encryptPassword
+userSchema.methods.encryptPassword = async function (password) {
+    this.password = await bcrypt.hash(password, 12);
     this.confirmPassword = undefined;
-    const date = new Date();
-    date.setDate(date.getDate() + 7);
-    this.subscriptionDuration = date;
-    next();
-});
-
+};
 
 
 // checkPassword instance method
@@ -109,6 +112,28 @@ userSchema.methods.createPasswordResetToken = function () {
     this.passwordResetToken = crypto.createHash('sha256').update(token).digest('hex');
     this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
     return token;
+};
+
+// updateSubscription methods
+userSchema.methods.setBasicSubscription = async function () {
+    this.subscription = 'basic';
+    const date = new Date();
+    date.setDate(date.getDate() + 7);
+    this.subscriptionDuration = date;
+};
+
+userSchema.methods.setPremiumSubscription = async function () {
+    this.subscription = 'premium';
+    const date = new Date();
+    date.setDate(date.getDate() + 183);
+    this.subscriptionDuration = date;
+};
+
+userSchema.methods.setCinematicSubscription = async function () {
+    this.subscription = 'cinematic';
+    const date = new Date();
+    date.setDate(date.getDate() + 365);
+    this.subscriptionDuration = date;
 };
 
 const User = mongoose.model('User', userSchema);

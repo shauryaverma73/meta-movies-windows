@@ -1103,13 +1103,16 @@ async function updatePassword() {
 			method: 'PATCH',
 			url: `http://127.0.0.1:3000/api/v1/user/updateMyPassword`,
 			data: {
-				password: oldPassword,
-				currentPassword: newPassword,
+				currentPassword: oldPassword,
+				password: newPassword,
 				passwordConfirm: reEnterNewPass
 			}
 		});
 
-		if (movie.data.status == 'success') {
+		if (user.data.status == 'success') {
+			document.getElementById('oldPass').value = '';
+			document.getElementById('newPass').value = '';
+			document.getElementById('reNewPass').value = '';
 			showAlert('success', 'Passsword updated successfully');
 			// window.setTimeout(() => {
 			// 	location.reload();
@@ -1128,17 +1131,25 @@ const stripe = Stripe('pk_test_51L5oipSICxPwE1EuSdZJewHG3Eea8Jy4gLhdYwxXBh5F0QTS
 async function buyPremiumSubscription() {
 	// get checkout session
 	const session = await axios.get(`http://127.0.0.1:3000/api/v1/subscription/premium/checkout-session`);
-	console.log(session);
-	await stripe.redirectToCheckout({
-		sessionId: session.data.session.id
-	});
+	if (session.data.status == 'error') {
+		showAlert('error', session.data.message);
+	} else {
+		showAlert('success', 'You are being redirected to Payment Page');
+		await stripe.redirectToCheckout({
+			sessionId: session.data.session.id
+		});
+	}
 }
 
 async function buyCinematicSubscription() {
 	// get checkout session
 	const session = await axios.get(`http://127.0.0.1:3000/api/v1/subscription/cinematic/checkout-session`);
-	console.log(session);
-	await stripe.redirectToCheckout({
-		sessionId: session.data.session.id
-	});
+	if (session.data.status == 'error') {
+		showAlert('error', session.data.message);
+	} else {
+		showAlert('success', 'You are being redirected to Payment Page');
+		await stripe.redirectToCheckout({
+			sessionId: session.data.session.id
+		});
+	}
 }

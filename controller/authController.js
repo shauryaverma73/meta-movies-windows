@@ -38,6 +38,11 @@ exports.signUp = async (req, res) => {
             password: req.body.password,
             confirmPassword: req.body.confirmPassword
         });
+
+        await newUser.encryptPassword(req.body.password);
+        await newUser.setBasicSubscription();
+        await newUser.save({ validateBeforeSave: false });
+
         if (newUser) {
 
             const token = signJWT(newUser.id);
@@ -118,7 +123,19 @@ exports.logout = (req, res) => {
 // Middlewares
 /***************************************/
 exports.checkSubscription = async (req, res, next) => {
-    if (req.user.subscription == 'basic' || req.user.subscription == 'premium' || req.user.subscription == 'cinematic' && req.user.subscriptionDuration > new Date()) {
+    let subscriptionCheck = '';
+    if (req.user.subscription == 'basic') {
+        subscriptionCheck = true;
+    } else if (req.user.subscription == 'premium') {
+        subscriptionCheck = true;
+    } else if (req.user.subscription == 'cinematic') {
+        subscriptionCheck = true;
+    } else {
+        subscriptionCheck = false;
+    }
+    const subscriptionDurationCheck = req.user.subscriptionDuration > new Date();
+
+    if (subscriptionCheck && subscriptionDurationCheck) {
         next();
     }
     else {
@@ -193,7 +210,7 @@ exports.isLoggedIn = async (req, res, next) => {
             res.locals.user = currentUser;
             return next();
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             return next();
         }
     }
@@ -285,6 +302,10 @@ exports.resetPassword = async (req, res, next) => {
         user.passwordResetExpires = undefined;
         await user.save();
 
+        await user.encryptPassword(req.body.password);
+        await user.save({ validateBeforeSave: false });
+
+
         const newToken = signJWT(user._id);
 
         setCookie(res, newToken);
@@ -304,7 +325,7 @@ exports.updatePassword = async (req, res, next) => {
     const user = await User.findById(req.user.id);
 
     if (!(await user.checkPassword(req.body.currentPassword, user.password))) {
-        res.status(401).json({
+        return res.status(401).json({
             status: 'error',
             message: 'Current password is wrong'
         });
@@ -315,6 +336,9 @@ exports.updatePassword = async (req, res, next) => {
 
     await user.save();
 
+    await user.encryptPassword(req.body.password);
+    await user.save({ validateBeforeSave: false });
+
     const newToken = signJWT(user._id);
 
     setCookie(res, newToken);
@@ -324,23 +348,3 @@ exports.updatePassword = async (req, res, next) => {
         token: newToken
     });
 };
-// for updating the user after payment
-// exports.setPremiumSubscription = async (req, res) => {
-//     try {
-//         const subscriptionName = 'premium';
-//         const endingDateTime = new Date() + '';
-//         const user = await User.findByIdAndUpdate(req.user.id, { subscription: subscriptionName, subscriptionDuration: endingDateTime }, { runValidators: false, new: true });
-//     } catch (err) {
-
-//     }
-// };
-
-// exports.setCinematicSubscription = (req, res) => {
-//     try {
-//         const subscriptionName = 'premium';
-//         const endingDateTime = new Date() + '';
-//         const user = await User.findByIdAndUpdate(req.user.id, { subscription: subscriptionName, subscriptionDuration: endingDateTime }, { runValidators: false, new: true });
-//     } catch (err) {
-
-//     }
-// };

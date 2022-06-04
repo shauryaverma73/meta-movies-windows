@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const viewController = require('./../controller/viewController');
 const authController = require('./../controller/authController');
+const subscriptionController = require('./../controller/subscriptionController');
 
 router.get('/forgotPassword', viewController.forgotPassword);
 
@@ -53,7 +54,9 @@ router.get('/about', viewController.about);
 
 router.get('/catalogue', viewController.catalogue);
 
+router.get('/premium/paymentSuccess/:userId', subscriptionController.verifyAndUpdateStatusPremium);
 
+router.get('/cinematic/paymentSuccess/:userId', subscriptionController.verifyAndUpdateStatusCinematic);
 
 router.get('/test', viewController.test);
 

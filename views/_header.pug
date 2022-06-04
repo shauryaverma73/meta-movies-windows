@@ -17,8 +17,13 @@ header.header
               // dropdown
               li.header__nav-item
                 a.header__nav-link(href='/catalogue') Catalogue
-              li.header__nav-item
-                a.header__nav-link(href='/buy-subscription') Subscriptions
+              - if(user)
+                - if(user.subscriptionDuration < new Date())
+                  li.header__nav-item
+                    a.header__nav-link(href='/buy-subscription') Subscriptions
+              - else   
+                li.header__nav-item
+                  a.header__nav-link(href='/buy-subscription') Subscriptions
               - if (user)
                   li.header__nav-item
                     a.header__nav-link(href='/#watchlistSection') WatchList

@@ -21,23 +21,24 @@ block content
     .container
       .row
         // price
-        .col-12.col-md-6.col-lg-4
-          .price
-            .price__item.price__item--first
-              span Basic
-              span Free
-            .price__item
-              span 7 Days Access
-            .price__item
-              span Full HD
-            .price__item
-              span 1 Screen
-            .price__item
-              span Any Device
-            .price__item
-              span Limited Support
-            a.price__btn(href='#') Choose Plan
-        // end price
+        - if(!user)
+          .col-12.col-md-6.col-lg-4
+            .price
+              .price__item.price__item--first
+                span Basic
+                span Free
+              .price__item
+                span 7 Days Access
+              .price__item
+                span Full HD
+              .price__item
+                span 1 Screen
+              .price__item
+                span Any Device
+              .price__item
+                span Limited Support
+              a.price__btn(href='/signup') Create Free Account
+          // end price
         // price
         .col-12.col-md-6.col-lg-4
           .price.price--premium
@@ -54,7 +55,10 @@ block content
               span Any Device
             .price__item
               span 24/7 Support
-            a.price__btn(href='#' onclick='buyPremiumSubscription()') Choose Plan
+            - if(user)
+                a.price__btn(onclick='buyPremiumSubscription()') Choose Plan
+            - else 
+                a.price__btn(href='/signup') Create Free Account
         // end price
         // price
         .col-12.col-md-6.col-lg-4
@@ -72,7 +76,10 @@ block content
               span Any Device
             .price__item
               span 24/7 Support
-            a.price__btn(href='#' onclick='buyPremiumSubscription()') Choose Plan
+            - if(user)
+                a.price__btn(onclick='buyCinematicSubscription()') Choose Plan
+            - else 
+                a.price__btn(href='/signup') Create Free Account
         // end price
   // end pricing
   // features

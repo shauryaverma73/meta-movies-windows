@@ -6,16 +6,26 @@ exports.checkoutPremiumSubscription = async (req, res) => {
     try {
         // 1.find the currently logged in user
         const user = await User.findById(req.user.id);
+
+        // if subscription is valid show error to user
+        if (user.subscriptionDuration > new Date()) {
+            return res.status(201).json({
+                status: 'error',
+                message: `You have a valid Subscription: ${user.subscription}`
+            });
+        }
+
         // 2.create checkout session
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            success_url: `${req.protocol}://${req.get('host')}/`,
+            success_url: `${req.protocol}://${req.get('host')}/premium/paymentSuccess/${user.id}?session_Id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.protocol}://${req.get('host')}/buy-subscription`,
             customer_email: user.email,
             client_reference_id: `${req.user.id}`,
             line_items: [
                 {
                     name: 'Premium Subscription',
+                    description: '6 Months Access || FullHD || 2 Screens || Any Device || 24/7 Support',
                     amount: 599 * 100,
                     currency: 'inr',
                     quantity: 1
@@ -36,16 +46,26 @@ exports.checkoutCinematicSubscription = async (req, res) => {
     try {
         // 1.find the currently logged in user
         const user = await User.findById(req.user.id);
+
+        // if subscription is valid show error to user
+        if (user.subscriptionDuration > new Date()) {
+            return res.status(201).json({
+                status: 'error',
+                message: `You have a valid Subscription: ${user.subscription}`
+            });
+        }
+
         // 2.create checkout session
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
-            success_url: `${req.protocol}://${req.get('host')}/`,
+            success_url: `${req.protocol}://${req.get('host')}/cinematic/paymentSuccess/${user.id}?session_Id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.protocol}://${req.get('host')}/buy-subscription`,
             customer_email: user.email,
             client_reference_id: `${req.user.id}`,
             line_items: [
                 {
                     name: 'Cinematic Subscription',
+                    description: '1 Year Access || FullHD || 2 Screens || Any Device || 24/7 Support',
                     amount: 999 * 100,
                     currency: 'inr',
                     quantity: 1
@@ -63,3 +83,36 @@ exports.checkoutCinematicSubscription = async (req, res) => {
 
 // 127.0.0.1:3000/api/v1/subscription/premium/checkout-session
 // 127.0.0.1:3000/api/v1/subscription/cinematic/checkout-session
+
+
+exports.verifyAndUpdateStatusPremium = async (req, res) => {
+    // const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+    // console.log(session.expires_at);
+
+    const user = await User.findById(req.userId);
+
+    res.status(200).json({
+        status: 'success',
+        userId: req.params.sessionId,
+        checkoutSessionId: req.query.session_Id
+    });
+};
+
+exports.verifyAndUpdateStatusCinematic = async (req, res) => {
+    // const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+    // console.log(session.expires_at);
+
+    const user = await User.findById(req.userId);
+    await user.setPremiumSubscription();
+    const newUser = await user.save({ validateBeforeSave: false });
+
+    if(newUser){
+
+    }
+
+    res.status(200).json({
+        status: 'success',
+        userId: req.params.sessionId,
+        checkoutSessionId: req.query.session_Id
+    });
+};
