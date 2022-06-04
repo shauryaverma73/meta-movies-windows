@@ -828,7 +828,8 @@ async function openUpdateUserModal(btn) {
 	// const role = editUserRole.options[editUserRole.selectedIndex].value;
 	editUserName.value = userData.data.data.user.name;
 	editUserEmail.value = userData.data.data.user.email;
-	editUserSubscriptionEnd.value = userData.data.data.user.subscriptionDuration;
+	// editUserSubscriptionEnd.value = userData.data.data.user.subscriptionDuration;
+	editUserSubscriptionEnd.value = '2022-05-24T12:23:11.422Z';
 	console.log(userData.data.data.user.subscriptionDuration);
 
 };
@@ -998,7 +999,6 @@ async function updateMovie(btn) {
 				backdrop: editMovBackdrop
 			}
 		});
-		console.log(movie);
 
 		if (movie.data.status == 'success') {
 			editModal.classList.remove('show');
@@ -1022,7 +1022,6 @@ async function deleteMovie(btn) {
 			location.reload();
 		}, 1000);
 	} catch (err) {
-		console.log(err);
 		showAlert('error', err.response.data.message);
 	}
 }
@@ -1031,18 +1030,95 @@ async function deleteMovie(btn) {
 // DeleteReviewAdmin
 async function deleteReviewAdmin(btn) {
 	try {
-		const id = btn.value;
+		const id = btn.id;
 		await axios.delete(`http://127.0.0.1:3000/api/v1/review/${id}`);
 		showAlert('success', 'Review deleted successfully');
 		window.setTimeout(() => {
 			location.reload();
 		}, 1000);
 	} catch (err) {
-		console.log(err);
 		showAlert('error', err.response.data.message);
 	}
 }
 
+// update user
+// Incomplete due to date not being displayed in form set date issue in data loading function
+async function updateUser(btn) {
+	try {
+		const id = btn.id;
+		const editUserName = document.getElementById('editUserName');
+		const editUserEmail = document.getElementById('editUserEmail');
+		const editUserRole = document.getElementById('editUserRole');
+		const editUserActive = document.getElementById('editUserActive');
+		const editUserSubscription = document.getElementById('editUserSubscription');
+		const editUserSubscriptionEnd = document.getElementById('editUserSubscriptionEnd');
+
+		const user = await axios({
+			method: 'PATCH',
+			url: `http://127.0.0.1:3000/api/v1/user/${id}`,
+			data: {
+				name: editUserName,
+				email: editUserEmail,
+				role: editUserRole,
+				active: editUserActive,
+				subscription: editUserSubscription,
+				subscriptionDuration: editUserSubscriptionEnd
+			}
+		});
+
+		if (movie.data.status == 'success') {
+			editModal.classList.remove('show');
+			showAlert('success', 'Movie updated successfully');
+			window.setTimeout(() => {
+				location.reload();
+			}, 1500);
+		}
+
+	} catch (err) {
+		showAlert('error', err.response.data.message);
+	}
+}
+
+// delete user
+async function deleteUser(btn) {
+	try {
+		const id = btn.value;
+		await axios.delete(`http://127.0.0.1:3000/api/v1/user/${id}`);
+		showAlert('success', 'User Account Deactivated successfully');
+		window.setTimeout(() => {
+			location.reload();
+		}, 1000);
+	} catch (err) {
+		showAlert('error', err.response.data.message);
+	}
+}
+
+async function updatePassword() {
+	try {
+		const oldPassword = document.getElementById('oldPass').value;
+		const newPassword = document.getElementById('newPass').value;
+		const reEnterNewPass = document.getElementById('reNewPass').value;
+
+		const user = await axios({
+			method: 'PATCH',
+			url: `http://127.0.0.1:3000/api/v1/user/updateMyPassword`,
+			data: {
+				password: oldPassword,
+				currentPassword: newPassword,
+				passwordConfirm: reEnterNewPass
+			}
+		});
+
+		if (movie.data.status == 'success') {
+			showAlert('success', 'Passsword updated successfully');
+			// window.setTimeout(() => {
+			// 	location.reload();
+			// }, 1500);
+		}
+	} catch (err) {
+		showAlert('error', err.response.data.message);
+	}
+}
 
 
 

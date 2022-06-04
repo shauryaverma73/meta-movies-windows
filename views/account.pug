@@ -368,7 +368,7 @@ block content
 														td
 															button(title='Settings' value=`${user.id}` onclick='openUpdateUserModal(this)')
 																i.icon.ion-md-create
-															button(title='Delete')
+															button(title='Delete' value=`${user.id}` onclick='deleteUser(this)')
 																i.icon.ion-ios-trash
 									// Update User Modal
 									#modal-container-editUser.modal-container-search
@@ -409,10 +409,10 @@ block content
 										.reviews
 											label.form__Heading Update Password
 											form.form(action='#')
-												input.form__input(type='text' placeholder='Old Password')
-												input.form__input(type='text' placeholder='Re-Enter Old Password')
-												input.form__input(type='text' placeholder='New Password')
-												button.form__btn(type='button') Update
+												input.form__input(type='text' placeholder='Old Password' id='oldPass')
+												input.form__input(type='text' placeholder='New Password' id='newPass')
+												input.form__input(type='text' placeholder='Re-Enter New Password' id='reNewPass')
+												button.form__btn(type='button' onclick='updatePassword()') Update
 
 	- else
 			section.section(style='margin-bottom:-29px;')

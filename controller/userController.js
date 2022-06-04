@@ -112,13 +112,44 @@ exports.getUserUsingId = async (req, res) => {
     }
 };
 
-exports.updateUser = (req, res) => {
+exports.updateUser = async (req, res) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        if (!user) {
+            return res.status(401).json({
+                status: 'error',
+                message: 'Can\'t update data'
+            });
+        }
+        return res.status(200).json({
+            status: 'success',
+            message: 'Data update successful'
+        });
 
+    } catch (err) {
+        return res.status(200).json({
+            status: 'error',
+            message: 'Some internal error'
+        });
+    }
 
 };
 
-exports.deleteUser = (req, res) => {
-
+exports.deleteUser = async (req, res) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, { active: false }, { runValidators: false });
+        if (user) {
+            res.status(204).json({
+                status: 'success',
+                message: 'User Account Deactivated'
+            });
+        }
+    } catch (err) {
+        res.status(400).json({
+            status: 'error',
+            user: null
+        });
+    }
 };
 
 exports.buySubscription = async (req, res) => {
