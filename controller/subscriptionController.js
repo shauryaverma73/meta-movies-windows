@@ -86,33 +86,39 @@ exports.checkoutCinematicSubscription = async (req, res) => {
 
 
 exports.verifyAndUpdateStatusPremium = async (req, res) => {
-    // const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
-    // console.log(session.expires_at);
+    try {
+        const user = await User.findById(req.params.userId);
 
-    const user = await User.findById(req.userId);
+        await user.setPremiumSubscription();
+        await user.save({ validateBeforeSave: false });
 
-    res.status(200).json({
-        status: 'success',
-        userId: req.params.sessionId,
-        checkoutSessionId: req.query.session_Id
-    });
+        res.status(200).redirect('/');
+
+    } catch (err) {
+        console.log(err);
+        res.status(400).json({
+            status: 'error',
+            message: 'something went very wrong'
+        });
+    }
+
+
 };
 
 exports.verifyAndUpdateStatusCinematic = async (req, res) => {
-    // const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
-    // console.log(session.expires_at);
+    try {
+        const user = await User.findById(req.params.userId);
 
-    const user = await User.findById(req.userId);
-    await user.setPremiumSubscription();
-    const newUser = await user.save({ validateBeforeSave: false });
+        await user.setCinematicSubscription();
+        await user.save({ validateBeforeSave: false });
 
-    if(newUser){
+        res.status(200).redirect('/');
 
+    } catch (err) {
+        console.log(err);
+        res.status(400).json({
+            status: 'error',
+            message: 'Something went very wrong'
+        });
     }
-
-    res.status(200).json({
-        status: 'success',
-        userId: req.params.sessionId,
-        checkoutSessionId: req.query.session_Id
-    });
 };
