@@ -67,8 +67,8 @@ block content
 										form.form(action='#')
 											// add multipart form
 											img.nav__user-form(src=`/img/users/${user.profilePicture}`)
-											input(type='file' accept='image/*')
-											button.form__btn(type='button') Update
+											input(type='file' accept='image/*' id='profilePicture' name='profilePicture')
+											button.form__btn(type='button' value=`${user.id}` onclick='updateProfilePicture(this)') Update Picture
 										.reviews
 									// end email name photo
 							// tab2
@@ -479,8 +479,8 @@ block content
 											form.form(action='#')
 												// add multipart form
 												img.nav__user-form(src=`/img/users/${user.profilePicture}`)
-												input(type='file' accept='image/*')
-												button.form__btn(type='button') Update
+												input(type='file' accept='image/*' id='profilePicture' name='profilePicture')
+												button.form__btn(type='button' value=`${user.id}` onclick='updateProfilePicture(this)') Update Picture 
 										// end email name photo
 								// tab2
 								#tab-2.tab-pane.fade(role='tabpanel' aria-labelledby='2-tab')

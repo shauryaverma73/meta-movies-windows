@@ -14,8 +14,6 @@ Review
 
 
 
-
-
 When we populate an array of mongoose.Schema.objectId we must not use the middleware because it may cause errors. So, call the .populate method whenever we need when fetching data from database (using with .find method)
 
 

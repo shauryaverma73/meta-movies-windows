@@ -1,6 +1,49 @@
+const multer = require('multer');
 const User = require('./../model/userModel');
 
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/img/users');
+    },
+    filename: (req, file, cb) => {
+        // user-userId-currentTime
+        const ext = file.mimetype.split('/')[1];
+        cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
+    }
+});
 
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith('image')) {
+        cb(null, true);
+    } else {
+        cb(new Error('Please Upload Image File only.'), false);
+    }
+};
+
+const upload = multer({
+    storage: multerStorage,
+    fileFilter: multerFilter
+});
+
+exports.uploadUserPhoto = upload.single('photo');
+
+exports.saveUserPhoto = async (req, res) => {
+    try {
+        console.log(req.file);
+        const user = await User.findById(req.user.id);
+        user.profilePicture = req.file.filename;
+        await user.save({ validateBeforeSave: false });
+        res.status(200).json({
+            status: 'success',
+            message: 'Profile Photo Updated Successfully'
+        });
+    } catch (err) {
+        res.status(401).json({
+            status: 'error',
+            message: 'Profile Photo not Updated'
+        });
+    }
+};
 
 exports.getMe = (req, res) => {
     res.status(200).json({

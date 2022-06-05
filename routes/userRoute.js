@@ -21,9 +21,6 @@ router
     .route('/resetPassword/:token')
     .patch(authController.resetPassword);
 
-
-
-
 // Protected Routes
 router.use(authController.protect);
 
@@ -46,6 +43,10 @@ router
 router
     .route('/updateMe')
     .patch(userController.updateMe);
+
+router
+    .route('/updatePicture')
+    .patch(userController.uploadUserPhoto, userController.saveUserPhoto);
 
 router
     .route('/deleteMe')

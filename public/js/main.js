@@ -1070,7 +1070,6 @@ async function updateUser(btn) {
 				subscriptionDuration: newSubDate
 			}
 		});
-		console.log(user.data);
 
 		if (user.data.status == 'success') {
 			modalUpdateUser.classList.remove('show');
@@ -1197,5 +1196,27 @@ async function buyCinematicSubscription() {
 		await stripe.redirectToCheckout({
 			sessionId: session.data.session.id
 		});
+	}
+}
+
+async function updateProfilePicture(btn) {
+	try {
+		const form = new FormData();
+		form.append('photo', document.getElementById('profilePicture').files[0]);
+		const picture = await axios({
+			method: 'PATCH',
+			url: `http://127.0.0.1:3000/api/v1/user/updatePicture`,
+			data: form
+		});
+		console.log(picture);
+		if (picture.data.status == 'success') {
+			showAlert('success', 'Picture Updated Successfully');
+			window.setTimeout(() => {
+				location.reload();
+			}, 1000);
+		}
+	} catch (err) {
+		console.log(err);
+		showAlert('error', 'Cant Update Picture');
 	}
 }
