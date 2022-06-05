@@ -186,9 +186,9 @@ exports.protect = async (req, res, next) => {
 
     } catch (err) {
         // console.log(err);
-        res.status(400).json({
-            status: 'error',
-            err
+        res.status(400).render('error', {
+            heading: 'Ohho...',
+            message: 'You are not logged in Please login...'
         })
     }
 };
@@ -321,30 +321,36 @@ exports.resetPassword = async (req, res, next) => {
 };
 
 exports.updatePassword = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user.id);
 
-    const user = await User.findById(req.user.id);
+        if (!(await user.checkPassword(req.body.currentPassword, user.password))) {
+            return res.status(401).json({
+                status: 'error',
+                message: 'Current password is wrong'
+            });
+        }
 
-    if (!(await user.checkPassword(req.body.currentPassword, user.password))) {
-        return res.status(401).json({
+        user.password = req.body.password;
+        user.confirmPassword = req.body.passwordConfirm;
+
+        await user.save();
+
+        await user.encryptPassword(req.body.password);
+        await user.save({ validateBeforeSave: false });
+
+        const newToken = signJWT(user._id);
+
+        setCookie(res, newToken);
+
+        res.status(201).json({
+            status: 'success',
+            token: newToken
+        });
+    } catch (err) {
+        res.status(400).json({
             status: 'error',
-            message: 'Current password is wrong'
+            err
         });
     }
-
-    user.password = req.body.password;
-    user.confirmPassword = req.body.passwordConfirm;
-
-    await user.save();
-
-    await user.encryptPassword(req.body.password);
-    await user.save({ validateBeforeSave: false });
-
-    const newToken = signJWT(user._id);
-
-    setCookie(res, newToken);
-
-    res.status(201).json({
-        status: 'success',
-        token: newToken
-    });
 };

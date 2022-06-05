@@ -113,6 +113,7 @@ exports.getUserUsingId = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     try {
+        console.log(req.body);
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!user) {
             return res.status(401).json({
@@ -120,12 +121,14 @@ exports.updateUser = async (req, res) => {
                 message: 'Can\'t update data'
             });
         }
+        console.log(user);
         return res.status(200).json({
             status: 'success',
             message: 'Data update successful'
         });
 
     } catch (err) {
+        console.log(err);
         return res.status(200).json({
             status: 'error',
             message: 'Some internal error'
@@ -189,6 +192,29 @@ exports.addToWatchList = async (req, res) => {
         res.status(201).json({
             status: 'error',
             message: 'Can\'t add movie to watchlist'
+        });
+    }
+};
+
+exports.removeFromWatchList = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        let newList = [];
+        user.watchList.forEach((el) => {
+            if (el != req.params.movieId) {
+                newList.push(el);
+            }
+        });
+        user.watchList = newList;
+        await user.save({ validateBeforeSave: false });
+        res.status(200).json({
+            status: 'success',
+            message: 'Review Deleted Successfully'
+        });
+    } catch (err) {
+        res.status(201).json({
+            status: 'error',
+            message: 'Can\'t remove movie from watchlist'
         });
     }
 };

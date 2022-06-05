@@ -806,6 +806,9 @@ async function openUpdateUserModal(btn) {
 	const editUserActive = document.getElementById('editUserActive');
 	const editUserSubscription = document.getElementById('editUserSubscription');
 	const editUserSubscriptionEnd = document.getElementById('editUserSubscriptionEnd');
+	const updateBtnId = document.getElementById('userIdUpdate');
+	updateBtnId.value = btn.value;
+
 
 	// To be used when pre selecting an option
 	// document.getElementById("serviceType");
@@ -828,10 +831,10 @@ async function openUpdateUserModal(btn) {
 	// const role = editUserRole.options[editUserRole.selectedIndex].value;
 	editUserName.value = userData.data.data.user.name;
 	editUserEmail.value = userData.data.data.user.email;
-	// editUserSubscriptionEnd.value = userData.data.data.user.subscriptionDuration;
-	editUserSubscriptionEnd.value = '2022-05-24T12:23:11.422Z';
-	console.log(userData.data.data.user.subscriptionDuration);
 
+	// Date code
+	const date = userData.data.data.user.subscriptionDuration.split('.')[0];
+	editUserSubscriptionEnd.value = date;
 };
 
 const closeUserModal = document.getElementById('closeUserModal');
@@ -1031,7 +1034,8 @@ async function deleteMovie(btn) {
 async function deleteReviewAdmin(btn) {
 	try {
 		const id = btn.id;
-		await axios.delete(`http://127.0.0.1:3000/api/v1/review/${id}`);
+		const x = await axios.delete(`http://127.0.0.1:3000/api/v1/review/${id}`);
+		console.log(x);
 		showAlert('success', 'Review deleted successfully');
 		window.setTimeout(() => {
 			location.reload();
@@ -1041,20 +1045,21 @@ async function deleteReviewAdmin(btn) {
 	}
 }
 
-// update user
-// Incomplete due to date not being displayed in form set date issue in data loading function
+// update user (ADMIN)
 async function updateUser(btn) {
 	try {
-		const id = btn.id;
-		const editUserName = document.getElementById('editUserName');
-		const editUserEmail = document.getElementById('editUserEmail');
-		const editUserRole = document.getElementById('editUserRole');
-		const editUserActive = document.getElementById('editUserActive');
-		const editUserSubscription = document.getElementById('editUserSubscription');
+		const modalUpdateUser = document.getElementById('modal-container-editUser');
+		const id = btn.value;
+		const editUserName = document.getElementById('editUserName').value;
+		const editUserEmail = document.getElementById('editUserEmail').value;
+		const editUserRole = document.getElementById('editUserRole').value;
+		const editUserActive = document.getElementById('editUserActive').value;
+		const editUserSubscription = document.getElementById('editUserSubscription').value;
 		const editUserSubscriptionEnd = document.getElementById('editUserSubscriptionEnd');
-
+		const dt = Date.parse(editUserSubscriptionEnd.value);
+		const newSubDate = new Date(dt);
 		const user = await axios({
-			method: 'PATCH',
+			method: 'POST',
 			url: `http://127.0.0.1:3000/api/v1/user/${id}`,
 			data: {
 				name: editUserName,
@@ -1062,20 +1067,21 @@ async function updateUser(btn) {
 				role: editUserRole,
 				active: editUserActive,
 				subscription: editUserSubscription,
-				subscriptionDuration: editUserSubscriptionEnd
+				subscriptionDuration: newSubDate
 			}
 		});
+		console.log(user.data);
 
-		if (movie.data.status == 'success') {
-			editModal.classList.remove('show');
-			showAlert('success', 'Movie updated successfully');
+		if (user.data.status == 'success') {
+			modalUpdateUser.classList.remove('show');
+			showAlert('success', 'User updated successfully');
 			window.setTimeout(() => {
 				location.reload();
 			}, 1500);
 		}
 
 	} catch (err) {
-		showAlert('error', err.response.data.message);
+		showAlert('error', err.response.message);
 	}
 }
 
@@ -1119,7 +1125,7 @@ async function updatePassword() {
 			// }, 1500);
 		}
 	} catch (err) {
-		showAlert('error', err.response.data.message);
+		showAlert('error', err.response.data.err.message);
 	}
 }
 
@@ -1149,6 +1155,21 @@ async function resetPassword(btn) {
 		showAlert('error', err.response.data.message)
 	}
 }
+
+
+async function removeFromWatchLater(btn) {
+	try {
+		const id = btn.value;
+		const x = await axios.delete(`http://127.0.0.1:3000/api/v1/user/removeFromWatchList/${id}`);
+		showAlert('success', 'Movie deleted from WatchList');
+		window.setTimeout(() => {
+			location.reload();
+		}, 1000);
+	} catch (err) {
+		showAlert('error', 'Some internal Error occured');
+	}
+}
+
 
 // Stripe payment
 const stripe = Stripe('pk_test_51L5oipSICxPwE1EuSdZJewHG3Eea8Jy4gLhdYwxXBh5F0QTSHd9y9n7bKMikITSmK7v0jaH2uEBbgfV6ZddXHsFM00j2TFnsJB');

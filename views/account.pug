@@ -317,27 +317,28 @@ block content
 									// reviews
 									.col-12
 										.reviews
-											ul.reviews__list
-												each review in reviews
-													//Review 
-													li.reviews__item
-														.reviews__autor
-															img.reviews__avatar(src=`/img/users/${review.user.profilePicture}` alt=`${review.user.name}`)
-															span.reviews__name #{review.reviewTitle}
-															span.reviews__time
-																| MOVIE: #{review.movie.name} || User: #{review.user.name}
-																||| DATE: #{review.createdAt.toDateString()}
-															span.reviews__rating
-																i.icon.ion-ios-star
-																| #{review.reviewRating}
-														p.reviews__text
-															| #{review.reviewContent}
-														.comments__actions
-															button(type='button' id=`${review.id}` onclick='deleteReviewAdmin(this)')
-																i.icon.ion-ios-trash
-																| Delete
-										// end reviews
-
+											- if(reviews.length>0)
+													ul.reviews__list
+														each review in reviews
+															//Review 
+															li.reviews__item
+																.reviews__autor
+																	img.reviews__avatar(src=`/img/users/${review.user.profilePicture}` alt=`${review.user.name}`)
+																	span.reviews__name #{review.reviewTitle}
+																	span.reviews__time
+																		| MOVIE: #{review.movie.name} || User: #{review.user.name}
+																		||| DATE: #{review.createdAt.toDateString()}
+																	span.reviews__rating
+																		i.icon.ion-ios-star
+																		| #{review.reviewRating}
+																p.reviews__text
+																	| #{review.reviewContent}
+																.comments__actions
+																	button(type='button' id=`${review.id}` onclick='deleteReviewAdmin(this)')
+																		i.icon.ion-ios-trash
+																		| Delete
+											- else
+													h2(style="color:#fff") No Results Found !!!
 							// tab5
 							#tab-5.tab-pane.fade(role='tabpanel' aria-labelledby='5-tab')
 								.row
@@ -398,7 +399,7 @@ block content
 																option(value='cinematic') Cinematic
 															label.form__Heading Subscription Duration
 															input#editUserSubscriptionEnd.form__input(type='datetime-local' placeholder='Subscription End Date')
-															button.form__btn(type='button' value='') Update User
+															button.form__btn(type='button' value='' id='userIdUpdate' onclick='updateUser(this)') Update User
 															button#closeUserModal.form__btn(type='button') Cancel
 										// UPDATE Modal END
 							// tab6
@@ -431,7 +432,7 @@ block content
 									li.nav-item
 										a.nav-link(data-toggle='tab' href='#tab-2' role='tab' aria-controls='tab-2' aria-selected='false') My Reviews
 									li.nav-item
-										a.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') Manage Watch Later
+										a.nav-link(data-toggle='tab' href='#tab-3' role='tab' aria-controls='tab-3' aria-selected='false') Manage Watch List
 									li.nav-item
 										a.nav-link(data-toggle='tab' href='#tab-4' role='tab' aria-controls='tab-4' aria-selected='false') Manage Subscription
 									li.nav-item
@@ -470,9 +471,9 @@ block content
 											.reviews
 												label.form__Heading Account Details
 												form.form(action='#')
-													input.form__input(type='text' placeholder='Name' value=`${user.name}`)
-													input.form__input(type='text' placeholder='Email' value=`${user.email}`)
-													button.form__btn(type='button') Update
+													input.form__input(type='text' placeholder='Name' value=`${user.name}` id='userName')
+													input.form__input(type='text' placeholder='Email' value=`${user.email}` id='userEmail')
+													button.form__btn(type='button' onclick='updateCurrentUser()') Update
 											// file upload for user photo
 											label.form__Heading Profile Picture
 											form.form(action='#')
@@ -488,71 +489,76 @@ block content
 										.col-12
 											.reviews
 												ul.reviews__list
-													each review in user.reviews
-														li.reviews__item
-															.reviews__autor
-																img.reviews__avatar(src=`/img/users/${review.user.profilePicture}` alt='')
-																span.reviews__name #{review.reviewTitle}
-																span.reviews__time Movie:#{review.movie.name} || #{review.createdAt.toDateString()}
-																span.reviews__rating
-																	i.icon.ion-ios-star
-																	| #{review.reviewRating}
-															p.reviews__text= `${review.reviewContent}`
-															.comments__actions
-																button(type='button' value=`${review.id}` onclick='openReviewEditModal(this)')
-																	i.icon.ion-ios-document
-																	| Edit
-																button(type='button')
-																	i.icon.ion-ios-trash
-																	| Delete
-														// Review Modal Form
-														#modal-container-updateReview.modal-container-search
-															.form-edit
-																form.form(action='#')
-																	input#editRevTitle.form__input(type='text' placeholder='Title')
-																	textarea#editRevContent.form__textarea(placeholder='Review')
-																	input#editRevRating.form__input(type='text' placeholder='Rating')
-																	button.form__btn(type='button') Update
-																	button#closeEditReview.form__btn(type='button') close
-										// end reviews
+													- if(user.reviews.length>0)
+														each review in user.reviews
+															li.reviews__item
+																.reviews__autor
+																	img.reviews__avatar(src=`/img/users/${review.user.profilePicture}` alt='')
+																	span.reviews__name #{review.reviewTitle}
+																	span.reviews__time Movie:#{review.movie.name} || #{review.createdAt.toDateString()}
+																	span.reviews__rating
+																		i.icon.ion-ios-star
+																		| #{review.reviewRating}
+																p.reviews__text= `${review.reviewContent}`
+																.comments__actions
+																	button(type='button' value=`${review.id}` onclick='openReviewEditModal(this)')
+																		i.icon.ion-ios-document
+																		| Edit
+																	button(type='button' value=`${review.id}` onclick='deleteReviewAdmin(this)')
+																		i.icon.ion-ios-trash
+																		| Delete
+															// Review Modal Form
+															#modal-container-updateReview.modal-container-search
+																.form-edit
+																	form.form(action='#')
+																		input#editRevTitle.form__input(type='text' placeholder='Title')
+																		textarea#editRevContent.form__textarea(placeholder='Review')
+																		input#editRevRating.form__input(type='text' placeholder='Rating')
+																		button.form__btn(type='button') Update
+																		button#closeEditReview.form__btn(type='button') close
+													- else
+														h2(style="color:#fff") No Results Found !!!
+											// end reviews
 								// tab3
 								#tab-3.tab-pane.fade(role='tabpanel' aria-labelledby='3-tab')
 									// project gallery
 									.catalog
 										.container
 											.row
-												each list in user.watchList
-													// card
-													.col-6.col-sm-12.col-lg-6
-														.card.card--list
-															.row
-																.col-12.col-sm-4
-																	.card__cover
-																		img(src=`${list.poster}` alt=`${list.name}`)
-																		a.card__play(href=`/movie/${list.slug}`)
-																			i.icon.ion-ios-play
-																.col-12.col-sm-8
-																	.card__content
-																		h3.card__title
-																			a(href=`/movie/${list.slug}`)= `${list.name}`
-																		span.card__category
-																			each genre in list.genre
-																				a(href='#')= `${genre}`
-																		.card__wrap
-																			span.card__rate
-																				i.icon.ion-ios-star
-																				| #{(Math.round(list.ratings * 100) / 100).toFixed(1)}
-																			ul.card__list
-																				li HD
-																				li 16+
-																		.comments__actions
-																			button(type='button')
-																				i.icon.ion-ios-trash
-																				| Remove from
-																				| WatchLater
-																		// buttons here
-												// end card
-												
+												- if(user.watchList.length>0)
+													each list in user.watchList
+														// card
+														.col-6.col-sm-12.col-lg-6
+															.card.card--list
+																.row
+																	.col-12.col-sm-4
+																		.card__cover
+																			img(src=`${list.poster}` alt=`${list.name}`)
+																			a.card__play(href=`/movie/${list.slug}`)
+																				i.icon.ion-ios-play
+																	.col-12.col-sm-8
+																		.card__content
+																			h3.card__title
+																				a(href=`/movie/${list.slug}`)= `${list.name}`
+																			span.card__category
+																				each genre in list.genre
+																					a(href='#')= `${genre}`
+																			.card__wrap
+																				span.card__rate
+																					i.icon.ion-ios-star
+																					| #{(Math.round(list.ratings * 100) / 100).toFixed(1)}
+																				ul.card__list
+																					li HD
+																					li 16+
+																			.comments__actions
+																				button(type='button' value=`${list.id}` onclick='removeFromWatchLater(this)')
+																					i.icon.ion-ios-trash
+																					| Remove from
+																					| WatchLater
+																			// buttons here
+													// end card
+												- else
+													h2(style="color:#fff") No Results Found !!!
 								// tab4
 								#tab-4.tab-pane.fade(role='tabpanel' aria-labelledby='4-tab')
 									.row
@@ -574,7 +580,7 @@ block content
 											.reviews
 												label.form__Heading Update Password
 												form.form(action='#')
-													input.form__input(type='text' placeholder='Old Password')
-													input.form__input(type='text' placeholder='Re-Enter Old Password')
-													input.form__input(type='text' placeholder='New Password')
-													button.form__btn(type='button') Update
+													input.form__input(type='text' placeholder='Old Password' id='oldPass')
+													input.form__input(type='text' placeholder='New Password' id='newPass')
+													input.form__input(type='text' placeholder='Re-Enter New Password' id='reNewPass')
+													button.form__btn(type='button' onclick='updatePassword()') Update

@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
             validator: function (el) {
                 return el === this.password;
             },
-            message: 'Password not same'
+            message: 'Password and confirm password not same'
         }
     },
     profilePicture: {
