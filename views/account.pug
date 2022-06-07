@@ -514,7 +514,7 @@ block content
 																		input#editRevTitle.form__input(type='text' placeholder='Title')
 																		textarea#editRevContent.form__textarea(placeholder='Review')
 																		input#editRevRating.form__input(type='text' placeholder='Rating')
-																		button.form__btn(type='button') Update
+																		button.form__btn(type='button' id='revUpdateId' onclick='updateReview(this)') Update
 																		button#closeEditReview.form__btn(type='button') close
 													- else
 														h2(style="color:#fff") No Results Found !!!

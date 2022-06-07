@@ -55,7 +55,8 @@ exports.createReview = async (req, res) => {
 
 exports.getReview = async (req, res) => {
     try {
-        const review = await Review.findOne({ id: req.params.id });
+        console.log(req.params.id);
+        const review = await Review.findById(req.params.id);
         res.status(200).json({
             status: 'success',
             data: {
@@ -85,10 +86,11 @@ exports.updateReview = async (req, res) => {
 
 exports.deleteReview = async (req, res) => {
     try {
-        const review = await Review.findByIdAndRemove(req.params.id);
+        const review = await Review.findByIdAndDelete(req.params.id);
+        console.log(review);
         res.status(200).json({
             status: 'success',
-            message: 'review deleted successfully'
+            message: 'Review deleted successfully'
         });
     } catch (err) {
         console.log(err);

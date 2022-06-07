@@ -493,7 +493,8 @@ if (catalogueApplyButton) {
 
 
 	document.getElementById('apply').addEventListener('click', async () => {
-		const genre = document.getElementById('genreName').value;
+		const genreVal = document.getElementById('genreName').value;
+		const genre = genreVal.toLowerCase();
 		const ratingLow = document.getElementById('filter__imbd-start').innerHTML;
 		const ratingHigh = document.getElementById('filter__imbd-end').innerHTML;
 		const year = document.getElementById('filter__years-end').innerHTML;
@@ -501,6 +502,7 @@ if (catalogueApplyButton) {
 		// alert(genre + ' ' + ratingLow + ' ' + ratingHigh + ' ' + year);
 		const apiLink = `http://127.0.0.1:3000/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[eq]=${year}&genre=${genre}`;
 		const movieData = await axios.get(apiLink);
+		console.log(movieData);
 		document.querySelector('.movie-card-container').innerHTML = '';
 		let cardHTML = '';
 		if (movieData.data.data.movies.length > 0) {
@@ -551,7 +553,6 @@ if (catalogueApplyButton) {
 		} else {
 			document.querySelector('.movie-card-container').innerHTML = `<h2 style="color:#fff">No Results Found !!!</h2>`;
 		}
-		console.log(movieData);
 	});
 }
 // *************************************************************************
@@ -768,18 +769,21 @@ const reviewUpdateModal = document.getElementById('modal-container-updateReview'
 const closeEditReview = document.getElementById('closeEditReview');
 
 async function openReviewEditModal(btn) {
+	const id = btn.value;
+	console.log(id);
 	reviewUpdateModal.classList.add('show');
 	const editRevTitle = document.getElementById('editRevTitle');
 	const editRevContent = document.getElementById('editRevContent');
 	const editRevRating = document.getElementById('editRevRating');
 
-	const reviewQuery = `http://127.0.0.1:3000/api/v1/review/${btn.value}`;
+	const reviewQuery = `http://127.0.0.1:3000/api/v1/review/${id}`;
 	const reviewData = await axios.get(reviewQuery);
 	console.log(reviewData);
 
 	editRevTitle.value = reviewData.data.data.data.reviewTitle;
 	editRevContent.value = reviewData.data.data.data.reviewContent;
 	editRevRating.value = reviewData.data.data.data.reviewRating;
+	document.getElementById('revUpdateId').value = btn.value;
 
 }
 
@@ -788,6 +792,39 @@ if (closeEditReview) {
 		reviewUpdateModal.classList.remove('show');
 	});
 }
+
+
+async function updateReview(btn) {
+	try {
+		const id = btn.value;
+		const editRevTitle = document.getElementById('editRevTitle').value;
+		const editRevContent = document.getElementById('editRevContent').value;
+		const editRevRating = document.getElementById('editRevRating').value;
+
+		const res = await axios({
+			method: 'PATCH',
+			url: `http://127.0.0.1:3000/api/v1/review/${id}`,
+			data: {
+				reviewTitle: editRevTitle,
+				reviewContent: editRevContent,
+				reviewRating: editRevRating
+			}
+		});
+		if (res.data.status === 'success') {
+			reviewUpdateModal.classList.remove('show');
+			showAlert('success', 'Review updated successfully');
+			window.setTimeout(() => {
+				location.reload();
+			}, 1000);
+		}
+	} catch (err) {
+		console.log(err);
+		showAlert('success', 'Review updated successfully');
+	}
+
+}
+
+
 
 
 
@@ -1039,9 +1076,9 @@ async function deleteReviewAdmin(btn) {
 		const x = await axios.delete(`http://127.0.0.1:3000/api/v1/review/${id}`);
 		console.log(x);
 		showAlert('success', 'Review deleted successfully');
-		window.setTimeout(() => {
-			location.reload();
-		}, 1000);
+		// window.setTimeout(() => {
+		// 	location.reload();
+		// }, 1000);
 	} catch (err) {
 		showAlert('error', err.response.data.message);
 	}

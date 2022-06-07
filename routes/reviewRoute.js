@@ -10,8 +10,8 @@ router
 
 router
     .route('/:id')
-    .get(reviewController.getReview)
-    .delete(reviewController.deleteReview)
-    .patch(reviewController.updateReview);
+    .get(authController.protect, reviewController.getReview)
+    .delete(authController.protect, reviewController.deleteReview)
+    .patch(authController.protect, reviewController.updateReview);
 
 module.exports = router;

@@ -100,6 +100,7 @@ exports.addMovie = async (req, res) => {
         if (req.file) {
             req.body.movieLink = req.file.filename;
         }
+        req.body.genre = req.body.genre.split(',');
         const movie = await Movie.create(req.body);
         if (movie) {
             res.status(200).json({
@@ -124,6 +125,7 @@ exports.updateMovie = async (req, res) => {
         if (req.file) {
             req.body.movieLink = req.file.filename;
         }
+        req.body.genre = req.body.genre.split(',');
         const movie = await Movie.findByIdAndUpdate(req.params.id, req.body);
         if (movie) {
             res.status(200).json({
