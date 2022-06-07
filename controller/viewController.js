@@ -46,6 +46,10 @@ exports.getOverview = async (req, res) => {
 exports.getMovie = async (req, res) => {
     // find movie
     const movie = await Movie.findOne({ slug: req.params.slug }).populate('reviews');
+    console.log(movie);
+    if (movie) {
+        console.log(movie.name);
+    }
     // Highest IMDB Rated
     const highIMDBRating = await Movie.aggregate([
         {

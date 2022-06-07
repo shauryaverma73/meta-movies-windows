@@ -928,7 +928,7 @@ async function addMovie() {
 	const addMovDesc = document.getElementById('addMovDesc').value;
 	const addMovPosterLink = document.getElementById('addMovPosterLink').value;
 	const addMovReleaseYear = document.getElementById('addMovReleaseYear').value;
-	// const movieFile = document.getElementById('movieFileName').value;
+	const movieFile = document.getElementById('movieFileName').files[0];
 	let trailerArr = document.getElementById('trailerLink').value;
 	const trailerId = trailerArr.split('=');
 	const trailer = `https://www.youtube.com/embed/${trailerId[1]}`;
@@ -937,23 +937,25 @@ async function addMovie() {
 	const pgRating = document.getElementById('pgRating').value;
 	const addMovBackdrop = document.getElementById('addMovBackdrop').value;
 	const imdbRating = document.getElementById('form__slider-value').innerHTML;
+
+	const form = new FormData();
+	form.append('name', addMovName);
+	form.append('runTime', addMovLength);
+	form.append('ratings', imdbRating);
+	form.append('description', addMovDesc);
+	form.append('poster', addMovPosterLink);
+	form.append('year', addMovReleaseYear);
+	form.append('movieLink', movieFile);
+	form.append('trailerLink', trailer);
+	form.append('genre', genreArray);
+	form.append('pgRating', pgRating);
+	form.append('backdrop', addMovBackdrop);
+
 	try {
 		const movie = await axios({
-			method: 'POST',
+			method: 'PUT',
 			url: 'http://127.0.0.1:3000/api/v1/movie',
-			data: {
-				name: addMovName,
-				runTime: addMovLength,
-				ratings: imdbRating,
-				description: addMovDesc,
-				poster: addMovPosterLink,
-				year: addMovReleaseYear,
-				movieLink: 'bigbuck.mp4', //faking name here
-				trailerLink: trailer,
-				genre: genreArray,
-				pgRating: pgRating,
-				backdrop: addMovBackdrop
-			}
+			data: form
 		});
 		if (movie.data.status === 'success') {
 			showAlert('success', 'Movie added successfully');
@@ -982,6 +984,19 @@ async function updateMovie(btn) {
 		const editMovPgRating = document.getElementById('editMovPgRating').value;
 		const editMovBackdrop = document.getElementById('editMovBackdrop').value;
 		const editMovRating = document.getElementById('editMovRating').value;
+
+		const form = new FormData();
+		form.append('name', editMovName);
+		form.append('runTime', editMovLength);
+		form.append('ratings', editMovRating);
+		form.append('description', editMovDesc);
+		form.append('poster', editMovPoster);
+		form.append('year', editMovYear);
+		form.append('movieLink', movieFile);
+		form.append('trailerLink', editMovTrailer);
+		form.append('genre', genreArray);
+		form.append('pgRating', pgRating);
+		form.append('backdrop', editMovBackdrop);
 
 		const updateEndpoint = `http://127.0.0.1:3000/api/v1/movie/${id}`;
 
@@ -1208,7 +1223,6 @@ async function updateProfilePicture(btn) {
 			url: `http://127.0.0.1:3000/api/v1/user/updatePicture`,
 			data: form
 		});
-		console.log(picture);
 		if (picture.data.status == 'success') {
 			showAlert('success', 'Picture Updated Successfully');
 			window.setTimeout(() => {
@@ -1216,7 +1230,6 @@ async function updateProfilePicture(btn) {
 			}, 1000);
 		}
 	} catch (err) {
-		console.log(err);
-		showAlert('error', 'Cant Update Picture');
+		showAlert('error', err.response.data.message);
 	}
 }

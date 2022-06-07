@@ -1,4 +1,31 @@
 const Movie = require('./../model/movieModel');
+const multer = require('multer');
+
+const multerStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/movies');
+    },
+    filename: (req, file, cb) => {
+        // user-currentTime
+        const ext = file.mimetype.split('/')[1];
+        cb(null, `movie-${Date.now()}.${ext}`);
+    }
+});
+
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith('video')) {
+        cb(null, true);
+    } else {
+        cb(null, false, req.typeError = 'Please upload video files only');
+    }
+};
+
+const upload = multer({
+    storage: multerStorage,
+    fileFilter: multerFilter
+});
+
+exports.uploadMovie = upload.single('movieLink');
 
 exports.getAllMovie = async (req, res, next) => {
     try {
@@ -70,6 +97,9 @@ exports.getMovieUsingId = async (req, res) => {
 
 exports.addMovie = async (req, res) => {
     try {
+        if (req.file) {
+            req.body.movieLink = req.file.filename;
+        }
         const movie = await Movie.create(req.body);
         if (movie) {
             res.status(200).json({

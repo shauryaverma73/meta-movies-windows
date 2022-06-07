@@ -9,14 +9,12 @@ router
 router
     .route('/')
     .get(movieController.getAllMovie)
-    .post(movieController.addMovie);
+    .put(movieController.uploadMovie, movieController.addMovie);
 
 router
     .route('/:id')
     .get(movieController.getMovieUsingId)
-    .patch(movieController.updateMovie)
+    .patch(movieController.uploadMovie, movieController.updateMovie)
     .delete(movieController.deleteMovie);
-
-
 
 module.exports = router;

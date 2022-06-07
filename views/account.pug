@@ -216,7 +216,7 @@ block content
 											label.form__Heading Year
 											input#addMovReleaseYear.form__input(type='number' placeholder='Movie Release Year')
 											label.form__Heading Movie File
-											input(type='file' accept='video/*' id='movieFileName')
+											input(type='file' accept='video/*' id='movieFileName' name='movieFileName' required)
 											br
 											br
 											label.form__Heading Trailer Link
@@ -294,7 +294,7 @@ block content
 																	label.form__Heading Year
 																	input#editMovYear.form__input(type='number' placeholder='Movie Release Year')
 																	label.form__Heading Movie File
-																	input(type='file' accept='video/*')
+																	input(type='file' accept='video/*' id='movieUpdateFileName' name='movieUpdateFileName' required)
 																	br
 																	br
 																	label.form__Heading Trailer Link (Please write Video ID after embed/)

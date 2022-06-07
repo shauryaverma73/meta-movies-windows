@@ -16,7 +16,7 @@ const multerFilter = (req, file, cb) => {
     if (file.mimetype.startsWith('image')) {
         cb(null, true);
     } else {
-        cb(new Error('Please Upload Image File only.'), false);
+        cb(null, false, req.typeError = 'Please upload image files only');
     }
 };
 
@@ -29,7 +29,12 @@ exports.uploadUserPhoto = upload.single('photo');
 
 exports.saveUserPhoto = async (req, res) => {
     try {
-        console.log(req.file);
+        if (req.typeError) {
+            return res.status(401).json({
+                status: 'error',
+                message: req.typeError
+            });
+        }
         const user = await User.findById(req.user.id);
         user.profilePicture = req.file.filename;
         await user.save({ validateBeforeSave: false });
