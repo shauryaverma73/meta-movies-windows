@@ -500,7 +500,7 @@ if (catalogueApplyButton) {
 		const year = document.getElementById('filter__years-end').innerHTML;
 		//- create a link with data to make api request api
 		// alert(genre + ' ' + ratingLow + ' ' + ratingHigh + ' ' + year);
-		const apiLink = `http://127.0.0.1:3000/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[eq]=${year}&genre=${genre}`;
+		const apiLink = `http://127.0.0.1:3000/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[lte]=${year}&genre=${genre}`;
 		const movieData = await axios.get(apiLink);
 		console.log(movieData);
 		document.querySelector('.movie-card-container').innerHTML = '';
