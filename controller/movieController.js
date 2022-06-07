@@ -121,6 +121,9 @@ exports.addMovie = async (req, res) => {
 
 exports.updateMovie = async (req, res) => {
     try {
+        if (req.file) {
+            req.body.movieLink = req.file.filename;
+        }
         const movie = await Movie.findByIdAndUpdate(req.params.id, req.body);
         if (movie) {
             res.status(200).json({

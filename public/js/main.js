@@ -977,7 +977,7 @@ async function updateMovie(btn) {
 		const editMovDesc = document.getElementById('editMovDesc').value;
 		const editMovPoster = document.getElementById('editMovPoster').value;
 		const editMovYear = document.getElementById('editMovYear').value;
-		const editMovieFile = 'bigbuck.mp4';    // when file upload
+		const editMovieFile = document.getElementById('movieUpdateFileName').files[0];
 		const editMovTrailer = document.getElementById('editMovTrailer').value;
 		const editMovGenre = document.getElementById('editMovGenre').value;
 		const genre = editMovGenre.split(',');
@@ -992,30 +992,16 @@ async function updateMovie(btn) {
 		form.append('description', editMovDesc);
 		form.append('poster', editMovPoster);
 		form.append('year', editMovYear);
-		form.append('movieLink', movieFile);
+		form.append('movieLink', editMovieFile);
 		form.append('trailerLink', editMovTrailer);
-		form.append('genre', genreArray);
-		form.append('pgRating', pgRating);
+		form.append('genre', genre);
+		form.append('pgRating', editMovPgRating);
 		form.append('backdrop', editMovBackdrop);
-
-		const updateEndpoint = `http://127.0.0.1:3000/api/v1/movie/${id}`;
 
 		const movie = await axios({
 			method: 'PATCH',
 			url: `http://127.0.0.1:3000/api/v1/movie/${id}`,
-			data: {
-				name: editMovName,
-				runTime: editMovLength,
-				ratings: editMovRating,
-				description: editMovDesc,
-				poster: editMovPoster,
-				year: editMovYear,
-				movieLink: 'bigbuck.mp4', //faking name here
-				trailerLink: editMovTrailer,
-				genre: genre,
-				pgRating: editMovPgRating,
-				backdrop: editMovBackdrop
-			}
+			data: form
 		});
 
 		if (movie.data.status == 'success') {
@@ -1026,6 +1012,7 @@ async function updateMovie(btn) {
 			}, 1500);
 		}
 	} catch (err) {
+		console.log(err);
 		showAlert('error', err.response.data.message);
 	}
 }
