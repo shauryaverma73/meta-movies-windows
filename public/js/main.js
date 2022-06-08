@@ -500,7 +500,7 @@ if (catalogueApplyButton) {
 		const year = document.getElementById('filter__years-end').innerHTML;
 		//- create a link with data to make api request api
 		// alert(genre + ' ' + ratingLow + ' ' + ratingHigh + ' ' + year);
-		const apiLink = `http://127.0.0.1:3000/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[lte]=${year}&genre=${genre}`;
+		const apiLink = `/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[lte]=${year}&genre=${genre}`;
 		const movieData = await axios.get(apiLink);
 		document.querySelector('.movie-card-container').innerHTML = '';
 		let cardHTML = '';
@@ -735,7 +735,7 @@ async function openMovieEditModalWithData(btn) {
 	const editMovRating = document.getElementById('editMovRating');
 	const updateBtnId = document.getElementById('updateBtnId');
 
-	const movieQuery = `http://127.0.0.1:3000/api/v1/movie/${id}`;
+	const movieQuery = `/api/v1/movie/${id}`;
 	const movieData = await axios.get(movieQuery);
 	// console.log(movieData.data.data.movie.name);
 	updateBtnId.value = id;
@@ -774,7 +774,7 @@ async function openReviewEditModal(btn) {
 	const editRevContent = document.getElementById('editRevContent');
 	const editRevRating = document.getElementById('editRevRating');
 
-	const reviewQuery = `http://127.0.0.1:3000/api/v1/review/${id}`;
+	const reviewQuery = `/api/v1/review/${id}`;
 	const reviewData = await axios.get(reviewQuery);
 	// console.log(reviewData);
 
@@ -801,7 +801,7 @@ async function updateReview(btn) {
 
 		const res = await axios({
 			method: 'PATCH',
-			url: `http://127.0.0.1:3000/api/v1/review/${id}`,
+			url: `/api/v1/review/${id}`,
 			data: {
 				reviewTitle: editRevTitle,
 				reviewContent: editRevContent,
@@ -832,7 +832,7 @@ async function openUpdateUserModal(btn) {
 	const modalUpdateUser = document.getElementById('modal-container-editUser');
 	modalUpdateUser.classList.add('show');
 
-	const userQuery = `http://127.0.0.1:3000/api/v1/user/${btn.value}`;
+	const userQuery = `/api/v1/user/${btn.value}`;
 	const userData = await axios.get(userQuery);
 
 	const editUserName = document.getElementById('editUserName');
@@ -883,7 +883,7 @@ if (closeUserModal) {
 
 
 async function addMovieToWatchlist(btn) {
-	const addQuery = `http://127.0.0.1:3000/api/v1/user/addToWatchlist/${btn.value}`;
+	const addQuery = `/api/v1/user/addToWatchlist/${btn.value}`;
 	try {
 		const added = await axios.put(addQuery);
 		if (added.status == 200) {
@@ -908,7 +908,7 @@ async function addMovieReview(btn) {
 	try {
 		const res = await axios({
 			method: 'POST',
-			url: `http://127.0.0.1:3000/api/v1/review`,
+			url: `/api/v1/review`,
 			data: {
 				user: userId,
 				movie: movieId,
@@ -936,7 +936,7 @@ async function updateCurrentUser() {
 		const email = document.getElementById('userEmail').value;
 		const res = await axios({
 			method: 'PATCH',
-			url: 'http://127.0.0.1:3000/api/v1/user/updateMe',
+			url: '/api/v1/user/updateMe',
 			data: {
 				email: email,
 				name: name
@@ -988,7 +988,7 @@ async function addMovie() {
 	try {
 		const movie = await axios({
 			method: 'PUT',
-			url: 'http://127.0.0.1:3000/api/v1/movie',
+			url: '/api/v1/movie',
 			data: form
 		});
 		if (movie.data.status === 'success') {
@@ -1034,7 +1034,7 @@ async function updateMovie(btn) {
 
 		const movie = await axios({
 			method: 'PATCH',
-			url: `http://127.0.0.1:3000/api/v1/movie/${id}`,
+			url: `/api/v1/movie/${id}`,
 			data: form
 		});
 
@@ -1054,7 +1054,7 @@ async function updateMovie(btn) {
 async function deleteMovie(btn) {
 	try {
 		const id = btn.value;
-		await axios.delete(`http://127.0.0.1:3000/api/v1/movie/${id}`);
+		await axios.delete(`/api/v1/movie/${id}`);
 		showAlert('success', 'Movie deleted successfully');
 		window.setTimeout(() => {
 			location.reload();
@@ -1069,7 +1069,7 @@ async function deleteMovie(btn) {
 async function deleteReviewAdmin(btn) {
 	try {
 		const id = btn.id;
-		const x = await axios.delete(`http://127.0.0.1:3000/api/v1/review/${id}`);
+		const x = await axios.delete(`/api/v1/review/${id}`);
 		showAlert('success', 'Review deleted successfully');
 		window.setTimeout(() => {
 			location.reload();
@@ -1094,7 +1094,7 @@ async function updateUser(btn) {
 		const newSubDate = new Date(dt);
 		const user = await axios({
 			method: 'POST',
-			url: `http://127.0.0.1:3000/api/v1/user/${id}`,
+			url: `/api/v1/user/${id}`,
 			data: {
 				name: editUserName,
 				email: editUserEmail,
@@ -1122,7 +1122,7 @@ async function updateUser(btn) {
 async function deleteUser(btn) {
 	try {
 		const id = btn.value;
-		await axios.delete(`http://127.0.0.1:3000/api/v1/user/${id}`);
+		await axios.delete(`/api/v1/user/${id}`);
 		showAlert('success', 'User Account Deactivated successfully');
 		window.setTimeout(() => {
 			location.reload();
@@ -1140,7 +1140,7 @@ async function updatePassword() {
 
 		const user = await axios({
 			method: 'PATCH',
-			url: `http://127.0.0.1:3000/api/v1/user/updateMyPassword`,
+			url: `/api/v1/user/updateMyPassword`,
 			data: {
 				currentPassword: oldPassword,
 				password: newPassword,
@@ -1170,7 +1170,7 @@ async function resetPassword(btn) {
 		const token = btn.value;
 		const password = await axios({
 			method: 'PATCH',
-			url: `http://127.0.0.1:3000/api/v1/user/resetPassword/${token}`,
+			url: `/api/v1/user/resetPassword/${token}`,
 			data: {
 				password: newPassword,
 				confirmPassword: confirmPassword
@@ -1193,7 +1193,7 @@ async function resetPassword(btn) {
 async function removeFromWatchLater(btn) {
 	try {
 		const id = btn.value;
-		const x = await axios.delete(`http://127.0.0.1:3000/api/v1/user/removeFromWatchList/${id}`);
+		const x = await axios.delete(`/api/v1/user/removeFromWatchList/${id}`);
 		showAlert('success', 'Movie deleted from WatchList');
 		window.setTimeout(() => {
 			location.reload();
@@ -1209,7 +1209,7 @@ const stripe = Stripe('pk_test_51L5oipSICxPwE1EuSdZJewHG3Eea8Jy4gLhdYwxXBh5F0QTS
 
 async function buyPremiumSubscription() {
 	// get checkout session
-	const session = await axios.get(`http://127.0.0.1:3000/api/v1/subscription/premium/checkout-session`);
+	const session = await axios.get(`/api/v1/subscription/premium/checkout-session`);
 	if (session.data.status == 'error') {
 		showAlert('error', session.data.message);
 	} else {
@@ -1222,7 +1222,7 @@ async function buyPremiumSubscription() {
 
 async function buyCinematicSubscription() {
 	// get checkout session
-	const session = await axios.get(`http://127.0.0.1:3000/api/v1/subscription/cinematic/checkout-session`);
+	const session = await axios.get(`/api/v1/subscription/cinematic/checkout-session`);
 	if (session.data.status == 'error') {
 		showAlert('error', session.data.message);
 	} else {
@@ -1239,7 +1239,7 @@ async function updateProfilePicture(btn) {
 		form.append('photo', document.getElementById('profilePicture').files[0]);
 		const picture = await axios({
 			method: 'PATCH',
-			url: `http://127.0.0.1:3000/api/v1/user/updatePicture`,
+			url: `/api/v1/user/updatePicture`,
 			data: form
 		});
 		if (picture.data.status == 'success') {
