@@ -7,7 +7,7 @@ mongoose.connect(process.env.DATABASE_CONNECTION_STRING).then(con => {
     console.log('Database Connection successfull.');
 });
 
-
-const server = app.listen(3000, () => {
+const port = process.env.SERVER_PORT || 3000;
+const server = app.listen(port, () => {
     console.log('Server Online: ' + process.env.SERVER_PORT);
 });
