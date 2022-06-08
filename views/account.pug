@@ -504,7 +504,7 @@ block content
 																	button(type='button' value=`${review.id}` onclick='openReviewEditModal(this)')
 																		i.icon.ion-ios-document
 																		| Edit
-																	button(type='button' value=`${review.id}` onclick='deleteReviewAdmin(this)')
+																	button(type='button' id=`${review.id}` onclick='deleteReviewAdmin(this)')
 																		i.icon.ion-ios-trash
 																		| Delete
 															// Review Modal Form

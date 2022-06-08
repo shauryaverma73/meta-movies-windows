@@ -1073,12 +1073,13 @@ async function deleteMovie(btn) {
 async function deleteReviewAdmin(btn) {
 	try {
 		const id = btn.id;
+		console.log(id);
 		const x = await axios.delete(`http://127.0.0.1:3000/api/v1/review/${id}`);
 		console.log(x);
 		showAlert('success', 'Review deleted successfully');
-		// window.setTimeout(() => {
-		// 	location.reload();
-		// }, 1000);
+		window.setTimeout(() => {
+			location.reload();
+		}, 1000);
 	} catch (err) {
 		showAlert('error', err.response.data.message);
 	}

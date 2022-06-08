@@ -86,6 +86,7 @@ exports.updateReview = async (req, res) => {
 
 exports.deleteReview = async (req, res) => {
     try {
+        console.log(req.params.id);
         const review = await Review.findByIdAndDelete(req.params.id);
         console.log(review);
         res.status(200).json({
