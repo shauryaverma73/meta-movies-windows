@@ -72,7 +72,6 @@ exports.updateMe = async (req, res, next) => {
         if (req.body.email) {
             obBody.email = req.body.email;
         }
-        console.log(obBody);
         const user = await User.findByIdAndUpdate(req.user.id, obBody, { new: true, runValidators: true });
         if (!user) {
             return res.status(401).json({
@@ -114,7 +113,6 @@ exports.deleteMe = async (req, res, next) => {
 exports.getAllUsers = async (req, res) => {
     try {
         const allUsers = await User.find().populate('watchList').populate('reviews');
-        console.log(allUsers);
         if (allUsers) {
             res.status(200).json({
                 status: "success",
@@ -130,7 +128,7 @@ exports.getAllUsers = async (req, res) => {
             });
         }
     } catch (err) {
-        console.log(err);
+        res.status(400).render('404');
     }
 
 };
@@ -155,13 +153,12 @@ exports.getUserUsingId = async (req, res) => {
             });
         }
     } catch (err) {
-        console.log(err);
+        res.status(400).render('404');
     }
 };
 
 exports.updateUser = async (req, res) => {
     try {
-        console.log(req.body);
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!user) {
             return res.status(401).json({
@@ -169,14 +166,12 @@ exports.updateUser = async (req, res) => {
                 message: 'Can\'t update data'
             });
         }
-        console.log(user);
         return res.status(200).json({
             status: 'success',
             message: 'Data update successful'
         });
 
     } catch (err) {
-        console.log(err);
         return res.status(200).json({
             status: 'error',
             message: 'Some internal error'
@@ -208,12 +203,12 @@ exports.buySubscription = async (req, res) => {
         if (sub) {
             res.status(200).json({
                 status: 'success',
-                message: 'Subscription added Successgully'
+                message: 'Subscription added Successfully'
             })
         }
     }
     catch (err) {
-        console.log(err);
+        res.status(200).render(404);
     }
 };
 
@@ -236,7 +231,6 @@ exports.addToWatchList = async (req, res) => {
             });
         }
     } catch (err) {
-        console.log(err);
         res.status(201).json({
             status: 'error',
             message: 'Can\'t add movie to watchlist'

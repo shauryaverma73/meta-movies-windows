@@ -18,6 +18,7 @@ app.set('views', path.join(__dirname, 'views'));
 // public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // middlewares
 app.use(express.json());
 app.use(cookieParser());

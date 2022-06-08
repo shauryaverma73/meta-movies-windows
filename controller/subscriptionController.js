@@ -91,7 +91,6 @@ exports.verifyAndUpdateStatusPremium = async (req, res) => {
         res.status(200).redirect('/');
 
     } catch (err) {
-        console.log(err);
         res.status(400).json({
             status: 'error',
             message: 'something went very wrong'
@@ -111,7 +110,6 @@ exports.verifyAndUpdateStatusCinematic = async (req, res) => {
         res.status(200).redirect('/');
 
     } catch (err) {
-        console.log(err);
         res.status(400).json({
             status: 'error',
             message: 'Something went very wrong'

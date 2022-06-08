@@ -502,7 +502,6 @@ if (catalogueApplyButton) {
 		// alert(genre + ' ' + ratingLow + ' ' + ratingHigh + ' ' + year);
 		const apiLink = `http://127.0.0.1:3000/api/v1/movie?ratings[gte]=${ratingLow}&ratings[lte]=${ratingHigh}&year[lte]=${year}&genre=${genre}`;
 		const movieData = await axios.get(apiLink);
-		console.log(movieData);
 		document.querySelector('.movie-card-container').innerHTML = '';
 		let cardHTML = '';
 		if (movieData.data.data.movies.length > 0) {
@@ -602,7 +601,6 @@ if (movSearch) {
 		const query = `https://api.themoviedb.org/3/search/movie?api_key=bc9dabeae5a66fbe7bf887b0cb184612&query=${movieSearchField}`;
 
 		// const res = await axios.get(query);
-		console.log(movieSearchField);
 	});
 }
 
@@ -770,7 +768,7 @@ const closeEditReview = document.getElementById('closeEditReview');
 
 async function openReviewEditModal(btn) {
 	const id = btn.value;
-	console.log(id);
+	// console.log(id);
 	reviewUpdateModal.classList.add('show');
 	const editRevTitle = document.getElementById('editRevTitle');
 	const editRevContent = document.getElementById('editRevContent');
@@ -778,7 +776,7 @@ async function openReviewEditModal(btn) {
 
 	const reviewQuery = `http://127.0.0.1:3000/api/v1/review/${id}`;
 	const reviewData = await axios.get(reviewQuery);
-	console.log(reviewData);
+	// console.log(reviewData);
 
 	editRevTitle.value = reviewData.data.data.data.reviewTitle;
 	editRevContent.value = reviewData.data.data.data.reviewContent;
@@ -818,7 +816,7 @@ async function updateReview(btn) {
 			}, 1000);
 		}
 	} catch (err) {
-		console.log(err);
+		// console.log(err);
 		showAlert('success', 'Review updated successfully');
 	}
 
@@ -936,7 +934,6 @@ async function updateCurrentUser() {
 	try {
 		const name = document.getElementById('userName').value;
 		const email = document.getElementById('userEmail').value;
-		console.log(name + '--' + email);
 		const res = await axios({
 			method: 'PATCH',
 			url: 'http://127.0.0.1:3000/api/v1/user/updateMe',
@@ -1049,7 +1046,6 @@ async function updateMovie(btn) {
 			}, 1500);
 		}
 	} catch (err) {
-		console.log(err);
 		showAlert('error', err.response.data.message);
 	}
 }
@@ -1073,9 +1069,7 @@ async function deleteMovie(btn) {
 async function deleteReviewAdmin(btn) {
 	try {
 		const id = btn.id;
-		console.log(id);
 		const x = await axios.delete(`http://127.0.0.1:3000/api/v1/review/${id}`);
-		console.log(x);
 		showAlert('success', 'Review deleted successfully');
 		window.setTimeout(() => {
 			location.reload();
