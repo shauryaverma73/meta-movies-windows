@@ -128,7 +128,10 @@ exports.getAllUsers = async (req, res) => {
             });
         }
     } catch (err) {
-        res.status(400).render('404');
+        res.status(400).json({
+            status: 'error',
+            message: 'Something went very wrong'
+        });
     }
 
 };
@@ -153,7 +156,10 @@ exports.getUserUsingId = async (req, res) => {
             });
         }
     } catch (err) {
-        res.status(400).render('404');
+        res.status(400).json({
+            status: "error",
+            message: 'Something went very wrong'
+        });
     }
 };
 

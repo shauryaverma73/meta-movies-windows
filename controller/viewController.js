@@ -39,7 +39,10 @@ exports.getOverview = async (req, res) => {
             drama
         });
     } catch (err) {
-        res.status(200).render('404');
+        res.status(200).json({
+            status: 'error',
+            message: 'Something went very wrong'
+        });
     }
 };
 

@@ -185,7 +185,6 @@ exports.protect = async (req, res, next) => {
         next();
 
     } catch (err) {
-        // console.log(err);
         res.status(400).render('error', {
             heading: 'Ohho...',
             message: 'You are not logged in Please login...'
