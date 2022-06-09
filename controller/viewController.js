@@ -19,10 +19,10 @@ exports.getOverview = async (req, res) => {
             }
         ]);
 
-        const action = await axios.get('/api/v1/movie?genre=action');
-        const drama = await axios.get('/api/v1/movie?genre=drama');
-        const comedy = await axios.get('/api/v1/movie?genre=comedy');
-        const horror = await axios.get('/api/v1/movie?genre=horror');
+        const action = await axios.get('https://metamovies.herokuapp.com/api/v1/movie?genre=action');
+        const drama = await axios.get('https://metamovies.herokuapp.com/api/v1/movie?genre=drama');
+        const comedy = await axios.get('https://metamovies.herokuapp.com/api/v1/movie?genre=comedy');
+        const horror = await axios.get('https://metamovies.herokuapp.com/api/v1/movie?genre=horror');
 
         // console.log(drama);
 
@@ -100,7 +100,7 @@ exports.about = (req, res) => {
 
 exports.catalogue = async (req, res) => {
     const movies = await Movie.find();
-    const genres = await axios.get('/api/v1/movie/genre');
+    const genres = await axios.get('https://metamovies.herokuapp.com/api/v1/movie/genre');
     // console.log(genres.data.data.genArr);
     res.status(200).render('catalogue', {
         title: 'Catalogue',
