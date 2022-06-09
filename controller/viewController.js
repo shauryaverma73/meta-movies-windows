@@ -41,7 +41,7 @@ exports.getOverview = async (req, res) => {
     } catch (err) {
         res.status(200).json({
             status: 'error',
-            message: 'Something went very wrong'
+            message: err
         });
     }
 };
